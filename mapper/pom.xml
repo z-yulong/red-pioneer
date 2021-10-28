@@ -41,11 +41,11 @@
             <version>2.4.4</version>
         </dependency>
 
-        <!--test starter-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;test starter&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--        </dependency>-->
 
         <!--mybatis starter-->
         <dependency>
@@ -68,23 +68,25 @@
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
                     <version>1.3.5</version>
-                <configuration>
-                    <configurationFile>
-                        ${basedir}/src/main/resources/generator/generatorConfig.xml
-                    </configurationFile>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.47</version>
-                    </dependency>
+                    <configuration>
+                        <configurationFile>
+                            ${basedir}/src/main/resources/generator/generatorConfig.xml
+                        </configurationFile>
+                    </configuration>
 
-                    <dependency>
-                        <groupId>tk.mybatis</groupId>
-                        <artifactId>mapper</artifactId>
-                        <version>3.4.4</version>
-                    </dependency>
+                <dependencies>
+
+<!--                    <dependency>-->
+<!--                        <groupId>mysql</groupId>-->
+<!--                        <artifactId>mysql-connector-java</artifactId>-->
+<!--                        <version>5.1.47</version>-->
+<!--                    </dependency>-->
+
+<!--                    <dependency>-->
+<!--                        <groupId>tk.mybatis</groupId>-->
+<!--                        <artifactId>mapper</artifactId>-->
+<!--                        <version>3.4.4</version>-->
+<!--                    </dependency>-->
 
 
                 </dependencies>

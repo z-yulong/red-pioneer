@@ -2,7 +2,7 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/tech?characterEncoding=utf-8
+      url: jdbc:mysql://localhost:3306/red-pioneer?characterEncoding=utf-8
       username: root
       password: root
   mybatis:

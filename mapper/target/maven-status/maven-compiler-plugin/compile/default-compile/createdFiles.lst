@@ -1,0 +1,8 @@
+cn\edu\imau\redpioneer\dao\ConversationMapper.class
+cn\edu\imau\redpioneer\dao\LeaderTecherMapper.class
+cn\edu\imau\redpioneer\dao\SupperAdminMapper.class
+cn\edu\imau\redpioneer\dao\ActivistMapper.class
+cn\edu\imau\redpioneer\general\GeneralDAO.class
+cn\edu\imau\redpioneer\dao\LeaderStuMapper.class
+cn\edu\imau\redpioneer\dao\FimalyMapper.class
+cn\edu\imau\redpioneer\dao\VolunteerMapper.class
