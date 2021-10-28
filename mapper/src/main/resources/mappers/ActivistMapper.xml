@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.imau.redpioneer.dao.ActivistMapper">
+  <resultMap id="BaseResultMap" type="cn.deu.imau.redpioneer.entity.Activist">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="date_of_birth" jdbcType="DATE" property="dateOfBirth" />
+    <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="admission_time" jdbcType="DATE" property="admissionTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="application_time" jdbcType="DATE" property="applicationTime" />
+    <result column="is_adult" jdbcType="VARCHAR" property="isAdult" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="pyr_stu" jdbcType="INTEGER" property="pyrStu" />
+    <result column="pyr_techer" jdbcType="INTEGER" property="pyrTecher" />
+  </resultMap>
+</mapper>
