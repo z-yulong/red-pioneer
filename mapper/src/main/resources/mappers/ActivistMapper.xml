@@ -21,7 +21,8 @@
     <result column="application_time" jdbcType="DATE" property="applicationTime" />
     <result column="is_adult" jdbcType="VARCHAR" property="isAdult" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="pyr_stu" jdbcType="INTEGER" property="pyrStu" />
-    <result column="pyr_techer" jdbcType="INTEGER" property="pyrTecher" />
+    <result column="leader_stu" jdbcType="INTEGER" property="leaderStu" />
+    <result column="leader_techer" jdbcType="INTEGER" property="leaderTecher" />
+    <result column="juri" jdbcType="INTEGER" property="juri" />
   </resultMap>
 </mapper>
