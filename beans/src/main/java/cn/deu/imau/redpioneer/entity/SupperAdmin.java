@@ -14,6 +14,8 @@ public class SupperAdmin {
 
     private String name;
 
+    private Integer juri;
+
     /**
      * @return id
      */
@@ -68,5 +70,19 @@ public class SupperAdmin {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return juri
+     */
+    public Integer getJuri() {
+        return juri;
+    }
+
+    /**
+     * @param juri
+     */
+    public void setJuri(Integer juri) {
+        this.juri = juri;
     }
 }

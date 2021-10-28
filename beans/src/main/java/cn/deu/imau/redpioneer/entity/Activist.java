@@ -93,16 +93,21 @@ public class Activist {
     private String photo;
 
     /**
-     * 培养人
+     * 党小组组长
      */
-    @Column(name = "pyr_stu")
-    private Integer pyrStu;
+    @Column(name = "leader_stu")
+    private Integer leaderStu;
 
     /**
-     * 培养人
+     * 培养人_老师
      */
-    @Column(name = "pyr_techer")
-    private Integer pyrTecher;
+    @Column(name = "leader_techer")
+    private Integer leaderTecher;
+
+    /**
+     * 权限
+     */
+    private Integer juri;
 
     /**
      * 获取id
@@ -393,38 +398,56 @@ public class Activist {
     }
 
     /**
-     * 获取培养人
+     * 获取党小组组长
      *
-     * @return pyr_stu - 培养人
+     * @return leader_stu - 党小组组长
      */
-    public Integer getPyrStu() {
-        return pyrStu;
+    public Integer getLeaderStu() {
+        return leaderStu;
     }
 
     /**
-     * 设置培养人
+     * 设置党小组组长
      *
-     * @param pyrStu 培养人
+     * @param leaderStu 党小组组长
      */
-    public void setPyrStu(Integer pyrStu) {
-        this.pyrStu = pyrStu;
+    public void setLeaderStu(Integer leaderStu) {
+        this.leaderStu = leaderStu;
     }
 
     /**
-     * 获取培养人
+     * 获取培养人_老师
      *
-     * @return pyr_techer - 培养人
+     * @return leader_techer - 培养人_老师
      */
-    public Integer getPyrTecher() {
-        return pyrTecher;
+    public Integer getLeaderTecher() {
+        return leaderTecher;
     }
 
     /**
-     * 设置培养人
+     * 设置培养人_老师
      *
-     * @param pyrTecher 培养人
+     * @param leaderTecher 培养人_老师
      */
-    public void setPyrTecher(Integer pyrTecher) {
-        this.pyrTecher = pyrTecher;
+    public void setLeaderTecher(Integer leaderTecher) {
+        this.leaderTecher = leaderTecher;
+    }
+
+    /**
+     * 获取权限
+     *
+     * @return juri - 权限
+     */
+    public Integer getJuri() {
+        return juri;
+    }
+
+    /**
+     * 设置权限
+     *
+     * @param juri 权限
+     */
+    public void setJuri(Integer juri) {
+        this.juri = juri;
     }
 }

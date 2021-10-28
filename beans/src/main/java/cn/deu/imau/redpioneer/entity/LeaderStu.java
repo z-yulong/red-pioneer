@@ -3,8 +3,8 @@ package cn.deu.imau.redpioneer.entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "pyr_stu")
-public class PyrStu {
+@Table(name = "leader_stu")
+public class LeaderStu {
     @Id
     private Integer id;
 
@@ -13,6 +13,8 @@ public class PyrStu {
     private String password;
 
     private String name;
+
+    private Integer juri;
 
     /**
      * @return id
@@ -68,5 +70,19 @@ public class PyrStu {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return juri
+     */
+    public Integer getJuri() {
+        return juri;
+    }
+
+    /**
+     * @param juri
+     */
+    public void setJuri(Integer juri) {
+        this.juri = juri;
     }
 }
