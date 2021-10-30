@@ -24,5 +24,6 @@
     <result column="leader_stu" jdbcType="INTEGER" property="leaderStu" />
     <result column="leader_techer" jdbcType="INTEGER" property="leaderTecher" />
     <result column="juri" jdbcType="INTEGER" property="juri" />
+    <result column="diploma" jdbcType="VARCHAR" property="diploma" />
   </resultMap>
 </mapper>

@@ -5,10 +5,7 @@ import cn.edu.imau.redpioneer.service.UserService;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import io.swagger.annotations.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -16,9 +13,8 @@ import javax.annotation.Resource;
  * @author: zyl
  * @date 2021/10/28 17:08
  */
-
-@Controller
-@ResponseBody
+@CrossOrigin
+@RestController
 @RequestMapping("/user")
 @Api(value = "提供用户登录注册接口",tags = "用户管理")
 public class UserController {
@@ -31,7 +27,8 @@ public class UserController {
             @ApiImplicitParam(dataType = "String",name = "account",value = "用户名",required = true),
             @ApiImplicitParam(dataType = "String",name = "password",value = "密码",required = false,defaultValue = "888888")
     })
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping("/login")
+    @GetMapping
     public ResultVO login(@RequestParam("account")String account,
                           @RequestParam(value = "password",defaultValue = "888888") String password){
         return userService.login(account,password);
@@ -40,7 +37,8 @@ public class UserController {
 
     @ApiOperation(value = "用户注册接口")
     @ApiImplicitParam
-    @RequestMapping(value = "/regist",method = RequestMethod.POST)
+    @RequestMapping("/regist")
+    @PostMapping
     public ResultVO regist(Activist activist){
         System.out.println("regist");
         return new ResultVO(10002,"sec",null);
