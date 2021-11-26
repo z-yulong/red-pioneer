@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.ActivistMapper">
-  <resultMap id="BaseResultMap" type="cn.deu.imau.redpioneer.entity.Activist">
-    <!--
-      WARNING - @mbg.generated
-    -->
+
+    <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.Activist">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -25,5 +23,47 @@
     <result column="leader_techer" jdbcType="INTEGER" property="leaderTecher" />
     <result column="juri" jdbcType="INTEGER" property="juri" />
     <result column="diploma" jdbcType="VARCHAR" property="diploma" />
+    <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />
   </resultMap>
+
+  <update id="updateInfoByPrimaryKey" parameterType="cn.edu.imau.redpioneer.entity.Activist" >
+    update activist
+    <set>
+        <if test="account != null">account = #{account},</if>
+        <if test="password != null">password = #{password},</if>
+        <if test="name != null">name = #{name},</if>
+        <if test="sex != null">sex = #{sex},</if>
+        <if test="nation != null">nation = #{nation},</if>
+        <if test="dateOfBirth != null">date_of_birth = #{dateOfBirth},</if>
+        <if test="nativePlace != null">native_place = #{nativePlace},</if>
+        <if test="education != null">education = #{education},</if>
+        <if test="admissionTime != null">admission_time = #{admissionTime},</if>
+        <if test="address != null">address = #{address},</if>
+        <if test="idCard != null">id_card = #{idCard},</if>
+        <if test="tel != null">tel = #{tel},</if>
+        <if test="applicationTime != null">application_time = #{applicationTime},</if>
+        <if test="isAdult != null">is_adult = #{isAdult},</if>
+        <if test="photo != null">photo = #{photo},</if>
+        <if test="leaderStu != null">leader_stu = #{leaderStu},</if>
+        <if test="leaderTecher != null">leader_techer = #{leaderTecher},</if>
+        <if test="juri != null">juri = #{juri},</if>
+        <if test="diploma != null">diploma = #{diploma}</if>
+        <if test="upactivistTime != null">upactivist_time = #{upactivistTime}</if>
+
+    </set>
+        where id=#{id}
+
+  </update>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO activist
+        (account,name)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.account},#{item.name})
+        </foreach>
+    </insert>
+    
+
+
 </mapper>

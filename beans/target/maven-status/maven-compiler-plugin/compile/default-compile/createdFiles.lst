@@ -1,7 +1,8 @@
-cn\deu\imau\redpioneer\entity\SupperAdmin.class
-cn\deu\imau\redpioneer\entity\Volunteer.class
-cn\deu\imau\redpioneer\entity\LeaderStu.class
-cn\deu\imau\redpioneer\entity\LeaderTecher.class
-cn\deu\imau\redpioneer\entity\Activist.class
-cn\deu\imau\redpioneer\entity\Fimaly.class
-cn\deu\imau\redpioneer\entity\Conversation.class
+cn\edu\imau\redpioneer\entity\Fimaly.class
+cn\edu\imau\redpioneer\entity\SupperAdmin.class
+cn\edu\imau\redpioneer\entity\Conversation.class
+cn\edu\imau\redpioneer\entity\Activist.class
+cn\edu\imau\redpioneer\utils\ExcelVOAttribute.class
+cn\edu\imau\redpioneer\entity\LeaderStu.class
+cn\edu\imau\redpioneer\entity\Volunteer.class
+cn\edu\imau\redpioneer\entity\LeaderTecher.class

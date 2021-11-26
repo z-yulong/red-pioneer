@@ -4,5 +4,7 @@ cn\edu\imau\redpioneer\dao\SupperAdminMapper.class
 cn\edu\imau\redpioneer\dao\ActivistMapper.class
 cn\edu\imau\redpioneer\general\GeneralDAO.class
 cn\edu\imau\redpioneer\dao\LeaderStuMapper.class
+cn\edu\imau\redpioneer\utils\FileUtil.class
 cn\edu\imau\redpioneer\dao\FimalyMapper.class
 cn\edu\imau\redpioneer\dao\VolunteerMapper.class
+cn\edu\imau\redpioneer\utils\ExcelUtil.class
