@@ -9,6 +9,14 @@ spring:
     mapper-locations: classpath:mappers/*.xml
     type-aliases-package: cn.deu.imau.redpioneer.entity
 
+  servlet:
+    multipart:
+      max-request-size: 10MB # 上传文件的最大值
+      max-file-size: 5MB # 单个文件上传的最大值
+upload:
+  path: D:\\upload\headImgs
+
+
 #  redis:
 #    host: 127.0.0.1
 #    port: 6379

@@ -41,8 +41,6 @@ public class ImportActivistServiceImpl implements ImportActivistService {
     private final static String XLS = "xls";
     public static final String XLSX = "xlsx";
 
-    private final static Logger logger = LoggerFactory.getLogger(ImportActivistService.class);
-
     @Resource
     ActivistMapper activistMapper;
 
@@ -93,15 +91,7 @@ public class ImportActivistServiceImpl implements ImportActivistService {
                 //  姓名
                 String name = getCellValue(row.getCell(1));
                 activist.setName(name);
-//                // 成为积极分子时间
-//                String date =getCellValue(row.getCell(2));
-//
-//                SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd");
-//                try {
-//                    activist.setUpactivistTime(formatter.parse(date));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
+
                 activists.add(activist);
             }
         }

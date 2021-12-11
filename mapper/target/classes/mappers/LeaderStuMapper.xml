@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.LeaderStuMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.LeaderStu">
+  <resultMap id="BaseResultMap" type="cn.deu.imau.redpioneer.entity.LeaderStu">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="activist_id" jdbcType="VARCHAR" property="activistId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="juri" jdbcType="INTEGER" property="juri" />
   </resultMap>
 </mapper>

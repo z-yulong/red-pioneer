@@ -29,42 +29,36 @@ public enum ResStatus {
      * token不合法
      */
     TOKEN_ERROR(10010,"token不合法"),
-    /**
-     * 400请求参数出错
-     */
-    BAD_REQUEST(400, "请求参数出错"),
-    /**
-     * 403没有权限
-     */
-    FORBIDDEN(403, "没有权限"),
-    /**
-     * 410已被删除
-     */
-    GONE(410, "已被删除"),
-    /**
-     * 423已被锁定
-     */
-    LOCKED(423, "已被锁定"),
-    /**
-     * 500服务器出错
-     */
-    INTERNAL_SERVER_ERROR(500, "服务器出错"),
-    /**
-     * 异常
-     */
-    EXCPTION_ERROR(4001, "异常"),
 
+    /**
+     * 未经授权,无法访问!
+     */
+    USER_UNAUTHORIZED(20020,"未经授权,无法访问!"),
 
-    PARAMETER_ERROR(1003,"系统参数错误"),
+    /**
+     * 文件不是Excel
+     */
     FILE_IS_NOT_EXCEL(1004,"文件不是Excel"),
+
+    /**
+     * 数据为空，请填写数据
+     */
     DATA_IS_NULL(1005,"数据为空，请填写数据"),
-    USERNAME_IS_ERROR(1006,"用户名错误"),
-    PASSWORD_IS_ERROR(1007,"密码错误");
+
+    /**
+     * 删除成功
+     */
+
+    DELETE_OK(10000,"删除成功！"),
+    /**
+     * 更新成功
+     */
+    UPDATE_OK(10000,"更新成功");
 
     private final Integer value;
     private final String text;
 
-    private ResStatus(Integer value, String text) {
+    ResStatus(Integer value, String text) {
         this.value = value;
         this.text = text;
     }

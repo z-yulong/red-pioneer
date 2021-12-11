@@ -2,6 +2,7 @@ package cn.edu.imau.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -18,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
+
 public class SwaggerConfig {
 
 /** Swagger 会生成接口文档
@@ -33,7 +35,7 @@ public class SwaggerConfig {
         ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
         apiInfoBuilder.title("《红色先锋后端接口说明》")
                 .description("此文档说明了《红色先锋》项目的后端接口规范")
-                .version("v 1.0.0")
+                .version("v 1.0.1")
                 .contact(new Contact("zyl",null,"1156211195@qq.com"));
 
         ApiInfo apiInfo = apiInfoBuilder.build();

@@ -21,10 +21,6 @@ class ApiApplicationTests {
     @Test
     void contextLoads() {
 
-        Activist activist = new Activist();
-        activist.setId(2);
-        activist.setPassword("222");
-        activistMapper.updateInfoByPrimaryKey(activist);
 
     }
 

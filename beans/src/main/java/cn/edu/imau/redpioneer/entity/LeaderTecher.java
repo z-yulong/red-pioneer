@@ -1,20 +1,16 @@
 package cn.edu.imau.redpioneer.entity;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "leader_techer")
 public class LeaderTecher {
     @Id
     private Integer id;
 
-    private String account;
-
-    private String password;
+    @Column(name = "activist_id")
+    private String activistId;
 
     private String name;
-
-    private Integer juri;
 
     /**
      * @return id
@@ -31,31 +27,17 @@ public class LeaderTecher {
     }
 
     /**
-     * @return account
+     * @return activist_id
      */
-    public String getAccount() {
-        return account;
+    public String getActivistId() {
+        return activistId;
     }
 
     /**
-     * @param account
+     * @param activistId
      */
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    /**
-     * @return password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setActivistId(String activistId) {
+        this.activistId = activistId;
     }
 
     /**
@@ -70,19 +52,5 @@ public class LeaderTecher {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return juri
-     */
-    public Integer getJuri() {
-        return juri;
-    }
-
-    /**
-     * @param juri
-     */
-    public void setJuri(Integer juri) {
-        this.juri = juri;
     }
 }

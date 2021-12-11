@@ -4,6 +4,8 @@ import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.ImportActivistService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +26,7 @@ public class ImportExcel {
     ImportActivistService importActivistService;
 
     //  Excel导入数据到数据库
+    @RequiresRoles("管理员")
     @ApiOperation(value = "批量注册接口")
     @PostMapping("/importExcel")
     public ResultVO importExcel(@RequestParam("myfile") MultipartFile myFile){
