@@ -5,13 +5,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: zyl
@@ -26,8 +32,17 @@ public class SwaggerConfig {
  *  1.配置生成文档信息
  *  2.配置生成规则
  */
+
     @Bean
     public Docket getDocket(){
+
+        ParameterBuilder ticketPar = new ParameterBuilder();
+        List<Parameter> pars = new ArrayList<Parameter>();
+        ticketPar.name("ticket").description("user ticket")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                .required(false).build();
+        pars.add(ticketPar.build());
+
         //指定文档风格
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
 
@@ -49,5 +64,6 @@ public class SwaggerConfig {
 
         return docket;
     }
-
 }
+
+

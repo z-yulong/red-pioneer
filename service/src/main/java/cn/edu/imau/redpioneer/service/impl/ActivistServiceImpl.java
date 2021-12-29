@@ -161,6 +161,7 @@ public class ActivistServiceImpl implements ActivistService {
 
         Activist activist = new Activist();
         activist.setAccount(account);
+        activist.setPassword("888888");
         activist.setName(name);
         activist.setRoles(roles);
 

@@ -35,7 +35,7 @@ public class UpdateActivistController {
     @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长","积极分子"})
     @ApiOperation(value = "修改个人信息接口")
     @PutMapping("/update")
-    public ResultVO updateUser(@RequestBody Activist activist,@RequestHeader("token")String token){
+    public ResultVO updateUser(@RequestBody Activist activist){
         return updateActivistService.updateActivistInfo(activist);
     }
 
@@ -46,7 +46,7 @@ public class UpdateActivistController {
      * @return
      * @throws IOException
      */
-    @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长","积极分子"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     @ApiOperation(value = "修改头像接口")
     @PutMapping("/avater")
     public ResultVO updateAvater(@RequestParam("avater") MultipartFile avater, ServletRequest request) throws IOException {

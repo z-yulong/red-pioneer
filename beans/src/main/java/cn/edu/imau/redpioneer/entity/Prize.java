@@ -1,5 +1,8 @@
 package cn.edu.imau.redpioneer.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -19,6 +22,8 @@ public class Prize {
     /**
      * 奖惩时间
      */
+    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "prize_date")
     private Date prizeDate;
 

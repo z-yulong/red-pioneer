@@ -26,7 +26,7 @@ public class ImportExcel {
     ImportActivistService importActivistService;
 
     //  Excel导入数据到数据库
-    @RequiresRoles("管理员")
+    @RequiresRoles("admin")
     @ApiOperation(value = "批量注册接口")
     @PostMapping("/importExcel")
     public ResultVO importExcel(@RequestParam("myfile") MultipartFile myFile){
@@ -34,3 +34,5 @@ public class ImportExcel {
         return importActivistService.importExcel(myFile);
     }
 }
+
+

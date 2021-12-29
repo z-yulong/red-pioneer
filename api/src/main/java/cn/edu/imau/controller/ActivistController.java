@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
  */
 @CrossOrigin//解决跨域访问
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/activist")
 @Api(value = "提供用户登录注册接口",tags = "用户管理")
 public class ActivistController {
 
@@ -47,7 +47,7 @@ public class ActivistController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("通过id删除一个用户")
-    @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长"})//拥有admin和shuji和zuzhuang角色的用户可以访问
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})//拥有admin和shuji和zuzhuang角色的用户可以访问
     public ResultVO delete(@PathVariable("id") Integer id) {
         return activistService.deleteById(id);
     }
@@ -59,7 +59,7 @@ public class ActivistController {
      */
     @GetMapping("getUser/{id}")
     @ApiOperation("通过id获取一个用户")
-    @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
     public ResultVO getUserById(@PathVariable("id") Integer id) {
         return activistService.getUserById(id);
     }
@@ -71,7 +71,7 @@ public class ActivistController {
      */
     @GetMapping("getUserByAccount/{account}")
     @ApiOperation("通过账号获取一个用户")
-    @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
     public ResultVO getUserByAccount(@PathVariable("account") String account) {
         return activistService.getUserByAccount(account);
     }
@@ -83,7 +83,7 @@ public class ActivistController {
      */
     @GetMapping("getUserByName/{name}")
     @ApiOperation("通过姓名获取一个用户")
-    @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
     public ResultVO getUserByName(@PathVariable("name") String name) {
         return activistService.getUserByName(name);
     }
@@ -95,7 +95,7 @@ public class ActivistController {
      */
     @PutMapping("/updateById")
     @ApiOperation("通过id更新一个用户")
-    @RequiresRoles(logical = Logical.OR, value = {"管理员","党支部书记","党小组组长"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
     public ResultVO update(@RequestBody Activist activist) {
         return activistService.updateActivistByid(activist);
     }
@@ -108,7 +108,7 @@ public class ActivistController {
      */
     @GetMapping("/getUserByRole")
     @ApiOperation("通过角色查询支部负责人")
-    @RequiresRoles("管理员")
+    @RequiresRoles("admin")
     public ResultVO getUserByRole() {
         return activistService.getUserByRole();
     }
@@ -121,7 +121,7 @@ public class ActivistController {
      */
     @GetMapping("/register")
     @ApiOperation("管理员注册账号")
-    @RequiresRoles("管理员")
+    @RequiresRoles("admin")
     @ApiImplicitParams({
             @ApiImplicitParam(dataType = "String",name = "account",value = "用户名",required = true),
             @ApiImplicitParam(dataType = "String",name = "name",value = "姓名",required = true),

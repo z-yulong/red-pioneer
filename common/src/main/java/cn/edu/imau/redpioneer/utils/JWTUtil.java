@@ -33,6 +33,7 @@ public class JWTUtil {
         String token= JWT.create()
                 .withHeader(map)
                 .withClaim("account", activist.getAccount())//私有声明
+                .withClaim("id",String.valueOf(activist.getId()))
                 .withExpiresAt(date)//过期时间
                 .withIssuedAt(new Date())//签发时间
                 .sign(Algorithm.HMAC256(SECRET));//签名
@@ -55,6 +56,15 @@ public class JWTUtil {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("account").asString();
+        } catch (JWTDecodeException e) {
+            return null;
+        }
+    }
+
+    public static String getIdByToken(String token){
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("id").asString();
         } catch (JWTDecodeException e) {
             return null;
         }
