@@ -1,12 +1,10 @@
 package cn.edu.imau.controller.partybranchcontroller;
 
-import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.PartyBranchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

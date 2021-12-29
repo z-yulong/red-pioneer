@@ -6,8 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="secretary" jdbcType="INTEGER" property="secretary" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
+    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
 </mapper>

@@ -130,8 +130,4 @@ public class ActivistController {
         return activistService.register(account,name,roles);
     }
 
-
-
-
-
 }

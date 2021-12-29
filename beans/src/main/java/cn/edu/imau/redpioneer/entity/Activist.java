@@ -6,15 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.util.Date;
-import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "Activist对象",description = "用户信息")
 public class Activist {
     /**
-     * id
+     * 用户表主键
      */
     @Id
     private Integer id;
@@ -42,15 +43,14 @@ public class Activist {
     private String sex;
 
     /**
+     * 出生年月
+     */
+    private Date birthday;
+
+    /**
      * 民族
      */
     private String nation;
-
-    /**
-     * 出生日期
-     */
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
 
     /**
      * 籍贯
@@ -59,10 +59,10 @@ public class Activist {
     private String nativePlace;
 
     /**
-     * 入学时间
+     * 身份证
      */
-    @Column(name = "admission_time")
-    private Date admissionTime;
+    @Column(name = "id_card")
+    private String idCard;
 
     /**
      * 地址
@@ -70,21 +70,9 @@ public class Activist {
     private String address;
 
     /**
-     * 身份证号码
-     */
-    @Column(name = "id_card")
-    private String idCard;
-
-    /**
      * 电话
      */
     private String tel;
-
-    /**
-     * 申请时间
-     */
-    @Column(name = "application_time")
-    private Date applicationTime;
 
     /**
      * 照片
@@ -92,27 +80,9 @@ public class Activist {
     private String photo;
 
     /**
-     * 党小组组长
+     * 班级
      */
-    @Column(name = "leader_stu")
-    private Integer leaderStu;
-
-    /**
-     * 培养人_老师
-     */
-    @Column(name = "leader_techer")
-    private Integer leaderTecher;
-
-    /**
-     * 积极分子结业证
-     */
-    private String diploma;
-
-    /**
-     * 成为积极分子时间
-     */
-    @Column(name = "upactivist_time")
-    private Date upactivistTime;
+    private String classes;
 
     /**
      * 角色
@@ -120,33 +90,23 @@ public class Activist {
     private String roles;
 
     /**
-     * 权限
-     */
-    private String permission;
-
-    /**
-     * 班级
-     */
-    private String classes;
-
-    /**
      * 状态
      */
     private String state;
 
     /**
-     * 获取id
+     * 获取用户表主键
      *
-     * @return id - id
+     * @return id - 用户表主键
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 设置id
+     * 设置用户表主键
      *
-     * @param id id
+     * @param id 用户表主键
      */
     public void setId(Integer id) {
         this.id = id;
@@ -225,6 +185,24 @@ public class Activist {
     }
 
     /**
+     * 获取出生年月
+     *
+     * @return birthday - 出生年月
+     */
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    /**
+     * 设置出生年月
+     *
+     * @param birthday 出生年月
+     */
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    /**
      * 获取民族
      *
      * @return nation - 民族
@@ -240,24 +218,6 @@ public class Activist {
      */
     public void setNation(String nation) {
         this.nation = nation;
-    }
-
-    /**
-     * 获取出生日期
-     *
-     * @return date_of_birth - 出生日期
-     */
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    /**
-     * 设置出生日期
-     *
-     * @param dateOfBirth 出生日期
-     */
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     /**
@@ -279,21 +239,21 @@ public class Activist {
     }
 
     /**
-     * 获取入学时间
+     * 获取身份证
      *
-     * @return admission_time - 入学时间
+     * @return id_card - 身份证
      */
-    public Date getAdmissionTime() {
-        return admissionTime;
+    public String getIdCard() {
+        return idCard;
     }
 
     /**
-     * 设置入学时间
+     * 设置身份证
      *
-     * @param admissionTime 入学时间
+     * @param idCard 身份证
      */
-    public void setAdmissionTime(Date admissionTime) {
-        this.admissionTime = admissionTime;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     /**
@@ -315,24 +275,6 @@ public class Activist {
     }
 
     /**
-     * 获取身份证号码
-     *
-     * @return id_card - 身份证号码
-     */
-    public String getIdCard() {
-        return idCard;
-    }
-
-    /**
-     * 设置身份证号码
-     *
-     * @param idCard 身份证号码
-     */
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    /**
      * 获取电话
      *
      * @return tel - 电话
@@ -348,24 +290,6 @@ public class Activist {
      */
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    /**
-     * 获取申请时间
-     *
-     * @return application_time - 申请时间
-     */
-    public Date getApplicationTime() {
-        return applicationTime;
-    }
-
-    /**
-     * 设置申请时间
-     *
-     * @param applicationTime 申请时间
-     */
-    public void setApplicationTime(Date applicationTime) {
-        this.applicationTime = applicationTime;
     }
 
     /**
@@ -387,75 +311,21 @@ public class Activist {
     }
 
     /**
-     * 获取党小组组长
+     * 获取班级
      *
-     * @return leader_stu - 党小组组长
+     * @return classes - 班级
      */
-    public Integer getLeaderStu() {
-        return leaderStu;
+    public String getClasses() {
+        return classes;
     }
 
     /**
-     * 设置党小组组长
+     * 设置班级
      *
-     * @param leaderStu 党小组组长
+     * @param classes 班级
      */
-    public void setLeaderStu(Integer leaderStu) {
-        this.leaderStu = leaderStu;
-    }
-
-    /**
-     * 获取培养人_老师
-     *
-     * @return leader_techer - 培养人_老师
-     */
-    public Integer getLeaderTecher() {
-        return leaderTecher;
-    }
-
-    /**
-     * 设置培养人_老师
-     *
-     * @param leaderTecher 培养人_老师
-     */
-    public void setLeaderTecher(Integer leaderTecher) {
-        this.leaderTecher = leaderTecher;
-    }
-
-    /**
-     * 获取积极分子结业证
-     *
-     * @return diploma - 积极分子结业证
-     */
-    public String getDiploma() {
-        return diploma;
-    }
-
-    /**
-     * 设置积极分子结业证
-     *
-     * @param diploma 积极分子结业证
-     */
-    public void setDiploma(String diploma) {
-        this.diploma = diploma;
-    }
-
-    /**
-     * 获取成为积极分子时间
-     *
-     * @return upactivist_time - 成为积极分子时间
-     */
-    public Date getUpactivistTime() {
-        return upactivistTime;
-    }
-
-    /**
-     * 设置成为积极分子时间
-     *
-     * @param upactivistTime 成为积极分子时间
-     */
-    public void setUpactivistTime(Date upactivistTime) {
-        this.upactivistTime = upactivistTime;
+    public void setClasses(String classes) {
+        this.classes = classes;
     }
 
     /**
@@ -474,42 +344,6 @@ public class Activist {
      */
     public void setRoles(String roles) {
         this.roles = roles;
-    }
-
-    /**
-     * 获取权限
-     *
-     * @return permission - 权限
-     */
-    public String getPermission() {
-        return permission;
-    }
-
-    /**
-     * 设置权限
-     *
-     * @param permission 权限
-     */
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
-
-    /**
-     * 获取班级
-     *
-     * @return classes - 班级
-     */
-    public String getClasses() {
-        return classes;
-    }
-
-    /**
-     * 设置班级
-     *
-     * @param classes 班级
-     */
-    public void setClasses(String classes) {
-        this.classes = classes;
     }
 
     /**

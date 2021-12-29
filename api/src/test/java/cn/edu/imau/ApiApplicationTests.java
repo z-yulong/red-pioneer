@@ -1,7 +1,6 @@
 package cn.edu.imau;
 
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
-import cn.edu.imau.redpioneer.entity.Activist;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

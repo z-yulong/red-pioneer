@@ -5,7 +5,6 @@ import cn.edu.imau.redpioneer.enums.ResultVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**

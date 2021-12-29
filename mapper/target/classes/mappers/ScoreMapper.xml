@@ -2,14 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.ScoreMapper">
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.Score">
-
+    <!--
+      WARNING - @mbg.generated
+    -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
     <result column="moral" jdbcType="VARCHAR" property="moral" />
-    <result column="comprehensive" jdbcType="VARCHAR" property="comprehensive" />
     <result column="moral_ranking" jdbcType="VARCHAR" property="moralRanking" />
+    <result column="comprehensive" jdbcType="VARCHAR" property="comprehensive" />
     <result column="comprehensive_ranking" jdbcType="VARCHAR" property="comprehensiveRanking" />
     <result column="class_size" jdbcType="VARCHAR" property="classSize" />
     <result column="is_firsthalf" jdbcType="VARCHAR" property="isFirsthalf" />
+    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
 </mapper>

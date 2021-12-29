@@ -10,58 +10,41 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="date_of_birth" jdbcType="DATE" property="dateOfBirth" />
     <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
-    <result column="admission_time" jdbcType="DATE" property="admissionTime" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
-    <result column="application_time" jdbcType="DATE" property="applicationTime" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="leader_stu" jdbcType="INTEGER" property="leaderStu" />
-    <result column="leader_techer" jdbcType="INTEGER" property="leaderTecher" />
-    <result column="diploma" jdbcType="VARCHAR" property="diploma" />
-    <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />
-    <result column="roles" jdbcType="VARCHAR" property="roles" />
-    <result column="permission" jdbcType="VARCHAR" property="permission" />
     <result column="classes" jdbcType="VARCHAR" property="classes" />
+    <result column="roles" jdbcType="VARCHAR" property="roles" />
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
 
-
+  <!--更新用户信息-->
   <update id="updateInfoByPrimaryKey" parameterType="cn.edu.imau.redpioneer.entity.Activist" >
     update activist
     <set>
-      <if test="account != null">account = #{account},</if>
-      <if test="password != null">password = #{password},</if>
-      <if test="name != null">name = #{name},</if>
-      <if test="sex != null">sex = #{sex},</if>
-      <if test="nation != null">nation = #{nation},</if>
-      <if test="dateOfBirth != null">date_of_birth = #{dateOfBirth},</if>
-      <if test="nativePlace != null">native_place = #{nativePlace},</if>
-
-      <if test="admissionTime != null">admission_time = #{admissionTime},</if>
-      <if test="address != null">address = #{address},</if>
-      <if test="idCard != null">id_card = #{idCard},</if>
-      <if test="tel != null">tel = #{tel},</if>
-      <if test="applicationTime != null">application_time = #{applicationTime},</if>
-
-      <if test="photo != null">photo = #{photo},</if>
-      <if test="leaderStu != null">leader_stu = #{leaderStu},</if>
-      <if test="leaderTecher != null">leader_techer = #{leaderTecher},</if>
-      <if test="diploma != null">diploma = #{diploma},</if>
-      <if test="upactivistTime != null">upactivist_time = #{upactivistTime}</if>
-      <if test="roles != null">roles = #{roles}</if>
-      <if test="permission != null">permission = #{permission}</if>
-      <if test="classes != null">classes = #{classes}</if>
-      <if test="state != null">state = #{state}</if>
-
+      <if test="account != null and account.toString() !=''">account = #{account},</if>
+      <if test="password != null and password.toString() !=''">password = #{password},</if>
+      <if test="name != null and name.toString() !=''">name = #{name},</if>
+      <if test="sex != null and sex.toString() !=''">sex = #{sex},</if>
+      <if test="birthday != null and birthday.toString()!=''">birthday = #{birthday},</if>
+      <if test="nation != null and nation.toString() != ''">nation = #{nation},</if>
+      <if test="nativePlace != null and nativePlace.toString()!=''">native_place = #{nativePlace},</if>
+      <if test="idCard != null and idCard.toString()!=''">id_card = #{idCard},</if>
+      <if test="address != null and address.toString()!=''">address = #{address},</if>
+      <if test="tel != null and tel.toString()!=''">tel = #{tel},</if>
+      <if test="photo != null and photo.toString()!=''">photo = #{photo},</if>
+      <if test="classes != null and classes.toString()!=''">classes = #{classes},</if>
+      <if test="roles != null and roles.toString()!=''">roles = #{roles},</if>
+      <if test="state != null and state.toString()!=''">state = #{state}</if>
     </set>
     where id=#{id}
-
   </update>
 
+  <!--批量插入用户-->
   <insert id="batchInsert" parameterType="java.util.List">
     INSERT INTO activist
     (account,name)
@@ -71,14 +54,10 @@
     </foreach>
   </insert>
 
-
+  <!--更新用户照片-->
   <update id="updateAvatarByPrimaryKey">
-    update activist
-    set photo=#{path}
-    where id=#{id}
-
+    update activist set photo=#{path} where id=#{id}
   </update>
-
 
 </mapper>
 

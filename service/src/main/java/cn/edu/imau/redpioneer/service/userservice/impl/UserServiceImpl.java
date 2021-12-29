@@ -3,7 +3,6 @@ package cn.edu.imau.redpioneer.service.userservice.impl;
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.PrizeMapper;
 import cn.edu.imau.redpioneer.dao.ScoreMapper;
-import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.entity.Prize;
 import cn.edu.imau.redpioneer.entity.Score;
 import cn.edu.imau.redpioneer.enums.ResStatus;
@@ -21,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.SocketHandler;
-
-import static cn.edu.imau.redpioneer.utils.FileUtil.deleteFile;
 
 /**
  * @author: zyl
@@ -67,8 +63,8 @@ public class UserServiceImpl implements UserService {
         Prize prize = new Prize();
         prize.setActivistId(id);
         prize.setPrizeInfo(savePath);
-        prize.setPrizeDate(date);
-        prize.setPrizeLevel(level);
+//        prize.setPrizeDate(date);
+//        prize.setPrizeLevel(level);
         prizeMapper.insert(prize);
 
         return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);

@@ -38,7 +38,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
-        System.out.println("isLoginAttempt");
+       // System.out.println("isLoginAttempt");
         HttpServletRequest req= (HttpServletRequest) request;
         String token=req.getHeader("Authorization");
         return token!=null;
@@ -51,7 +51,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
-        System.out.println("executeLogin");
+       // System.out.println("executeLogin");
         HttpServletRequest req= (HttpServletRequest) request;
         String token=req.getHeader("Authorization");
         JWTToken jwt=new JWTToken(token);
@@ -66,7 +66,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
-        System.out.println("preHandle");
+       // System.out.println("preHandle");
         HttpServletRequest req= (HttpServletRequest) request;
         HttpServletResponse res= (HttpServletResponse) response;
         res.setHeader("Access-control-Allow-Origin",req.getHeader("Origin"));
@@ -84,7 +84,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * 将非法请求跳转到 /unauthorized/**
      */
     private void responseError(ServletResponse response, String message) {
-        System.out.println("responseError");
+       // System.out.println("responseError");
 
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;

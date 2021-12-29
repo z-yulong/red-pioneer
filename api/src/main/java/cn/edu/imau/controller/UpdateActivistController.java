@@ -1,21 +1,17 @@
 package cn.edu.imau.controller;
 
 import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.UpdateActivistService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**

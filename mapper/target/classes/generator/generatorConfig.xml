@@ -18,7 +18,7 @@
 
         <!-- 配置数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/red-pioneer"
+                        connectionURL="jdbc:mysql://localhost:3306/red-pioneer-ddl"
                         userId="root" password="root">
         </jdbcConnection>
 

@@ -68,8 +68,7 @@ public class UserController {
     @RequiresRoles("user")
     @ApiOperation(value = "上传成绩接口")
     @PostMapping("/addScore")
-    public ResultVO addScore(@RequestBody Score score,ServletRequest request){
-
+    public ResultVO addScore(@RequestBody Score score, ServletRequest request){
         return userService.addScore(score,request);
     }
 

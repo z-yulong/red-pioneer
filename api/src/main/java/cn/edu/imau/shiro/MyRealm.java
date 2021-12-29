@@ -32,7 +32,7 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("授权~~~~~");
+        //System.out.println("授权~~~~~");
         String token=principals.toString();
         String username= JWTUtil.getAccount(token);
         Activist activist=activistService.getUser(username);
@@ -40,7 +40,7 @@ public class MyRealm extends AuthorizingRealm {
         //查询数据库来获取用户的角色
         info.addRole(activist.getRoles());
         //查询数据库来获取用户的权限
-        info.addStringPermission(activist.getPermission());
+        //info.addStringPermission(activist.getPermission());
         return info;
     }
 
@@ -50,7 +50,7 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        System.out.println("认证~~~~~~~");
+        //System.out.println("认证~~~~~~~");
         String jwt= (String) token.getCredentials();
         String username= null;
         try {

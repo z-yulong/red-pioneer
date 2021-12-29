@@ -1,31 +1,15 @@
 package cn.edu.imau.redpioneer.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.util.Date;
-import javax.persistence.*;
 
 public class Prize {
     /**
-     * 奖惩表主键
+     * 奖惩信息表主键
      */
     @Id
     private Integer id;
-
-    /**
-     * 用户id
-     */
-    @Column(name = "activist_id")
-    private Integer activistId;
-
-    /**
-     * 奖惩时间
-     */
-    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Column(name = "prize_date")
-    private Date prizeDate;
 
     /**
      * 奖惩信息
@@ -34,63 +18,38 @@ public class Prize {
     private String prizeInfo;
 
     /**
-     * 奖惩等级
+     * 奖惩时间
      */
-    @Column(name = "prize_level")
-    private String prizeLevel;
+    @Column(name = "prize_time")
+    private Date prizeTime;
 
     /**
-     * 获取奖惩表主键
+     * 佐证材料
+     */
+    private String prove;
+
+    /**
+     * 用户id
+     */
+    @Column(name = "activist_id")
+    private Integer activistId;
+
+    /**
+     * 获取奖惩信息表主键
      *
-     * @return id - 奖惩表主键
+     * @return id - 奖惩信息表主键
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 设置奖惩表主键
+     * 设置奖惩信息表主键
      *
-     * @param id 奖惩表主键
+     * @param id 奖惩信息表主键
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * 获取用户id
-     *
-     * @return activist_id - 用户id
-     */
-    public Integer getActivistId() {
-        return activistId;
-    }
-
-    /**
-     * 设置用户id
-     *
-     * @param activistId 用户id
-     */
-    public void setActivistId(Integer activistId) {
-        this.activistId = activistId;
-    }
-
-    /**
-     * 获取奖惩时间
-     *
-     * @return prize_date - 奖惩时间
-     */
-    public Date getPrizeDate() {
-        return prizeDate;
-    }
-
-    /**
-     * 设置奖惩时间
-     *
-     * @param prizeDate 奖惩时间
-     */
-    public void setPrizeDate(Date prizeDate) {
-        this.prizeDate = prizeDate;
     }
 
     /**
@@ -112,20 +71,56 @@ public class Prize {
     }
 
     /**
-     * 获取奖惩等级
+     * 获取奖惩时间
      *
-     * @return prize_level - 奖惩等级
+     * @return prize_time - 奖惩时间
      */
-    public String getPrizeLevel() {
-        return prizeLevel;
+    public Date getPrizeTime() {
+        return prizeTime;
     }
 
     /**
-     * 设置奖惩等级
+     * 设置奖惩时间
      *
-     * @param prizeLevel 奖惩等级
+     * @param prizeTime 奖惩时间
      */
-    public void setPrizeLevel(String prizeLevel) {
-        this.prizeLevel = prizeLevel;
+    public void setPrizeTime(Date prizeTime) {
+        this.prizeTime = prizeTime;
+    }
+
+    /**
+     * 获取佐证材料
+     *
+     * @return prove - 佐证材料
+     */
+    public String getProve() {
+        return prove;
+    }
+
+    /**
+     * 设置佐证材料
+     *
+     * @param prove 佐证材料
+     */
+    public void setProve(String prove) {
+        this.prove = prove;
+    }
+
+    /**
+     * 获取用户id
+     *
+     * @return activist_id - 用户id
+     */
+    public Integer getActivistId() {
+        return activistId;
+    }
+
+    /**
+     * 设置用户id
+     *
+     * @param activistId 用户id
+     */
+    public void setActivistId(Integer activistId) {
+        this.activistId = activistId;
     }
 }

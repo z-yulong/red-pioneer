@@ -1,8 +1,7 @@
 package cn.edu.imau.redpioneer.service.impl;
 
-import cn.edu.imau.redpioneer.entity.Activist;
-
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
+import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.ActivistService;
@@ -161,19 +160,20 @@ public class ActivistServiceImpl implements ActivistService {
 
         Activist activist = new Activist();
         activist.setAccount(account);
-        activist.setPassword("888888");
         activist.setName(name);
         activist.setRoles(roles);
+
+        //设置默认值
+        defaultValue(activist);
 
         int i = activistMapper.insert(activist);
         if(i == 1){
             //注册成功
-            return new ResultVO(ResStatus.OK.getValue()
-                    , ResStatus.OK.getText(),null);
+            return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),null);
         }
-        return new ResultVO(ResStatus.NO.getValue()
-                , ResStatus.NO.getText(),activist);
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(),activist);
     }
+
 
 
     /**
@@ -205,15 +205,32 @@ public class ActivistServiceImpl implements ActivistService {
      */
     @Override
     public ResultVO updateActivistByid(Activist activist) {
+
         int i = activistMapper.updateByPrimaryKey(activist);
 
         if(i == 1){
             //更新成功
-            return new ResultVO(ResStatus.UPDATE_OK.getValue()
-                    , ResStatus.UPDATE_OK.getText(),null);
+            return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(),null);
         }
-        return new ResultVO(ResStatus.NO.getValue()
-                , ResStatus.NO.getText(),activist);
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(),activist);
+    }
+
+    /**
+     * 设置默认值
+     * @param activist
+     */
+    private void defaultValue(Activist activist){
+        activist.setSex("");
+        activist.setPassword("888888");
+        activist.setBirthday(new Date(2000-01-01));
+        activist.setNation("");
+        activist.setNativePlace("");
+        activist.setIdCard("");
+        activist.setAddress("");
+        activist.setTel("");
+        activist.setPhoto("");
+        activist.setClasses("");
+        activist.setState("1");
     }
 
 }

@@ -6,11 +6,11 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
-    <result column="prove" jdbcType="VARCHAR" property="prove" />
-    <result column="volunteer time" jdbcType="DATE" property="volunteerTime" />
-    <result column="volunteer_size" jdbcType="VARCHAR" property="volunteerSize" />
     <result column="volunteer_address" jdbcType="VARCHAR" property="volunteerAddress" />
+    <result column="volunteer_time" jdbcType="DATE" property="volunteerTime" />
     <result column="volunteer_info" jdbcType="VARCHAR" property="volunteerInfo" />
+    <result column="volunteer_size" jdbcType="VARCHAR" property="volunteerSize" />
+    <result column="prove" jdbcType="VARCHAR" property="prove" />
+    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
 </mapper>

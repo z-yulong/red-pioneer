@@ -2,7 +2,6 @@ package cn.edu.imau.redpioneer.service.impl;
 
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.entity.Activist;
-
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.exception.LianjiaException;
@@ -16,9 +15,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 //import org.springframework.boot.devtools.restart.RestartInitializer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -91,6 +86,9 @@ public class ImportActivistServiceImpl implements ImportActivistService {
                 //  姓名
                 String name = getCellValue(row.getCell(1));
                 activist.setName(name);
+                //  支部
+                String partyBranch = getCellValue(row.getCell(2));
+                activist.setName(partyBranch);
 
                 activists.add(activist);
             }
