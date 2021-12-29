@@ -30,12 +30,24 @@ public class UpdateActivistServiceImpl implements UpdateActivistService {
     @Resource
     private ActivistMapper activistMapper;
 
+    /**
+     * 修改个人信息
+     * @param activist
+     * @return
+     */
     @Override
     public ResultVO updateActivistInfo(Activist activist) {
         activistMapper.updateInfoByPrimaryKey(activist);
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),activist);
     }
 
+    /**
+     * 修改头像
+     * @param avatar
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @Override
     public ResultVO updateActivistAvatar(MultipartFile avatar, ServletRequest request) throws IOException {
 

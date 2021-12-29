@@ -133,7 +133,7 @@ public class ActivistServiceImpl implements ActivistService {
     }
 
     /**
-     * 根据权限获取用户
+     * 根据角色获取支部负责人
      * @return
      */
     @Override
