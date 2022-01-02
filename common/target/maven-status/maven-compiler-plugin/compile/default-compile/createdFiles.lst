@@ -4,6 +4,7 @@ cn\edu\imau\redpioneer\enums\ResultVO.class
 cn\edu\imau\redpioneer\annotation\CurrentUser.class
 cn\edu\imau\redpioneer\utils\JWTUtil.class
 cn\edu\imau\redpioneer\utils\PageHelper.class
+cn\edu\imau\redpioneer\vo\ConversationVO.class
 cn\edu\imau\redpioneer\utils\Base64Util.class
 cn\edu\imau\redpioneer\utils\FileUtil.class
 cn\edu\imau\redpioneer\enums\ResStatus.class

@@ -1,7 +1,7 @@
 package cn.edu.imau.shiro;
 
 import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.service.ActivistService;
+import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

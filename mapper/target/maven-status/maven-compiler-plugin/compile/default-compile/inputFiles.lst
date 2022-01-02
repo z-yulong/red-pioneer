@@ -1,9 +1,13 @@
 E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\PrizeMapper.java
-E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\general\GeneralDAO.java
 E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\PartyGroupMapper.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dto\PrizeDto.java
 E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\ConversationMapper.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\DevelopmentInfoMapper.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\ScoreMapper.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\general\GeneralDAO.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dto\DevelopmentDto.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\TalkMapper.java
+E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dto\ConversationDto.java
 E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\ActivistMapper.java
 E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\PartyBranchMapper.java
 E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\utils\ExcelUtil.java
-E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\DevelopmentInfoMapper.java
-E:\A\ing\red-pioneer\mapper\src\main\java\cn\edu\imau\redpioneer\dao\ScoreMapper.java

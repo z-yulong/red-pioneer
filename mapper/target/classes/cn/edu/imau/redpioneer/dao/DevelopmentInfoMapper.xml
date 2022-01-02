@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.DevelopmentInfoMapper">
+
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.DevelopmentInfo">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="application_time" jdbcType="DATE" property="applicationTime" />
-    <result column="application_form" jdbcType="VARCHAR" property="applicationForm" />
-    <result column="diploma" jdbcType="VARCHAR" property="diploma" />
-    <result column="upactivist_time" jdbcType="VARCHAR" property="upactivistTime" />
-    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="application_time" jdbcType="DATE" property="applicationTime" />
+      <result column="application_form" jdbcType="VARCHAR" property="applicationForm" />
+      <result column="diploma" jdbcType="VARCHAR" property="diploma" />
+      <result column="upactivist_time" jdbcType="VARCHAR" property="upactivistTime" />
+      <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
+
+  <resultMap id="DevelopmentMap" type="cn.edu.imau.redpioneer.entity.ActivistDevelopmentInfo">
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />
+      <result column="application_form" jdbcType="VARCHAR" property="applicationForm" />
+      <result column="diploma" jdbcType="VARCHAR" property="diploma" />
+      <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />
+  </resultMap>
+
+  <select id="selectDevelopmentInfoByName" parameterType="string" resultMap="DevelopmentMap">
+    SELECT a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time
+    FROM activist AS a
+           INNER JOIN development_info AS d
+                      ON a.id=d.activist_id
+    WHERE a.name=#{name}
+  </select>
+
+  <select id="selectDevelopmentInfoByAccount" parameterType="string" resultMap="DevelopmentMap">
+    SELECT a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time
+    FROM activist AS a
+           INNER JOIN development_info AS d
+                      ON a.id=d.activist_id
+    WHERE a.account=#{account}
+  </select>
+
+
 </mapper>

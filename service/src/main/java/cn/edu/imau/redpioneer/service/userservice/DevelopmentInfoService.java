@@ -5,8 +5,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
 import java.io.IOException;
+import java.util.Date;
 
 public interface DevelopmentInfoService {
 
-    ResultVO uploadRdsq(MultipartFile imgFile, ServletRequest request) throws IOException;
+    ResultVO uploadRdsq(
+            Date applicationTime,
+            MultipartFile applicationForm,
+            Date upactivistTime,
+            MultipartFile diploma,
+            ServletRequest request
+    ) throws IOException;
+
+    ResultVO getDevelopmentInfo(String info);
 }

@@ -23,23 +23,43 @@
   </resultMap>
 
   <!--更新用户信息-->
+<!--  <update id="updateInfoByPrimaryKey" parameterType="cn.edu.imau.redpioneer.entity.Activist" >-->
+<!--    update activist-->
+<!--    <set>-->
+<!--      <if test="account != null and account.toString() !=''">account = #{account},</if>-->
+<!--      <if test="password != null and password.toString() !=''">password = #{password},</if>-->
+<!--      <if test="name != null and name.toString() !=''">name = #{name},</if>-->
+<!--      <if test="sex != null and sex.toString() !=''">sex = #{sex},</if>-->
+<!--      <if test="birthday != null and birthday.toString()!=''">birthday = #{birthday},</if>-->
+<!--      <if test="nation != null and nation.toString() != ''">nation = #{nation},</if>-->
+<!--      <if test="nativePlace != null and nativePlace.toString()!=''">native_place = #{nativePlace},</if>-->
+<!--      <if test="idCard != null and idCard.toString()!=''">id_card = #{idCard},</if>-->
+<!--      <if test="address != null and address.toString()!=''">address = #{address},</if>-->
+<!--      <if test="tel != null and tel.toString()!=''">tel = #{tel},</if>-->
+<!--      <if test="photo != null and photo.toString()!=''">photo = #{photo},</if>-->
+<!--      <if test="classes != null and classes.toString()!=''">classes = #{classes},</if>-->
+<!--      <if test="roles != null and roles.toString()!=''">roles = #{roles},</if>-->
+<!--      <if test="state != null and state.toString()!=''">state = #{state}</if>-->
+<!--    </set>-->
+<!--    where id=#{id}-->
+<!--  </update>-->
   <update id="updateInfoByPrimaryKey" parameterType="cn.edu.imau.redpioneer.entity.Activist" >
     update activist
     <set>
-      <if test="account != null and account.toString() !=''">account = #{account},</if>
-      <if test="password != null and password.toString() !=''">password = #{password},</if>
-      <if test="name != null and name.toString() !=''">name = #{name},</if>
-      <if test="sex != null and sex.toString() !=''">sex = #{sex},</if>
-      <if test="birthday != null and birthday.toString()!=''">birthday = #{birthday},</if>
-      <if test="nation != null and nation.toString() != ''">nation = #{nation},</if>
-      <if test="nativePlace != null and nativePlace.toString()!=''">native_place = #{nativePlace},</if>
-      <if test="idCard != null and idCard.toString()!=''">id_card = #{idCard},</if>
-      <if test="address != null and address.toString()!=''">address = #{address},</if>
-      <if test="tel != null and tel.toString()!=''">tel = #{tel},</if>
-      <if test="photo != null and photo.toString()!=''">photo = #{photo},</if>
-      <if test="classes != null and classes.toString()!=''">classes = #{classes},</if>
-      <if test="roles != null and roles.toString()!=''">roles = #{roles},</if>
-      <if test="state != null and state.toString()!=''">state = #{state}</if>
+      <if test="account != null">account = #{account},</if>
+      <if test="password != null">password = #{password},</if>
+      <if test="name != null">name = #{name},</if>
+      <if test="sex != null">sex = #{sex},</if>
+      <if test="birthday != null">birthday = #{birthday},</if>
+      <if test="nation != null">nation = #{nation},</if>
+      <if test="nativePlace != null">native_place = #{nativePlace},</if>
+      <if test="idCard != null">id_card = #{idCard},</if>
+      <if test="address != null">address = #{address},</if>
+      <if test="tel != null">tel = #{tel},</if>
+      <if test="photo != null">photo = #{photo},</if>
+      <if test="classes != null">classes = #{classes},</if>
+      <if test="roles != null">roles = #{roles},</if>
+      <if test="stateCode != null">state_code = #{stateCode}</if>
     </set>
     where id=#{id}
   </update>

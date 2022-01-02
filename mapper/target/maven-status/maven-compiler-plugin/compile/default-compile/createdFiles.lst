@@ -1,9 +1,13 @@
 cn\edu\imau\redpioneer\dao\ConversationMapper.class
 cn\edu\imau\redpioneer\dao\ActivistMapper.class
 cn\edu\imau\redpioneer\dao\ScoreMapper.class
+cn\edu\imau\redpioneer\dto\DevelopmentDto.class
 cn\edu\imau\redpioneer\dao\PartyBranchMapper.class
+cn\edu\imau\redpioneer\dao\TalkMapper.class
 cn\edu\imau\redpioneer\general\GeneralDAO.class
 cn\edu\imau\redpioneer\dao\PrizeMapper.class
+cn\edu\imau\redpioneer\dto\ConversationDto.class
 cn\edu\imau\redpioneer\dao\DevelopmentInfoMapper.class
 cn\edu\imau\redpioneer\dao\PartyGroupMapper.class
+cn\edu\imau\redpioneer\dto\PrizeDto.class
 cn\edu\imau\redpioneer\utils\ExcelUtil.class

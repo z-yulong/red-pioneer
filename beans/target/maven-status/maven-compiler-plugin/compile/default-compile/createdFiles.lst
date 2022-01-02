@@ -2,7 +2,11 @@ cn\edu\imau\redpioneer\entity\PartyBranch.class
 cn\edu\imau\redpioneer\entity\Conversation.class
 cn\edu\imau\redpioneer\entity\Activist.class
 cn\edu\imau\redpioneer\entity\DevelopmentInfo.class
+cn\edu\imau\redpioneer\entity\ActivistPrizeInfo.class
 cn\edu\imau\redpioneer\entity\PartyGroup.class
 cn\edu\imau\redpioneer\utils\ExcelVOAttribute.class
 cn\edu\imau\redpioneer\entity\Prize.class
+cn\edu\imau\redpioneer\entity\Talk.class
+cn\edu\imau\redpioneer\entity\ActivistConversation.class
+cn\edu\imau\redpioneer\entity\ActivistDevelopmentInfo.class
 cn\edu\imau\redpioneer\entity\Score.class

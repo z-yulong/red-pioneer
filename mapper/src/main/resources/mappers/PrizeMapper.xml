@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.PrizeMapper">
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.Prize">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="prize_info" jdbcType="VARCHAR" property="prizeInfo" />
     <result column="prize_time" jdbcType="DATE" property="prizeTime" />
@@ -12,9 +9,16 @@
     <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
 
+  <resultMap id="ListMap" type="cn.edu.imau.redpioneer.entity.ActivistPrizeInfo">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="prize_info" jdbcType="VARCHAR" property="prizeInfo" />
+    <result column="prize_time" jdbcType="DATE" property="prizeTime" />
+    <result column="prove" jdbcType="INTEGER" property="prove" />
+  </resultMap>
+
+<!--  添加奖惩信息-->
   <insert id="addPrize" parameterType="cn.edu.imau.redpioneer.entity.Prize">
     insert into prize(
-
     <if test="activistId != null">activist_id,</if>
     <if test="prizeDate != null">prize_date,</if>
     <if test="prizeInfo != null">prize_info,</if>
@@ -25,6 +29,15 @@
     <if test="prizeInfo != null">#{prizeInfo},</if>
     <if test="prizeLevel != null">#{prizeLevel}</if>)
   </insert>
+
+<!--  查询用户奖惩信息-->
+  <select id="selectActivistPrize" parameterType="integer" resultMap="ListMap">
+    SELECT a.name,p.prize_info,p.prize_time,p.prove
+      FROM activist AS a
+        INNER JOIN prize AS p
+         ON a.id=p.activist_id
+    WHERE a.id=#{id}
+  </select>
 
 
 </mapper>

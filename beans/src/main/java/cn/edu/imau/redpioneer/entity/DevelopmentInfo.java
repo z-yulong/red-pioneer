@@ -34,7 +34,7 @@ public class DevelopmentInfo {
      * 确定为积极分子时间
      */
     @Column(name = "upactivist_time")
-    private String upactivistTime;
+    private Date upactivistTime;
 
     /**
      * 积极分子id
@@ -119,7 +119,7 @@ public class DevelopmentInfo {
      *
      * @return upactivist_time - 确定为积极分子时间
      */
-    public String getUpactivistTime() {
+    public Date getUpactivistTime() {
         return upactivistTime;
     }
 
@@ -128,7 +128,7 @@ public class DevelopmentInfo {
      *
      * @param upactivistTime 确定为积极分子时间
      */
-    public void setUpactivistTime(String upactivistTime) {
+    public void setUpactivistTime(Date upactivistTime) {
         this.upactivistTime = upactivistTime;
     }
 

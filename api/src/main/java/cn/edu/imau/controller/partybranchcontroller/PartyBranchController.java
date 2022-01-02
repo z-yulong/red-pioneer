@@ -2,7 +2,7 @@ package cn.edu.imau.controller.partybranchcontroller;
 
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 import cn.edu.imau.redpioneer.enums.ResultVO;
-import cn.edu.imau.redpioneer.service.PartyBranchService;
+import cn.edu.imau.redpioneer.service.commonservice.PartyBranchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresRoles;

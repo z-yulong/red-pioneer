@@ -92,7 +92,7 @@ public class Activist {
     /**
      * 状态
      */
-    private String state;
+    private String stateCode;
 
     /**
      * 获取用户表主键
@@ -352,7 +352,7 @@ public class Activist {
      * @return state - 状态
      */
     public String getState() {
-        return state;
+        return stateCode;
     }
 
     /**
@@ -361,6 +361,6 @@ public class Activist {
      * @param state 状态
      */
     public void setState(String state) {
-        this.state = state;
+        this.stateCode = state;
     }
 }
