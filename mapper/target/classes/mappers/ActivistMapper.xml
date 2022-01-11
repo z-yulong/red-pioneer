@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.ActivistMapper">
+
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.Activist">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -22,27 +20,7 @@
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
 
-  <!--更新用户信息-->
-<!--  <update id="updateInfoByPrimaryKey" parameterType="cn.edu.imau.redpioneer.entity.Activist" >-->
-<!--    update activist-->
-<!--    <set>-->
-<!--      <if test="account != null and account.toString() !=''">account = #{account},</if>-->
-<!--      <if test="password != null and password.toString() !=''">password = #{password},</if>-->
-<!--      <if test="name != null and name.toString() !=''">name = #{name},</if>-->
-<!--      <if test="sex != null and sex.toString() !=''">sex = #{sex},</if>-->
-<!--      <if test="birthday != null and birthday.toString()!=''">birthday = #{birthday},</if>-->
-<!--      <if test="nation != null and nation.toString() != ''">nation = #{nation},</if>-->
-<!--      <if test="nativePlace != null and nativePlace.toString()!=''">native_place = #{nativePlace},</if>-->
-<!--      <if test="idCard != null and idCard.toString()!=''">id_card = #{idCard},</if>-->
-<!--      <if test="address != null and address.toString()!=''">address = #{address},</if>-->
-<!--      <if test="tel != null and tel.toString()!=''">tel = #{tel},</if>-->
-<!--      <if test="photo != null and photo.toString()!=''">photo = #{photo},</if>-->
-<!--      <if test="classes != null and classes.toString()!=''">classes = #{classes},</if>-->
-<!--      <if test="roles != null and roles.toString()!=''">roles = #{roles},</if>-->
-<!--      <if test="state != null and state.toString()!=''">state = #{state}</if>-->
-<!--    </set>-->
-<!--    where id=#{id}-->
-<!--  </update>-->
+
   <update id="updateInfoByPrimaryKey" parameterType="cn.edu.imau.redpioneer.entity.Activist" >
     update activist
     <set>

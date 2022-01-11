@@ -56,6 +56,7 @@ public class ShiroConfig {
         Map<String,String>filterRuleMap=new HashMap<>();
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/**","jwt");
+        //swagger无需认证
         filterRuleMap.put("/swagger-ui.html", "anon");
         filterRuleMap.put("/doc.html", "anon");
         // 访问 /unauthorized/** 不通过JWTFilter
@@ -69,7 +70,6 @@ public class ShiroConfig {
      */
     @Bean
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
-
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator=new DefaultAdvisorAutoProxyCreator();
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         return defaultAdvisorAutoProxyCreator;
@@ -77,7 +77,6 @@ public class ShiroConfig {
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") DefaultWebSecurityManager securityManager){
-
         AuthorizationAttributeSourceAdvisor advisor=new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;

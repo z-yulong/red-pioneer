@@ -9,15 +9,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageHelper<T> {
+public class PageHelper{
 
-    //总记录数
-    private int count;
+    //起始页
+    private int offset;
 
-    //总页数
-    private int pageCount;
+    //页面大小
+    private int limit;
 
-    //分页数据
-    private List<T> list;
+
 
 }

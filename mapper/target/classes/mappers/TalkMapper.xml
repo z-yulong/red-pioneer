@@ -6,7 +6,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="activist_id" jdbcType="INTEGER" property="activistId" />
     <result column="talk_time" jdbcType="DATE" property="talkTime" />
-    <result column="talk_people" jdbcType="INTEGER" property="talkPeople" />
+    <result column="talk_people" jdbcType="VARCHAR" property="talkPeople" />
     <result column="prove" jdbcType="VARCHAR" property="prove" />
+    <result column="talkState" jdbcType="INTEGER" property="talk_state" />
+    <result column="talk_state" jdbcType="INTEGER" property="talkState" />
   </resultMap>
 </mapper>

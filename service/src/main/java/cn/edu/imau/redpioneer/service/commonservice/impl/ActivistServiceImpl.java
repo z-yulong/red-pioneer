@@ -6,6 +6,7 @@ import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -168,6 +169,7 @@ public class ActivistServiceImpl implements ActivistService {
         defaultValue(activist);
 
         int i = activistMapper.insert(activist);
+
         if(i == 1){
             //注册成功
             return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),null);
@@ -175,6 +177,18 @@ public class ActivistServiceImpl implements ActivistService {
         return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(),activist);
     }
 
+    /**
+     * 分页查询所有人
+     * @param rowBounds
+     * @param request
+     * @return
+     */
+    @Override
+    public ResultVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request) {
+        Activist activist = new Activist();
+        List<Activist> activists = activistMapper.selectByRowBounds(activist, rowBounds);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), activists);
+    }
 
 
     /**
@@ -200,7 +214,7 @@ public class ActivistServiceImpl implements ActivistService {
     }
 
     /**
-     * 通过id更新一个用户
+     * 通过id更新个人信息
      * @param activist
      * @return
      */
@@ -239,7 +253,7 @@ public class ActivistServiceImpl implements ActivistService {
         activist.setTel("");
         activist.setPhoto("");
         activist.setClasses("");
-        activist.setState("1");
+        activist.setStateCode("1");
     }
 
 }

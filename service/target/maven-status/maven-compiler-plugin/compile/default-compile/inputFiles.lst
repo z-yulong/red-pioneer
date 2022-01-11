@@ -1,4 +1,5 @@
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\ImportActivistService.java
+E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\AdminService.java
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\userservice\DevelopmentInfoService.java
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\impl\ActivistServiceImpl.java
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\userservice\impl\PrizeServiceImpl.java
@@ -13,5 +14,6 @@ E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\common
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\impl\ImportActivistServiceImpl.java
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\UpdateActivistService.java
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\ActivistService.java
-E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\impl\PartyBranchServiceimpl.java
+E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\impl\AdminServiceimpl.java
+E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\commonservice\impl\PartyBranchServiceImpl.java
 E:\A\ing\red-pioneer\service\src\main\java\cn\edu\imau\redpioneer\service\userservice\impl\ConversationServiceImpl.java

@@ -27,11 +27,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!--SpringSecurity-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
 
         <!--Test-->
         <dependency>
@@ -53,13 +48,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--swagger ui-->
+        <!--swagger3-->
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
         </dependency>
-
+        <!--swagger-ui-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>

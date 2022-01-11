@@ -2,6 +2,7 @@ package cn.edu.imau.redpioneer.service.commonservice;
 
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.enums.ResultVO;
+import org.apache.ibatis.session.RowBounds;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -27,4 +28,7 @@ public interface ActivistService {
     ResultVO getUserByRole();
 
     ResultVO register(String account,String name,String roles);
+
+    ResultVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request);
+
 }

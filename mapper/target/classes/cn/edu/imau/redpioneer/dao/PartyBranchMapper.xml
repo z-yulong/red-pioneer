@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.PartyBranchMapper">
+
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.PartyBranch">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
     <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
+
+  <resultMap id="PartyBranchInfoMap" type="cn.edu.imau.redpioneer.entity.PartyBranchInfo">
+    <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+  </resultMap>
+
+  <select id="selectAllPartyBranch" resultMap="PartyBranchInfoMap">
+    SELECT P.branch_name,a.name,a.tel
+    FROM party_branch AS p
+           INNER JOIN activist AS a
+                      ON p.activist_id=a.id
+  </select>
+
 </mapper>

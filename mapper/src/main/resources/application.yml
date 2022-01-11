@@ -16,8 +16,16 @@ spring:
       max-request-size: 10MB # 上传文件的最大值
       max-file-size: 5MB # 单个文件上传的最大值
 
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
 upload:
   path: D:\\upload\headImgs
+
+# sql日志
 logging:
   level:
     cn.edu.imau.redpioneer.dao: debug

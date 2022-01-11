@@ -86,9 +86,9 @@ public class ImportActivistServiceImpl implements ImportActivistService {
                 //  姓名
                 String name = getCellValue(row.getCell(1));
                 activist.setName(name);
-                //  支部
-                String partyBranch = getCellValue(row.getCell(2));
-                activist.setName(partyBranch);
+//                //  支部
+//                String partyBranch = getCellValue(row.getCell(2));
+//                activist.setName(partyBranch);
 
                 activists.add(activist);
             }
