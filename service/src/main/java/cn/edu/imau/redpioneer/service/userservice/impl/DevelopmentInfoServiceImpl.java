@@ -2,18 +2,19 @@ package cn.edu.imau.redpioneer.service.userservice.impl;
 
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.DevelopmentInfoMapper;
-import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.entity.ActivistDevelopmentInfo;
+
+import cn.edu.imau.redpioneer.dto.ActivistDevelopmentDto;
 import cn.edu.imau.redpioneer.entity.DevelopmentInfo;
+import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.enums.State;
 import cn.edu.imau.redpioneer.service.userservice.DevelopmentInfoService;
 import cn.edu.imau.redpioneer.utils.FileUtil;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 
-import static cn.edu.imau.redpioneer.utils.FileUtil.deleteFile;
-
 /**
  * @author: zyl
  * @date 2021/12/30 13:32
  */
 @Service
 public class DevelopmentInfoServiceImpl implements DevelopmentInfoService {
+
+
     @Autowired
     ActivistMapper activistMapper;
 
@@ -63,12 +64,15 @@ public class DevelopmentInfoServiceImpl implements DevelopmentInfoService {
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
 
-        DevelopmentInfo developmentInfo=new DevelopmentInfo();
-        developmentInfo.setActivistId(id);
-        developmentInfo.setApplicationForm(applicationFormPATH);
-        developmentInfo.setApplicationTime(applicationTime);
-        developmentInfo.setDiploma(diplomaPATH);
-        developmentInfo.setUpactivistTime(upactivistTime);
+        DevelopmentInfo developmentInfo =new DevelopmentInfo();
+        developmentInfo.setActivistId(id); //设置用户id (此记录属于谁)
+        developmentInfo.setApplicationForm(applicationFormPATH); //设置入党申请书路径
+        developmentInfo.setApplicationTime(applicationTime); //设置入党申请时间
+        developmentInfo.setDiploma(diplomaPATH); //积极分子结业证路径
+        developmentInfo.setUpactivistTime(upactivistTime); //确定为积极分子时间
+
+        //更新状态为 待审批 (1)
+        developmentInfo.setStateCode(State.PENDING.getValue());
 
         int i = developmentInfoMapper.insert(developmentInfo);
 
@@ -87,10 +91,10 @@ public class DevelopmentInfoServiceImpl implements DevelopmentInfoService {
     @Override
     public ResultVO getDevelopmentInfo(String info) {
 
-        ActivistDevelopmentInfo developmentInfo = developmentInfoMapper.selectDevelopmentInfoByName(info);
+        ActivistDevelopmentDto developmentInfo = developmentInfoMapper.selectDevelopmentInfoByName(info);
 
         if(null == developmentInfo){
-            ActivistDevelopmentInfo developmentInfo1 = developmentInfoMapper.selectDevelopmentInfoByAccount(info);
+            ActivistDevelopmentDto developmentInfo1 = developmentInfoMapper.selectDevelopmentInfoByAccount(info);
             return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), developmentInfo1);
         }
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), developmentInfo);

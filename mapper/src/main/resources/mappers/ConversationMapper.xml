@@ -12,7 +12,7 @@
   </resultMap>
 
 
-  <resultMap id="ConversationListMap" type="cn.edu.imau.redpioneer.entity.ActivistConversation">
+  <resultMap id="ConversationListMap" type="cn.edu.imau.redpioneer.dto.ActivistConversationDto">
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="volunteer_info" jdbcType="VARCHAR" property="volunteerInfo" />
     <result column="volunteer_address" jdbcType="VARCHAR" property="volunteerAddress" />

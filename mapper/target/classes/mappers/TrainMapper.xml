@@ -7,6 +7,7 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="party_group_id" jdbcType="INTEGER" property="partyGroupId" />
     <result column="party_time" jdbcType="DATE" property="partyTime" />
   </resultMap>

@@ -253,7 +253,7 @@ public class ActivistServiceImpl implements ActivistService {
         activist.setTel("");
         activist.setPhoto("");
         activist.setClasses("");
-        activist.setStateCode("1");
+        activist.setStateCode(1);
     }
 
 }

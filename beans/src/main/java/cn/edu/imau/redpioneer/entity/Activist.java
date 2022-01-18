@@ -70,6 +70,11 @@ public class Activist {
     private String address;
 
     /**
+     * 邮箱
+     */
+    private String Email;
+
+    /**
      * 电话
      */
     private String tel;
@@ -96,6 +101,7 @@ public class Activist {
     /**
      * 状态
      */
-    private String stateCode;
+    @Column(name = "state_code")
+    private Integer stateCode;
 
 }

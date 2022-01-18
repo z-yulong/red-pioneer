@@ -13,11 +13,13 @@
     <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="email" jdbcType="VARCHAR" property="Email" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="classes" jdbcType="VARCHAR" property="classes" />
+    <result column="train" jdbcType="VARCHAR" property="train" />
     <result column="roles" jdbcType="VARCHAR" property="roles" />
-    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="state_code" jdbcType="INTEGER" property="StateCode" />
   </resultMap>
 
 
@@ -33,6 +35,7 @@
       <if test="nativePlace != null">native_place = #{nativePlace},</if>
       <if test="idCard != null">id_card = #{idCard},</if>
       <if test="address != null">address = #{address},</if>
+      <if test="Email != null">email = #{Email},</if>
       <if test="tel != null">tel = #{tel},</if>
       <if test="photo != null">photo = #{photo},</if>
       <if test="classes != null">classes = #{classes},</if>

@@ -16,8 +16,9 @@
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="classes" jdbcType="VARCHAR" property="classes" />
+    <result column="train" jdbcType="VARCHAR" property="train" />
     <result column="roles" jdbcType="VARCHAR" property="roles" />
-    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="state_code" jdbcType="INTEGER" property="StateCode" />
   </resultMap>
 
 

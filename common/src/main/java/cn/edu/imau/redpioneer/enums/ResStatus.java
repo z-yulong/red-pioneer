@@ -48,12 +48,13 @@ public enum ResStatus {
     /**
      * 删除成功
      */
-
     DELETE_OK(10000,"删除成功！"),
     /**
      * 更新成功
      */
-    UPDATE_OK(10000,"更新成功");
+    UPDATE_OK(10000,"更新成功"),
+
+    EMPTY(1006,"当前没有待审批用户！");
 
     private final Integer value;
     private final String text;

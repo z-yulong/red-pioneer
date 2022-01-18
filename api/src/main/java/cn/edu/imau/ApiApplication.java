@@ -4,9 +4,10 @@ package cn.edu.imau;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import springfox.documentation.oas.annotations.EnableOpenApi;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
-@EnableOpenApi
+
+@EnableScheduling//开启定时任务
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @MapperScan("cn.edu.imau.redpioneer.dao")
 public class ApiApplication {

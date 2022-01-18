@@ -1,7 +1,7 @@
 package cn.edu.imau.redpioneer.service.userservice.impl;
 
 import cn.edu.imau.redpioneer.dao.PrizeMapper;
-import cn.edu.imau.redpioneer.entity.ActivistPrizeInfo;
+import cn.edu.imau.redpioneer.dto.ActivistPrizeDto;
 import cn.edu.imau.redpioneer.entity.Prize;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
@@ -80,7 +80,7 @@ public class PrizeServiceImpl implements PrizeService {
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
 
-        List<ActivistPrizeInfo> prizeInfos = prizeMapper.selectActivistPrize(id);
+        List<ActivistPrizeDto> prizeInfos = prizeMapper.selectActivistPrize(id);
 
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),prizeInfos);
     }

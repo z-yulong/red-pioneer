@@ -8,7 +8,7 @@
     <result column="activist_id" jdbcType="INTEGER" property="activistId" />
   </resultMap>
 
-  <resultMap id="PartyBranchInfoMap" type="cn.edu.imau.redpioneer.entity.PartyBranchInfo">
+  <resultMap id="PartyBranchInfoMap" type="cn.edu.imau.redpioneer.dto.PartyBranchDto">
     <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />

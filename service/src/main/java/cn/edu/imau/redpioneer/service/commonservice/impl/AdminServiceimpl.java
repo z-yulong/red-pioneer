@@ -2,7 +2,7 @@ package cn.edu.imau.redpioneer.service.commonservice.impl;
 
 import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
-import cn.edu.imau.redpioneer.entity.PartyBranchInfo;
+import cn.edu.imau.redpioneer.dto.PartyBranchDto;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.AdminService;
@@ -65,9 +65,10 @@ public class AdminServiceimpl implements AdminService {
     @Override
     public ResultVO getAllPartyBranch() {
 
-        List<PartyBranchInfo> partyBranches = partyBranchMapper.selectAllPartyBranch();
+        List<PartyBranchDto> partyBranches = partyBranchMapper.selectAllPartyBranch();
 
         partyBranchMapper.selectAllPartyBranch();
+
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), partyBranches);
     }
 

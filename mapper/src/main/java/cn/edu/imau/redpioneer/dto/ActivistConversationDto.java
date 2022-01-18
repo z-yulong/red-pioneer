@@ -1,4 +1,4 @@
-package cn.edu.imau.redpioneer.entity;
+package cn.edu.imau.redpioneer.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.Date;
  * @date 2022/1/2 11:57
  */
 @Data
-public class ActivistConversation {
+public class ActivistConversationDto {
 
     private String name;
     private String volunteerInfo;

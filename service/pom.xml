@@ -44,14 +44,18 @@
             <scope>test</scope>
         </dependency>
 
-        <!--quartz-->
+        <!--actuator-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-            <version>2.5.4</version>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>2.5.5</version>
         </dependency>
 
-
+        <!--邮件-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 
 
         <dependency>

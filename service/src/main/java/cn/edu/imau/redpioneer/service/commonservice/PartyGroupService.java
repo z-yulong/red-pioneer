@@ -15,7 +15,11 @@ public interface PartyGroupService {
 
     ResultVO getAllTrain(HttpServletRequest request);
 
-
-
     ResultVO updateActivist(Activist activist);
+
+    ResultVO getPending();
+
+    ResultVO approved(Integer id,String remark);
+
+    ResultVO pass(Integer id, String remark);
 }

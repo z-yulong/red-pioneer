@@ -82,4 +82,33 @@ public class PartyGroupController {
     }
 
 
+    /**
+     * 获取待审批用户
+     */
+    @ApiOperation(value = "获取待审批用户")
+    @RequiresRoles("zuzhang")
+    @GetMapping("/getPending")
+    public ResultVO getPending(){
+        return partyGroupService.getPending();
+    }
+
+    /**
+     * 审批通过
+     */
+    @ApiOperation(value = "审批通过")
+    @RequiresRoles("zuzhang")
+    @PutMapping("/approved/{id}")
+    public ResultVO approved(@PathVariable("id")Integer id,String remark){
+        return partyGroupService.approved(id,remark);
+    }
+
+    /**
+     * 审批未通过
+     */
+    @ApiOperation(value = "审批未通过")
+    @RequiresRoles("zuzhang")
+    @PutMapping("/pass/{id}")
+    public ResultVO pass(@PathVariable("id")Integer id,String remark){
+        return partyGroupService.pass(id,remark);
+    }
 }

@@ -44,4 +44,15 @@ public class DevelopmentInfo {
     @Column(name = "activist_id")
     private Integer activistId;
 
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 状态
+     */
+    @Column(name = "state_code")
+    private Integer stateCode;
+
 }

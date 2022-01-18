@@ -1,9 +1,7 @@
 package cn.edu.imau.redpioneer.service.userservice.impl;
 
 import cn.edu.imau.redpioneer.dao.ConversationMapper;
-import cn.edu.imau.redpioneer.dto.ConversationDto;
-import cn.edu.imau.redpioneer.entity.ActivistConversation;
-import cn.edu.imau.redpioneer.entity.ActivistDevelopmentInfo;
+import cn.edu.imau.redpioneer.dto.ActivistConversationDto;
 import cn.edu.imau.redpioneer.entity.Conversation;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
@@ -65,10 +63,10 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public ResultVO getConversation(String info) {
 
-        List<ActivistConversation> conversations1 = conversationMapper.selectConversationByAccount(info);
+        List<ActivistConversationDto> conversations1 = conversationMapper.selectConversationByAccount(info);
 
         if(conversations1.size() == 0){
-            List<ActivistConversation> conversations = conversationMapper.selectConversationByName(info);
+            List<ActivistConversationDto> conversations = conversationMapper.selectConversationByName(info);
             return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), conversations);
         }
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), conversations1);

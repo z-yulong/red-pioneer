@@ -1,4 +1,4 @@
-package cn.edu.imau.redpioneer.entity;
+package cn.edu.imau.redpioneer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ActivistPrizeInfo {
+public class ActivistPrizeDto {
     private String name;
     private String prizeInfo;
     private Date prizeTime;
