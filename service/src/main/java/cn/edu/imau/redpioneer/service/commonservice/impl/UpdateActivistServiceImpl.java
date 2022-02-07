@@ -8,6 +8,7 @@ import cn.edu.imau.redpioneer.service.commonservice.UpdateActivistService;
 
 import cn.edu.imau.redpioneer.utils.FileUtil;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
@@ -17,7 +18,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-import static cn.edu.imau.redpioneer.utils.FileUtil.deleteFile;
+
 
 
 /**
@@ -27,6 +28,8 @@ import static cn.edu.imau.redpioneer.utils.FileUtil.deleteFile;
 @Service
 public class UpdateActivistServiceImpl implements UpdateActivistService {
 
+    @Autowired
+    FileUtil fileUtil;
     @Resource
     private ActivistMapper activistMapper;
 
@@ -69,7 +72,7 @@ public class UpdateActivistServiceImpl implements UpdateActivistService {
         String token = req.getHeader("Authorization");
 
         //获取文件保存路径
-        String savePath = FileUtil.uploadAvater(avatar);
+        String savePath = fileUtil.uploadImg(avatar);
 
         //从token中获取当前用户账号
         String account= JWTUtil.getAccount(token);
@@ -80,8 +83,9 @@ public class UpdateActivistServiceImpl implements UpdateActivistService {
         criteria.andEqualTo("account",account);
         Activist activist = activistMapper.selectOneByExample(example);
 
+
         //删除旧的头像
-        deleteFile(activist.getPhoto());
+        fileUtil.deleteFile(activist.getPhoto());
 
         //更新头像
         activist.setPhoto(savePath);

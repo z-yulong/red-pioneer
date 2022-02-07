@@ -1,6 +1,7 @@
 cn\edu\imau\redpioneer\utils\MD5Util.class
 cn\edu\imau\redpioneer\utils\PageHelper.class
 cn\edu\imau\redpioneer\vo\ConversationVO.class
+cn\edu\imau\redpioneer\enums\TalkState.class
 cn\edu\imau\redpioneer\utils\CookieUtil.class
 cn\edu\imau\redpioneer\enums\ResultVO.class
 cn\edu\imau\redpioneer\annotation\CurrentUser.class

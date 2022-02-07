@@ -11,10 +11,14 @@ import java.util.Date;
 @Data
 public class ActivistConversationDto {
 
+    private Integer id;
     private String name;
     private String volunteerInfo;
     private String volunteerAddress;
     private Date volunteerTime;
     private String volunteerSize;
     private String prove;
+    private String stateCode;
+    private String total;
+
 }

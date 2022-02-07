@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Service
 public class ScoreServiceImpl implements ScoreService {
-    private static final  String YES = "1";
-    private static final  String NO = "2";
+    private static final  Integer YES = 1;
+    private static final  Integer NO = 0;
 
     @Autowired
     ActivistMapper activistMapper;

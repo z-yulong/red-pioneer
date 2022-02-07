@@ -16,4 +16,7 @@ public interface ActivistMapper extends GeneralDAO<Activist> {
 
     void updateAvatarByPrimaryKey(@Param(value = "id") Integer id, @Param(value ="path")String path);
 
+    void updateStateCode(Integer stateCode,String name);
+
+    String selectEmailByName(String name);
 }

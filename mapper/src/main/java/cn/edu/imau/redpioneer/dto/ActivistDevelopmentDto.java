@@ -11,6 +11,7 @@ import java.util.Date;
  */
 @Data
 public class ActivistDevelopmentDto {
+    private Integer id;
     private String name;
     private Date applicationTime;
     private String applicationForm;

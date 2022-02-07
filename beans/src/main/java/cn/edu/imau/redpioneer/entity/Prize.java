@@ -36,4 +36,10 @@ public class Prize {
     @Column(name = "activist_id")
     private Integer activistId;
 
+    /**
+     * 用户id
+     */
+    @Column(name = "state_code")
+    private Integer stateCode;
+
 }

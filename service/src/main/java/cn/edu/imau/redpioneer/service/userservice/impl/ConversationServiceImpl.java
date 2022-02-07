@@ -25,6 +25,8 @@ import java.util.List;
 public class ConversationServiceImpl implements ConversationService {
     @Autowired
     ConversationMapper conversationMapper;
+    @Autowired
+    FileUtil fileUtil;
 
     /**
      * 添加志愿信息
@@ -41,7 +43,7 @@ public class ConversationServiceImpl implements ConversationService {
         HttpServletRequest req= (HttpServletRequest) request;
         String token = req.getHeader("Authorization");
         //获取文件保存路径
-        String provePATH = FileUtil.uploadAvater(prove);
+        String provePATH = fileUtil.uploadImg(prove);
 
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));

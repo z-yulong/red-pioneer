@@ -40,5 +40,14 @@
     WHERE a.account=#{account}
   </select>
 
+    <!--获取待审批的发展信息-->
+  <select id="selectDevelopmentInfoByStateCode" parameterType="integer" resultMap="DevelopmentMap">
+    SELECT a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
+    FROM activist AS a
+           INNER JOIN development_info AS d
+           ON a.id=d.activist_id
+    WHERE d.state_code=#{stateCode}
+  </select>
+
 
 </mapper>

@@ -5,7 +5,6 @@ import cn.edu.imau.redpioneer.dao.DevelopmentInfoMapper;
 
 import cn.edu.imau.redpioneer.dto.ActivistDevelopmentDto;
 import cn.edu.imau.redpioneer.entity.DevelopmentInfo;
-import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.enums.State;
@@ -29,7 +28,8 @@ import java.util.Date;
 @Service
 public class DevelopmentInfoServiceImpl implements DevelopmentInfoService {
 
-
+    @Autowired
+    FileUtil fileUtil;
     @Autowired
     ActivistMapper activistMapper;
 
@@ -58,8 +58,8 @@ public class DevelopmentInfoServiceImpl implements DevelopmentInfoService {
         HttpServletRequest req= (HttpServletRequest) request;
         String token = req.getHeader("Authorization");
         //获取文件保存路径
-        String applicationFormPATH = FileUtil.uploadAvater(applicationForm);
-        String diplomaPATH = FileUtil.uploadAvater(diploma);
+        String applicationFormPATH = fileUtil.uploadImg(applicationForm);
+        String diplomaPATH = fileUtil.uploadImg(diploma);
 
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));

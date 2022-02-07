@@ -1,24 +1,20 @@
 package cn.edu.imau.redpioneer.service.userservice.impl;
 
-import cn.edu.imau.redpioneer.dao.ActivistMapper;
-import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.entity.DevelopmentInfo;
+import cn.edu.imau.redpioneer.dao.*;
+import cn.edu.imau.redpioneer.dto.ScoreDto;
+import cn.edu.imau.redpioneer.dto.TalkNumDto;
+import cn.edu.imau.redpioneer.dto.TotalDto;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
-import cn.edu.imau.redpioneer.enums.State;
+import cn.edu.imau.redpioneer.enums.TalkState;
 import cn.edu.imau.redpioneer.service.userservice.TalkTaskService;
+import cn.edu.imau.redpioneer.utils.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.Resource;
-import javax.lang.model.element.VariableElement;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,42 +26,99 @@ import java.util.List;
 public class TalkTaskServiceImpl implements TalkTaskService {
 
     @Autowired
-    private ActivistMapper activistMapper;
-    @Resource
-    private JavaMailSender javaMailSender;
+    MessageUtil messageUtil;
+    @Autowired
+    ScoreMapper scoreMapper;
+    @Autowired
+    PrizeMapper prizeMapper;
+    @Autowired
+    ConversationMapper conversationMapper;
+    @Autowired
+    TalkMapper talkMapper;
+    @Autowired
+    ActivistMapper activistMapper;
 
-    @Value("${spring.mail.username}")
-    private String from;
+    //private static final String EXECUTION_TIME ="0 52 18 * * ?";
+    private static final String EXECUTION_TIME ="0 0 2 * * ?";
+    private static final Integer TOTAL =150;
+    private static final Integer GROUP_TALK_NUM =4;
+    private static final Integer PARTY_TALK_NUM =2;
 
-    //@Scheduled(fixedDelay = 7900000000L)
-    @Scheduled(fixedDelay = 1000)
+
     @Override
     public ResultVO partyGroupTalk() {
-        System.out.println("一秒>>>>>>>"+new Date());
+
         return null;
     }
 
-    //@Scheduled(fixedDelay = 7900000000L)
-    @Scheduled(fixedDelay = 2000)
+    //每天凌晨2点执行
+    @Scheduled(cron = EXECUTION_TIME)
     @Override
-    public ResultVO partyBrabchTalk() {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//
-//        //创建一个Example封装类 类别Activist查询条件
-//        Example example = new Example(Activist.class);
-//        Example.Criteria criteria = example.createCriteria();
-//        criteria.andEqualTo("id", 1);
-//
-//        Activist activist = activistMapper.selectOneByExample(example);
-//
-//        message.setFrom(from);// 发送人邮箱
-//        message.setTo(activist.getEmail()); //目标邮箱
-//        message.setSubject("subject"); //邮件主题
-//        message.setText("您的谈话时间即将结束，请尽快上传谈话记录"); //邮件内容
-//
-//        javaMailSender.send(message);
+    public ResultVO recommend() {
+        ArrayList<String> totalYES = new ArrayList<>();
+        ArrayList<String> talkYES = new ArrayList<>();
+        ArrayList<String> partyTalkYES = new ArrayList<>();
 
-        return null;
+        //查询所有人志愿总时长
+        List<TotalDto> totals = conversationMapper.selectTotal();
+
+        //遍历所有将总时长大于等于150的add到qualifieds
+        for (TotalDto total : totals) {
+            if(Integer.valueOf(total.getTotal()) >= TOTAL){
+                totalYES.add(total.getName());
+            }
+        }
+
+        //查询所有人已审批通过小组谈话次数
+        List<TalkNumDto> talknums = talkMapper.selectTalkNum(TalkState.GROUP_APPROVED.getValue());
+        //遍历所有谈话次数将谈话次数大于等于4次的add到qualifieds
+        for (TalkNumDto talknum : talknums) {
+            if(talknum.getNum() >= GROUP_TALK_NUM){
+                talkYES.add(talknum.getName());
+            }
+        }
+
+        //查询所有人已审批通过支部谈话次数
+        List<TalkNumDto> partyTalknums = talkMapper.selectTalkNum(TalkState.PARTY_APPROVED.getValue());
+        //遍历所有谈话次数将谈话次数大于等于4次的add到qualifieds
+        for (TalkNumDto partyTalknum : partyTalknums) {
+            if(partyTalknum.getNum() >= PARTY_TALK_NUM){
+                partyTalkYES.add(partyTalknum.getName());
+            }
+        }
+
+        //取交集
+        talkYES.retainAll(totalYES);
+        talkYES.retainAll(partyTalkYES);
+
+        for (String talk : talkYES) {
+            //num=1: 记录为双数
+            //num=0: 记录为单数
+            Integer num = scoreMapper.selectScoreNum(talk);//查询记录数（通过奇偶判断学年）
+            List<ScoreDto> lastYearScore = scoreMapper.selectNewScore(talk);//查询上一学年成绩信息
+
+            ScoreDto score1 = lastYearScore.get(0);
+            ScoreDto score2 = lastYearScore.get(1);
+
+            //如果记录为单数则移除
+            if(num==0 || score1.getIsFirsthalf()==0 || score2.getIsFirsthalf() == 0){
+                talkYES.remove(talk);
+            }
+        }
+
+        for (String name : talkYES) {
+            //将符合所有条件的用户状态改为待审批（ 3 ）
+            activistMapper.updateStateCode(TalkState.PENDING.getValue(),name);
+
+             //通过name查询email
+             String email = activistMapper.selectEmailByName(name);
+
+             //发送邮件
+             messageUtil.sendMessage(email,"恭喜"+ name,"您已完成了积极分子阶段的全部任务！");
+
+        }
+
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), talkYES);
     }
 
 

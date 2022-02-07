@@ -15,5 +15,5 @@ public interface TalkTaskService {
 
     //ResultVO partyBrabchTalk(Date talkTime, String talkPeople, Integer talkType, MultipartFile proveImg); ResultVO partyGroupTalk(Date talkTime, String talkPeople, Integer talkType, MultipartFile proveImg);
 
-    ResultVO partyBrabchTalk();
+    ResultVO recommend();
 }

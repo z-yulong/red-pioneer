@@ -44,12 +44,19 @@ public class Score {
      * 是否前1/2
      */
     @Column(name = "is_firsthalf")
-    private String isFirsthalf;
+    private Integer isFirsthalf;
 
     /**
      * 用户id
      */
     @Column(name = "activist_id")
     private Integer activistId;
+
+
+    /**
+     * 状态
+     */
+    @Column(name = "state_code")
+    private Integer stateCode;
 
 }

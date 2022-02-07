@@ -18,7 +18,7 @@ spring:
       max-request-size: 10MB # 上传文件的最大值
       max-file-size: 5MB # 单个文件上传的最大值
   upload:
-    path: D:\\upload\headImgs
+    path: E:/img
 
 # sql日志
   logging:
@@ -40,7 +40,7 @@ spring:
   # 发送端的用户邮箱名
     username: 1156211195@qq.com
   # 发送端的密码 注意保密
-    password: yfzyfljazwdkjddb
+    password: mghleugtsuzvhbfa
   # 指定mail会话的jndi名称 优先级较高   一般我们不使用该方式
     jndi-name:
   # 这个比较重要 针对不同的SMTP服务器 都有自己的一些特色配置该属性 提供了这些配置的 key value 封装方案 例如 Gmail SMTP 服务器超时配置 spring.mail.properties.mail.smtp.timeout= 5000

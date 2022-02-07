@@ -16,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class ActivistPrizeDto {
+    private Integer id;
     private String name;
     private String prizeInfo;
     private Date prizeTime;

@@ -20,7 +20,7 @@ public enum ResStatus {
     /**
      * 请先登录
      */
-    LOGIN_FAIL_NOT(20004,"请先登录"),
+    EXISTED(20004,"该账号已存在"),
     /**
      * 登录过期
      */
@@ -28,7 +28,7 @@ public enum ResStatus {
     /**
      * token不合法
      */
-    TOKEN_ERROR(10010,"token不合法"),
+    PARAMETER_ERROR(10010,"参数错误"),
 
     /**
      * 未经授权,无法访问!

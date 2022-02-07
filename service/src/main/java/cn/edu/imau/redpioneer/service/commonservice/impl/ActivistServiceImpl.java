@@ -159,7 +159,14 @@ public class ActivistServiceImpl implements ActivistService {
      */
     @Override
     public ResultVO register(String account, String name, String roles) {
-
+        //查询账号是否存在
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("account",account);
+        Activist activist1 = activistMapper.selectOneByExample(example);
+        if(activist1 != null){
+            return new ResultVO(ResStatus.EXISTED.getValue(), ResStatus.EXISTED.getText(),null);
+        }
         Activist activist = new Activist();
         activist.setAccount(account);
         activist.setName(name);

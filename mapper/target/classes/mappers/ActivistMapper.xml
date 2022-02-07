@@ -59,6 +59,16 @@
   <update id="updateAvatarByPrimaryKey">
     update activist set photo=#{path} where id=#{id}
   </update>
+<!-- 通过姓名更新用户状态-->
+  <update id="updateStateCode">
+    update activist as a
+    set state_code=#{stateCode}
+    where a.name=#{name}
+  </update>
+<!--  通过姓名查询邮箱-->
+  <select id="selectEmailByName" parameterType="string" resultType="string">
+    SELECT email FROM activist as a WHERE a.name=#{name}
+  </select>
 
 </mapper>
 

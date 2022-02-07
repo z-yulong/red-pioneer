@@ -47,5 +47,15 @@ public class Conversation {
      */
     @Column(name = "activist_id")
     private Integer activistId;
+    /**
+     * 状态
+     */
+    @Column(name = "state_code")
+    private Integer stateCode;
+
+    /**
+     * 合计时长
+     */
+    private String total;
 
 }

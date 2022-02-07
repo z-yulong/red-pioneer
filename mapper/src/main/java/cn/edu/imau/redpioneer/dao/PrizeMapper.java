@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface PrizeMapper extends GeneralDAO<Prize> {
     List<ActivistPrizeDto> selectActivistPrize(Integer id);
+
+    List<ActivistPrizeDto> selectPrizeByState(Integer state,Integer id);
 }

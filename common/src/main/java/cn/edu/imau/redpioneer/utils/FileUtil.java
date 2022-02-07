@@ -1,5 +1,7 @@
 package cn.edu.imau.redpioneer.utils;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +14,11 @@ import java.util.UUID;
  * @author: zyl
  * @date 2021/11/24 15:07
  */
-
+@Component
 public class FileUtil {
 
+    @Value("${spring.upload.path}")
+    private String path;
     /**
      * 获取随机名称
      * @param realName 真实名称
@@ -48,7 +52,7 @@ public class FileUtil {
      * @return path 保存路径
      * @throws IOException
      */
-    public static String uploadAvater(MultipartFile avatar) throws IOException {
+    public String uploadImg(MultipartFile avatar) throws IOException {
 
         //获取文件内容
         InputStream is = avatar.getInputStream();
@@ -62,7 +66,7 @@ public class FileUtil {
         //产生一个随机目录
         String randomDir = getDir();
 
-        File fileDir = new File("E:/A/ing/red-pioneer/files" + randomDir);
+        File fileDir = new File(path + randomDir);
 
         //若文件夹不存在,则创建出文件夹
         if (!fileDir.exists()) {
@@ -70,13 +74,13 @@ public class FileUtil {
         }
 
         //创建新的文件夹
-        File newFile = new File("E:/A/ing/red-pioneer/files" + randomDir, uuidFilename);
+        File newFile = new File(path + randomDir, uuidFilename);
 
         //将文件输出到目标的文件中
         avatar.transferTo(newFile);
 
         //生成保存路径
-        String savePath = randomDir + "/" + uuidFilename;
+        String savePath = path+randomDir + "/" + uuidFilename;
 
         return savePath;
     }
@@ -87,14 +91,14 @@ public class FileUtil {
      * @param filePath 文件路径
      * @return false、true
      */
-    public static Boolean deleteFile(String filePath) {
-        File file = new File("E:/A/ing/red-pioneer/files"+filePath);
+    public Boolean deleteFile(String filePath) {
+        File file = new File(filePath);
         if (file.exists()) {
             file.delete();
-            System.out.println("===========删除成功=================");
+            //System.out.println("===========删除成功===========");
             return true;
         } else {
-            System.out.println("===============删除失败==============");
+            //System.out.println("===========删除失败===========");
             return false;
         }
     }

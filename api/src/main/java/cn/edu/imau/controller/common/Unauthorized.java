@@ -3,10 +3,7 @@ package cn.edu.imau.controller.common;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.enums.ResultVO;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
@@ -23,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 @Api(value = "未经授权",tags = "未经授权")
 public class Unauthorized {
 
-    @RequestMapping(path = "/unauthorized/{message}")
+    @GetMapping(path = "/unauthorized/{message}")
     public ResultVO unauthorized(@PathVariable String message) throws UnsupportedEncodingException {
         return new ResultVO(ResStatus.USER_UNAUTHORIZED.getValue(), ResStatus.USER_UNAUTHORIZED.getText(), null);
     }

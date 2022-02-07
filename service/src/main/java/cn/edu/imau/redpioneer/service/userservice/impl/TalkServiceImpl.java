@@ -26,6 +26,8 @@ public class TalkServiceImpl implements TalkService {
     @Autowired
     TalkMapper talkMapper;
 
+    @Autowired
+    FileUtil fileUtil;
     /**
      * 上传谈话记录
      * @param talkTime
@@ -43,7 +45,7 @@ public class TalkServiceImpl implements TalkService {
         HttpServletRequest req= (HttpServletRequest) request;
         String token = req.getHeader("Authorization");
         //获取文件保存路径
-        String talkImgPATH = FileUtil.uploadAvater(prove);
+        String talkImgPATH = fileUtil.uploadImg(prove);
 
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
@@ -52,7 +54,7 @@ public class TalkServiceImpl implements TalkService {
         talk.setActivistId(id);
         talk.setTalkTime(talkTime);
         talk.setTalkPeople(talkPeople);
-        talk.setTalkType(talkType);
+        talk.setTalkType(talkType); //谈话类型；1：小组谈话 2：支部谈话
         talk.setProve(talkImgPATH);
         //待审批
         talk.setTalkState(State.PENDING.getValue());

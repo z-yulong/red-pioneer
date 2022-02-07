@@ -89,6 +89,12 @@ public class Activist {
      */
     private String classes;
     /**
+     * 所在党小组负责人
+     */
+    @Column(name = "party_group")
+    private Integer partyGroup;
+
+    /**
      * 培养人
      */
     private String train;

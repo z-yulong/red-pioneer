@@ -1,6 +1,7 @@
 package cn.edu.imau.redpioneer.dao;
 
 import cn.edu.imau.redpioneer.dto.ActivistConversationDto;
+import cn.edu.imau.redpioneer.dto.TotalDto;
 import cn.edu.imau.redpioneer.entity.Conversation;
 import cn.edu.imau.redpioneer.general.GeneralDAO;
 
@@ -12,4 +13,8 @@ public interface ConversationMapper extends GeneralDAO<Conversation> {
     List<ActivistConversationDto> selectConversationByName(String name);
 
     List<ActivistConversationDto> selectConversationByAccount(String account);
+
+    List<ActivistConversationDto> selectConversationByState(Integer state,Integer id);
+
+    List<TotalDto> selectTotal();
 }
