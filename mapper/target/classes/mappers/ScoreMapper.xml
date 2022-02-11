@@ -15,6 +15,7 @@
   </resultMap>
 
   <resultMap id="ScoreListMap" type="cn.edu.imau.redpioneer.dto.ScoreDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="moral" jdbcType="VARCHAR" property="moral" />
     <result column="moral_ranking" jdbcType="VARCHAR" property="moralRanking" />
@@ -33,13 +34,21 @@
     WHERE a.name = #{name} AND s.state_code=2
   </select>
 
+<!--通过姓名查询上一学年成绩-->
   <select id="selectNewScore" resultMap="ScoreListMap">
-    SELECT a.name,s.moral,s.moral_ranking,s.comprehensive,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
+    SELECT s.id,a.name,s.moral,s.moral_ranking,s.comprehensive,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
     FROM activist AS a
     INNER JOIN score AS s
     ON a.id=s.activist_id
     WHERE a.name=#{name}
     ORDER BY s.id DESC LIMIT 0,2;
-
+  </select>
+<!--查询待审批的成绩-->
+  <select id="selectScoreByState" resultMap="ScoreListMap">
+    SELECT s.id,a.name,s.moral,s.moral,s.moral_ranking,s.comprehensive,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
+    FROM activist AS a
+    INNER JOIN score AS s
+    ON a.id=s.activist_id
+    WHERE s.state_code=#{state} AND a.party_group=#{id}
   </select>
 </mapper>

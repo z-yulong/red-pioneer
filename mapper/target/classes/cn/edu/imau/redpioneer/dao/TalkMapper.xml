@@ -13,6 +13,7 @@
   </resultMap>
 
   <resultMap id="TalkListMap" type="cn.edu.imau.redpioneer.dto.TalkDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="talk_time" jdbcType="DATE" property="talkTime" />
     <result column="talk_people" jdbcType="VARCHAR" property="talkPeople" />
@@ -34,17 +35,17 @@
            INNER JOIN activist AS a
            ON a.id=t.activist_id
     WHERE t.talk_state=#{type}
-    GROUP BY a.name
+    GROUP BY a.id
   </select>
 
 
   <!--查询待审批谈话-->
   <select id="selectTalkByState" parameterType="integer" resultMap="TalkListMap">
-    SELECT a.name,t.talk_time,t.talk_people,t.talk_type,t.prove,t.talk_state
+    SELECT t,id,a.name,t.talk_time,t.talk_people,t.talk_type,t.prove,t.talk_state
     FROM activist AS a
            INNER JOIN talk AS t
            ON a.id=t.activist_id
-    WHERE talk_state=1
+    WHERE talk_state=1 AND a.party_group=#{id}
   </select>
 
 </mapper>

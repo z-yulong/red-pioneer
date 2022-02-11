@@ -123,7 +123,6 @@ public class PartyGroupServiceImpl implements PartyGroupService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("partyGroupId",id);
         List<Train> trains = trainMapper.selectByExample(example);
-
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), trains);
     }
 
@@ -196,9 +195,7 @@ public class PartyGroupServiceImpl implements PartyGroupService {
             default: /**参数错误*/
                 return new ResultVO(ResStatus.PARAMETER_ERROR.getValue(), ResStatus.PARAMETER_ERROR.getText(), null);
         }
-
     }
-
 
     /**
      * 发展信息审批通过
@@ -251,12 +248,9 @@ public class PartyGroupServiceImpl implements PartyGroupService {
     /**
      * 发展信息审批未通过
      */
-
     @Override
     public ResultVO pass(Integer id, String remark) {
-
         DevelopmentInfo developmentInfo = new DevelopmentInfo();
-
         developmentInfo.setId(id);
         //未通过
         developmentInfo.setStateCode(State.PASS.getValue());
@@ -273,9 +267,6 @@ public class PartyGroupServiceImpl implements PartyGroupService {
             return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);
         }
         return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
-
     }
-
-
 
 }

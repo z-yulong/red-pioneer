@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.ConversationMapper">
+
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.Conversation">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="volunteer_address" jdbcType="VARCHAR" property="volunteerAddress" />
@@ -15,6 +16,7 @@
 
 
   <resultMap id="ConversationListMap" type="cn.edu.imau.redpioneer.dto.ActivistConversationDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="volunteer_info" jdbcType="VARCHAR" property="volunteerInfo" />
     <result column="volunteer_address" jdbcType="VARCHAR" property="volunteerAddress" />
@@ -39,7 +41,7 @@
 
 <!--通过姓名查询志愿服务-->
   <select id="selectConversationByName" resultMap="ConversationListMap" parameterType="string">
-    SELECT a.name,c.volunteer_address,c.volunteer_time,c.volunteer_info,c.volunteer_size,c.prove,c.state_code,c.total
+    SELECT c.id,a.name,c.volunteer_address,c.volunteer_time,c.volunteer_info,c.volunteer_size,c.prove,c.state_code,c.total
     FROM activist AS a
            INNER JOIN conversation AS c
            ON a.id=c.`activist_id`
@@ -47,20 +49,20 @@
   </select>
 <!--通过账号查询志愿服务-->
   <select id="selectConversationByAccount" resultMap="ConversationListMap" parameterType="string">
-    SELECT a.name,c.volunteer_address,c.volunteer_time,c.volunteer_info,c.volunteer_size,c.prove,c.state_code,c.total
+    SELECT c.id,a.name,c.volunteer_address,c.volunteer_time,c.volunteer_info,c.volunteer_size,c.prove,c.state_code,c.total
     FROM activist AS a
            INNER JOIN conversation AS c
-           ON a.id=c.`activist_id`
+           ON a.id=c.activist_id
     WHERE a.account=#{account}
   </select>
 
   <!--通过状态查询志愿服务-->
   <select id="selectConversationByState" resultMap="ConversationListMap" parameterType="integer">
-    SELECT a.name,c.volunteer_address,c.volunteer_time,c.volunteer_info,c.volunteer_size,c.prove,c.state_code,c.total
+    SELECT c.id,a.name,c.volunteer_address,c.volunteer_time,c.volunteer_info,c.volunteer_size,c.prove,c.state_code,c.total
     FROM activist AS a
            INNER JOIN conversation AS c
            ON a.id=c.activist_id
-    WHERE c.state_code=#{state}
+    WHERE c.state_code=#{state} AND a.party_group=#{id}
   </select>
 
 </mapper>

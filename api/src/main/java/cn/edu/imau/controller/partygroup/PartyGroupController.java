@@ -111,4 +111,6 @@ public class PartyGroupController {
         return partyGroupService.pass(id,remark);
     }
 
+
+
 }

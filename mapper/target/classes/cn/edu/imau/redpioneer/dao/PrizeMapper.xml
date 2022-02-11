@@ -11,6 +11,7 @@
   </resultMap>
 
   <resultMap id="ListMap" type="cn.edu.imau.redpioneer.dto.ActivistPrizeDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="prize_info" jdbcType="VARCHAR" property="prizeInfo" />
     <result column="prize_time" jdbcType="DATE" property="prizeTime" />
@@ -32,9 +33,9 @@
     <if test="prizeLevel != null">#{prizeLevel}</if>)
   </insert>
 
-<!--  通过主键查询用户奖惩信息-->
+<!--通过主键查询用户奖惩信息-->
   <select id="selectActivistPrize" parameterType="integer" resultMap="ListMap">
-    SELECT a.name,p.prize_info,p.prize_time,p.prove,p.state_code
+    SELECT p.id,a.name,p.prize_info,p.prize_time,p.prove,p.state_code
       FROM activist AS a
         INNER JOIN prize AS p
          ON a.id=p.activist_id
@@ -42,13 +43,13 @@
   </select>
 
 
-  <!--  通过状态查询用户奖惩信息-->
+  <!--通过状态查询用户奖惩信息-->
   <select id="selectPrizeByState" parameterType="integer" resultMap="ListMap">
     SELECT a.name,p.prize_info,p.prize_time,p.prove,p.state_code
     FROM activist AS a
            INNER JOIN prize AS p
            ON a.id=p.activist_id
-    WHERE p.state_code=#{state}
+    WHERE p.state_code=#{state} AND a.party_group=#{id}
   </select>
 
 

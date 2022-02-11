@@ -14,6 +14,7 @@
   </resultMap>
   <!--发展信息结果集-->
   <resultMap id="DevelopmentMap" type="cn.edu.imau.redpioneer.dto.ActivistDevelopmentDto">
+      <result column="id" jdbcType="INTEGER" property="id" />
       <result column="name" jdbcType="VARCHAR" property="name" />
       <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />
       <result column="application_form" jdbcType="VARCHAR" property="applicationForm" />
@@ -25,7 +26,7 @@
 
 <!--通过姓名查询用户发展信息-->
   <select id="selectDevelopmentInfoByName" parameterType="string" resultMap="DevelopmentMap">
-    SELECT a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
+    SELECT d.id,a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
     FROM activist AS a
            INNER JOIN development_info AS d
            ON a.id=d.activist_id
@@ -33,7 +34,7 @@
   </select>
     <!--通过账号查询用户发展信息-->
   <select id="selectDevelopmentInfoByAccount" parameterType="string" resultMap="DevelopmentMap">
-    SELECT a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
+    SELECT d.id,a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
     FROM activist AS a
            INNER JOIN development_info AS d
            ON a.id=d.activist_id
@@ -42,11 +43,11 @@
 
     <!--获取待审批的发展信息-->
   <select id="selectDevelopmentInfoByStateCode" parameterType="integer" resultMap="DevelopmentMap">
-    SELECT a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
+    SELECT d.id,a.name,d.application_time,d.application_form,d.diploma,d.upactivist_time,d.remark,d.state_code
     FROM activist AS a
            INNER JOIN development_info AS d
            ON a.id=d.activist_id
-    WHERE d.state_code=#{stateCode}
+    WHERE d.state_code=#{stateCode} AND a.party_group=#{id}
   </select>
 
 
