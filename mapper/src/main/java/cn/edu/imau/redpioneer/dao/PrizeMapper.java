@@ -1,7 +1,5 @@
 package cn.edu.imau.redpioneer.dao;
 
-
-
 import cn.edu.imau.redpioneer.dto.ActivistPrizeDto;
 import cn.edu.imau.redpioneer.entity.Prize;
 import cn.edu.imau.redpioneer.general.GeneralDAO;

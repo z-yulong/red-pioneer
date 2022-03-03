@@ -4,6 +4,7 @@ cn\edu\imau\redpioneer\dto\TalkDto.class
 cn\edu\imau\redpioneer\dao\PrizeMapper.class
 cn\edu\imau\redpioneer\dto\TotalDto.class
 cn\edu\imau\redpioneer\dao\PartyGroupMapper.class
+cn\edu\imau\redpioneer\dto\PartyGroupDto.class
 cn\edu\imau\redpioneer\utils\ExcelUtil.class
 cn\edu\imau\redpioneer\dto\ActivistConversationDto.class
 cn\edu\imau\redpioneer\dao\ConversationMapper.class

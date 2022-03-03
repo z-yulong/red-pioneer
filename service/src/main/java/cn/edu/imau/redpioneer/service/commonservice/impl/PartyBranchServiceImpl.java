@@ -2,6 +2,7 @@ package cn.edu.imau.redpioneer.service.commonservice.impl;
 
 import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
 import cn.edu.imau.redpioneer.dao.PartyGroupMapper;
+import cn.edu.imau.redpioneer.dto.PartyGroupDto;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 import cn.edu.imau.redpioneer.entity.PartyGroup;
 import cn.edu.imau.redpioneer.enums.ResStatus;
@@ -109,14 +110,15 @@ public class PartyBranchServiceImpl implements PartyBranchService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("activistId",id);
         PartyBranch partyBranch = partyBranchMapper.selectOneByExample(example);
-
+/**
         //查询自己支部下的党小组
         Example example1 = new Example(PartyGroup.class);
         Example.Criteria criteria1 = example1.createCriteria();
-        criteria1.andEqualTo("activistId",partyBranch.getId());
+        criteria1.andEqualTo("branch",partyBranch.getId());
         List<PartyGroup> partyGroups = partyGroupMapper.selectByExample(example1);
-
-        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), partyGroups);
+*/
+        List<PartyGroupDto> partyGroupDtos = partyGroupMapper.selectMyGroups(partyBranch.getId());
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), partyGroupDtos);
 
 
     }

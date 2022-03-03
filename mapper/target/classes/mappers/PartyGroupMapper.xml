@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.imau.redpioneer.dao.PartyGroupMapper">
+
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.PartyGroup">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
+  <id column="id" jdbcType="INTEGER" property="id" />
+  <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+  <result column="activist_id" jdbcType="INTEGER" property="activistId" />
+  <result column="branch" jdbcType="INTEGER" property="branch" />
+</resultMap>
+
+  <resultMap id="myGroupList" type="cn.edu.imau.redpioneer.dto.PartyGroupDto">
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
-    <result column="activist_id" jdbcType="INTEGER" property="activistId" />
-    <result column="branch" jdbcType="INTEGER" property="branch" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="branchName" jdbcType="VARCHAR" property="branch_name" />
   </resultMap>
+
+  <select id="selectMyGroups" resultMap="myGroupList">
+    SELECT p.group_name,a.name,b.branch_name
+    FROM party_group AS p
+           INNER JOIN party_branch AS b
+           INNER JOIN activist AS a
+           ON a.id=p.activist_id AND b.id=p.branch
+    WHERE p.branch=#{id}
+  </select>
 </mapper>

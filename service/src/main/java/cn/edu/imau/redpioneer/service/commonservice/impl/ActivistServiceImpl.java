@@ -146,8 +146,7 @@ public class ActivistServiceImpl implements ActivistService {
 
         List<Activist> activists = activistMapper.selectByExample(example);
 
-        return new ResultVO(ResStatus.OK.getValue()
-                , ResStatus.OK.getText(),activists);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),activists);
     }
 
     /**
@@ -260,6 +259,8 @@ public class ActivistServiceImpl implements ActivistService {
         activist.setTel("");
         activist.setPhoto("");
         activist.setClasses("");
+        activist.setEmail("");
+        activist.setTrain("");
         activist.setStateCode(1);
     }
 

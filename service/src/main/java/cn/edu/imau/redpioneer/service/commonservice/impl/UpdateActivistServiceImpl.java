@@ -77,12 +77,14 @@ public class UpdateActivistServiceImpl implements UpdateActivistService {
         //从token中获取当前用户账号
         String account= JWTUtil.getAccount(token);
 
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+
         //通过账号查询当前用户信息
         Example example = new Example(Activist.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("account",account);
         Activist activist = activistMapper.selectOneByExample(example);
-
 
         //删除旧的头像
         fileUtil.deleteFile(activist.getPhoto());

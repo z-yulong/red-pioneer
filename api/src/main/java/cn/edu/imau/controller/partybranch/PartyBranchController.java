@@ -5,6 +5,7 @@ import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.PartyBranchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +66,7 @@ public class PartyBranchController {
      * @return
      */
     @ApiOperation(value = "获取自己支部下所有党小组")
-    @RequiresRoles("shuji")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji"})
     @GetMapping("/getAll")
     public ResultVO getAllPartyGroup(HttpServletRequest request){
         return partyBranchService.getAllPartyGroup(request);

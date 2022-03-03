@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -216,6 +217,7 @@ public class PartyGroupServiceImpl implements PartyGroupService {
         int i = developmentInfoMapper.updateByPrimaryKeySelective(developmentInfo);
 
         if(i == 1){
+
             //更新成功
             /**
              * 创建一个Example封装类 类别DevelopmentInfo查询条件

@@ -38,7 +38,7 @@ public class ActivistController {
     })
     @GetMapping("/login")
     public ResultVO login(@RequestParam("account")String account, @RequestParam(value = "password") String password) throws UnsupportedEncodingException {
-        return activistService.login(account,password);
+            return activistService.login(account,password);
     }
 
     /**
@@ -96,7 +96,7 @@ public class ActivistController {
      */
     @PutMapping("/updateById")
     @ApiOperation("通过id更新个人信息")
-    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     public ResultVO update(@RequestBody Activist activist, HttpServletRequest request) {
         return activistService.updateActivistByid(activist,request);
     }
@@ -125,7 +125,7 @@ public class ActivistController {
      * @param request
      * @return
      */
-    @GetMapping("/getActivistPage")
+    @PostMapping("/getActivistPage")
     @ApiOperation("分页查询所有人")
     @RequiresRoles("admin")
     public ResultVO getActivistPage(@RequestBody RowBounds rowBounds, HttpServletRequest request){
