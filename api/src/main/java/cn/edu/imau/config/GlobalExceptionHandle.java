@@ -45,11 +45,11 @@ public class GlobalExceptionHandle {
         return Result.fail(HttpStatus.BAD_REQUEST.value(),objectError.getDefaultMessage());
     }*/
     /**
-     * @Validated 校验错误异常处理
+     * Validated 校验错误异常处理
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public Result handler(MethodArgumentNotValidException e) throws IOException {
+    public Result handler(MethodArgumentNotValidException e)  {
 //        log.error("运行时异常:-------------->",e);
         BindingResult bindingResult = e.getBindingResult();
         //这一步是把异常的信息最简化
@@ -62,7 +62,7 @@ public class GlobalExceptionHandle {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = IllegalArgumentException.class)
-    public Result handler(IllegalArgumentException e) throws IOException {
+    public Result handler(IllegalArgumentException e)  {
 //        log.error("Assert异常:-------------->{}",e.getMessage());
         return Result.fail(400,e.getMessage(),null);
     }

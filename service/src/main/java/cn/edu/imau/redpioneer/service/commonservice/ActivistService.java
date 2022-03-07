@@ -14,7 +14,9 @@ import java.io.UnsupportedEncodingException;
 public interface ActivistService {
 
     ResultVO login(String name, String password) throws UnsupportedEncodingException;
+
     ResultVO deleteById(Integer id);
+
     ResultVO getUserById(Integer id);
 
     ResultVO getUserByAccount(String account);

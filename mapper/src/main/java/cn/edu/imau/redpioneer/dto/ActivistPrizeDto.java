@@ -21,5 +21,6 @@ public class ActivistPrizeDto {
     private String prizeInfo;
     private Date prizeTime;
     private String prove;
+    private String stateCode;
 
 }

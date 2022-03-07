@@ -1,5 +1,6 @@
 package cn.edu.imau.shiro;
 
+import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
@@ -13,12 +14,17 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tk.mybatis.mapper.entity.Example;
 
 @Component
 public class MyRealm extends AuthorizingRealm {
+    private final ActivistService activistService;
+    private final ActivistMapper activistMapper;
     @Autowired
-    private ActivistService activistService;
-
+    public MyRealm(ActivistMapper activistMapper,ActivistService activistService){
+        this.activistMapper=activistMapper;
+        this.activistService=activistService;
+    }
     //根据token判断此Authenticator是否使用该realm
     //必须重写不然shiro会报错
 
@@ -28,19 +34,26 @@ public class MyRealm extends AuthorizingRealm {
         return token instanceof JWTToken;
     }
     /**
-     * 只有当需要检测用户权限的时候才会调用此方法，例如@RequiresRoles,@RequiresPermissions之类的
+     * 只有当需要检测用户权限的时候才会调用此方法
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //System.out.println("授权~~~~~");
-        String token=principals.toString();
-        String username= JWTUtil.getAccount(token);
-        Activist activist=activistService.getUser(username);
+        String token = principals.toString();
+//        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+//        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+//        //查询数据库来获取用户的角色
+//        info.addRole(activistMapper.selectRoleById(id));
+
+        String account = JWTUtil.getAccount(token);
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("account",account);
+        Activist activist = activistMapper.selectOneByExample(example);
+
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
         //查询数据库来获取用户的角色
         info.addRole(activist.getRoles());
-        //查询数据库来获取用户的权限
-        //info.addStringPermission(activist.getPermission());
         return info;
     }
 

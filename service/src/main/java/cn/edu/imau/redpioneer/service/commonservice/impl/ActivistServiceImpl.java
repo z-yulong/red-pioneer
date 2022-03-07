@@ -7,10 +7,10 @@ import cn.edu.imau.redpioneer.enums.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -21,16 +21,19 @@ import java.util.*;
  */
 @Service
 public class ActivistServiceImpl implements ActivistService {
+    private final ActivistMapper activistMapper;
+    @Autowired
+    public ActivistServiceImpl(ActivistMapper activistMapper){
+        this.activistMapper=activistMapper;
+    }
 
-    @Resource
-    private ActivistMapper activistMapper;
 
     /**
      * 登录
-     * @param account
-     * @param password
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param account 账号
+     * @param password 密码
+     * @return activist
+     * @throws UnsupportedEncodingException c
      */
     @Override
     public ResultVO login(String account, String password) throws UnsupportedEncodingException {
@@ -55,15 +58,15 @@ public class ActivistServiceImpl implements ActivistService {
             }else{
                 //密码错误
                 return new ResultVO(ResStatus.PASSWORD_ERROR.getValue()
-                            , ResStatus.PASSWORD_ERROR.getText(),null);
+                        , ResStatus.PASSWORD_ERROR.getText(),null);
             }
         }
     }
 
     /**
      * 根据id删除一个用户
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return null
      */
     @Override
     public ResultVO deleteById(Integer id) {
@@ -82,8 +85,8 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 根据id获取一个用户
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return activist
      */
     @Override
     public ResultVO getUserById(Integer id) {
@@ -99,8 +102,8 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 根据账号获取一个用户
-     * @param account
-     * @return
+     * @param account 账号
+     * @return activist
      */
     @Override
     public ResultVO getUserByAccount(String account) {
@@ -122,20 +125,19 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 根据账号获取一个用户
-     * @param account
-     * @return
+     * @param account 账号
+     * @return activist
      */
     public Activist getUser(String account) {
         Example example = new Example(Activist.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("account",account);
-        Activist activist = activistMapper.selectOneByExample(example);
-        return activist;
+        return activistMapper.selectOneByExample(example);
     }
 
     /**
      * 根据角色获取支部负责人
-     * @return
+     * @return activists
      */
     @Override
     public ResultVO getUserByRole() {
@@ -151,10 +153,10 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 管理员注册账号
-     * @param account
-     * @param name
-     * @param roles
-     * @return
+     * @param account 账号
+     * @param name 姓名
+     * @param roles 角色
+     * @return activist
      */
     @Override
     public ResultVO register(String account, String name, String roles) {
@@ -185,9 +187,9 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 分页查询所有人
-     * @param rowBounds
-     * @param request
-     * @return
+     * @param rowBounds rowBounds
+     * @param request request
+     * @return activists
      */
     @Override
     public ResultVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request) {
@@ -199,8 +201,8 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 根据姓名获取一个用户
-     * @param name
-     * @return
+     * @param name 姓名
+     * @return activist
      */
     @Override
     public ResultVO getUserByName(String name) {
@@ -221,14 +223,13 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 通过id更新个人信息
-     * @param activist
-     * @return
+     * @param activist activist
+     * @return activist
      */
     @Override
     public ResultVO updateActivistByid(Activist activist, HttpServletRequest request) {
 
-        HttpServletRequest req= (HttpServletRequest) request;
-        String token = req.getHeader("Authorization");
+        String token = request.getHeader("Authorization");
 
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
@@ -246,7 +247,7 @@ public class ActivistServiceImpl implements ActivistService {
 
     /**
      * 设置默认值
-     * @param activist
+     * @param activist activist
      */
     private void defaultValue(Activist activist){
         activist.setSex("");

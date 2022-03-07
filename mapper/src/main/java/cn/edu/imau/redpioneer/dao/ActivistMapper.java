@@ -2,21 +2,20 @@ package cn.edu.imau.redpioneer.dao;
 
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.general.GeneralDAO;
-import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Param;
-
+import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
-import java.util.Map;
 
 public interface ActivistMapper extends GeneralDAO<Activist> {
 
-    int updateInfoByPrimaryKey(Activist activist);
+    //通过id获取用户角色
+    String selectRoleById(Integer id);
 
+    //批量插入用户
     void batchInsert(List<Activist> activists);
 
-    void updateAvatarByPrimaryKey(@Param(value = "id") Integer id, @Param(value ="path")String path);
-
+    //通过姓名更新用户状态
     void updateStateCode(Integer stateCode,String name);
 
+    //通过姓名查询邮箱
     String selectEmailByName(String name);
 }

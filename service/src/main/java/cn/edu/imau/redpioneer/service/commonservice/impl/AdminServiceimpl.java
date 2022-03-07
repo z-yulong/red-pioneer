@@ -1,5 +1,6 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
+import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 import cn.edu.imau.redpioneer.dto.PartyBranchDto;
@@ -19,8 +20,12 @@ import java.util.List;
 @Service
 public class AdminServiceimpl implements AdminService {
 
+    private final PartyBranchMapper partyBranchMapper;
     @Autowired
-    PartyBranchMapper partyBranchMapper;
+    public AdminServiceimpl(PartyBranchMapper partyBranchMapper){
+        this.partyBranchMapper=partyBranchMapper;
+    }
+
 
     /**
      * 新建党支部
@@ -66,8 +71,6 @@ public class AdminServiceimpl implements AdminService {
     public ResultVO getAllPartyBranch() {
 
         List<PartyBranchDto> partyBranches = partyBranchMapper.selectAllPartyBranch();
-
-        partyBranchMapper.selectAllPartyBranch();
 
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), partyBranches);
     }

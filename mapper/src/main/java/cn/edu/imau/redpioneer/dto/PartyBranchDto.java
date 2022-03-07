@@ -1,7 +1,6 @@
 package cn.edu.imau.redpioneer.dto;
 
 import lombok.Data;
-import sun.net.TelnetInputStream;
 
 /**
  * @author: zyl

@@ -9,9 +9,5 @@ import javax.annotation.Resource;
 
 
 public class test {
-    @Test
-    public void updata(){
 
-
-    }
 }

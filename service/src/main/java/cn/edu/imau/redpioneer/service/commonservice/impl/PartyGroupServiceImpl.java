@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,6 +22,26 @@ import java.util.List;
  */
 @Service
 public class PartyGroupServiceImpl implements PartyGroupService {
+    TrainMapper trainMapper;
+    PartyGroupMapper partyGroupMapper;
+    ActivistMapper activistMapper;
+    DevelopmentInfoMapper developmentInfoMapper;
+    ScoreMapper scoreMapper;
+    TalkMapper talkMapper;
+    PrizeMapper prizeMapper;
+    ConversationMapper conversationMapper;
+    //构造器
+    @Autowired
+    public PartyGroupServiceImpl(TrainMapper trainMapper, PartyGroupMapper partyGroupMapper, ActivistMapper activistMapper, DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper) {
+        this.trainMapper = trainMapper;
+        this.partyGroupMapper = partyGroupMapper;
+        this.activistMapper = activistMapper;
+        this.developmentInfoMapper = developmentInfoMapper;
+        this.scoreMapper = scoreMapper;
+        this.talkMapper = talkMapper;
+        this.prizeMapper = prizeMapper;
+        this.conversationMapper = conversationMapper;
+    }
 
     private static final String PRIZE = "prize";
     private static final String DEVELOPMENT = "development";
@@ -30,28 +49,11 @@ public class PartyGroupServiceImpl implements PartyGroupService {
     private static final String TALK = "talk";
     private static final String SCORE = "score";
 
-    @Autowired
-    TrainMapper trainMapper;
-    @Autowired
-    PartyGroupMapper partyGroupMapper;
-    @Autowired
-    ActivistMapper activistMapper;
-    @Autowired
-    DevelopmentInfoMapper developmentInfoMapper;
-    @Autowired
-    ScoreMapper scoreMapper;
-    @Autowired
-    PrizeMapper prizeMapper;
-    @Autowired
-    ConversationMapper conversationMapper;
-    @Autowired
-    TalkMapper talkMapper;
-
     /**
      * 添加培养人
-     * @param train
-     * @param request
-     * @return
+     * @param train 培养人
+     * @param request request
+     * @return ResultVO
      */
     @Override
     public ResultVO addTrain(Train train, HttpServletRequest request) {
@@ -80,8 +82,8 @@ public class PartyGroupServiceImpl implements PartyGroupService {
 
     /**
      * 通过id删除培养人
-     * @param id
-     * @return
+     * @param id id
+     * @return ResultVO
      */
     @Override
     public ResultVO deleteTrainById(Integer id) {
@@ -94,8 +96,8 @@ public class PartyGroupServiceImpl implements PartyGroupService {
 
     /**
      * 通过id更新培养人信息
-     * @param train
-     * @return
+     * @param train 培养人
+     * @return ResultVO
      */
     @Override
     public ResultVO updateTrainById(Train train) {
@@ -110,7 +112,7 @@ public class PartyGroupServiceImpl implements PartyGroupService {
 
     /**
      * 获取自己小组下所有培养人
-     * @return
+     * @return trains
      */
     @Override
     public ResultVO getAllTrain(HttpServletRequest request) {
@@ -129,7 +131,7 @@ public class PartyGroupServiceImpl implements PartyGroupService {
 
     /**
      * 通过id修改积极分子信息，培养人分配
-     * @return
+     * @return null
      */
     @Override
     public ResultVO updateActivist(Activist activist) {

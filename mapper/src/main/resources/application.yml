@@ -1,44 +1,45 @@
 spring:
+##################################### 数据库连接 ###################################
   datasource:
-    # 数据库连接
     druid:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/red-pioneer-ddl?characterEncoding=utf-8
-#      url: jdbc:mysql://localhost:3306/red-pioneer-ddl?characterEncoding=utf-8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/red-pioneer-ddl?characterEncoding=utf-8&serverTimezone=UTC
       username: root
       password: root
-  # mybatis
+##################################### mybatis #####################################
   mybatis:
-    mapper-locations: classpath:mappers/*.xml
-    type-aliases-package: cn.deu.imau.redpioneer.entity
+  # mapper映射文件路径
+  # mapper-locations: classpath:cn.edu.imau.redpioneer.dao.*.xml
+    mapper-locations: classpath:cn/edu/imau/redpioneer/dao/*.xml
+  # 实体类路径
+    type-aliases-package: cn.edu.imau.redpioneer.entity
     configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-# 文件上传
-  servlet:
-    multipart:
-      max-request-size: 10MB # 上传文件的最大值
-      max-file-size: 5MB # 单个文件上传的最大值
-  upload:
-    path: E:/img
-    #path: /usr/local/img
-
-# sql日志
+  # sql日志
   logging:
     level:
       cn.edu.imau.redpioneer.dao: debug
-
-  # 邮件
+##################################### 文件上传 #####################################
+  servlet:
+    multipart:
+      # 上传文件的最大值
+      max-request-size: 15MB
+      # 单个文件上传的最大值
+      max-file-size: 10MB
+  upload:
+    #path: E:/img
+    #文件保存路径
+    path: /usr/local/tomcat/img
+##################################### 邮件 #####################################
   mail:
   # 字符集编码 默认 UTF-8
     default-encoding: UTF-8
-  # SMTP 服务器 host  qq邮箱的为 smtp.qq.com 端口 465 587
+  # SMTP 服务器 host
     host: smtp.qq.com
-  # SMTP 服务器端口 不同的服务商不一样
+  # SMTP 服务器端口
     port: 465
-  #   SMTP 服务器使用的协议
+  # SMTP 服务器使用的协议
     protocol: smtp
-  # SMTP服务器需要身份验证 所以 要配置用户密码
-
   # 发送端的用户邮箱名
     username: 1156211195@qq.com
   # 发送端的密码 注意保密
@@ -49,7 +50,6 @@ spring:
     properties.<key>:
   # 指定是否在启动时测试邮件服务器连接，默认为false
     test-connection: false
-
     properties:
       mail:
         smtp:

@@ -10,15 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>beans</artifactId>
+
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--swagger2-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
 
         <!-- tkMapper -->
         <dependency>
@@ -26,18 +21,14 @@
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>2.1.5</version>
         </dependency>
-        <!-- swagger2 -->
+        <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+
+
     </dependencies>
 
 </project>

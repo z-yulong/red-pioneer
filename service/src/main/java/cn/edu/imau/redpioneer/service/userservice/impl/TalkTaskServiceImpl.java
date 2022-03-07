@@ -38,12 +38,11 @@ public class TalkTaskServiceImpl implements TalkTaskService {
     @Autowired
     ActivistMapper activistMapper;
 
-    //private static final String EXECUTION_TIME ="0 52 18 * * ?";
-    private static final String EXECUTION_TIME ="0 0 2 * * ?";
+    private static final String EXECUTION_TIME ="0 0 10 * * ?";
+    //private static final String EXECUTION_TIME ="0 0 2 * * ?";
     private static final Integer TOTAL =150;
     private static final Integer GROUP_TALK_NUM =4;
     private static final Integer PARTY_TALK_NUM =2;
-
 
     @Override
     public ResultVO partyGroupTalk() {

@@ -1,5 +1,6 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
+import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
 import cn.edu.imau.redpioneer.dao.PartyGroupMapper;
 import cn.edu.imau.redpioneer.dto.PartyGroupDto;
@@ -23,11 +24,15 @@ import java.util.List;
 @Service
 public class PartyBranchServiceImpl implements PartyBranchService {
 
+    private PartyGroupMapper partyGroupMapper;
+    private PartyBranchMapper partyBranchMapper;
     @Autowired
-    PartyGroupMapper partyGroupMapper;
-    @Autowired
-    PartyBranchMapper partyBranchMapper;
+    public PartyBranchServiceImpl(PartyGroupMapper partyGroupMapper,PartyBranchMapper partyBranchMapper){
+        this.partyGroupMapper=partyGroupMapper;
+        this.partyBranchMapper=partyBranchMapper;
+    }
 
+    private final String AUTHORIZATION ="Authorization";
     /**
      * 新增党小组
      * @param partyGroup
@@ -37,7 +42,7 @@ public class PartyBranchServiceImpl implements PartyBranchService {
     public ResultVO addPartyGroup(PartyGroup partyGroup, HttpServletRequest request) {
 
         //从header中获取token
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader(AUTHORIZATION);
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
 
@@ -49,7 +54,6 @@ public class PartyBranchServiceImpl implements PartyBranchService {
 
         //设置党小组所在支部
         partyGroup.setBranch(partyBranch.getId());
-
         //插入
         int i = partyGroupMapper.insert(partyGroup);
 

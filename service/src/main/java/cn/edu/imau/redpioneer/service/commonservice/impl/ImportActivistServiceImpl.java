@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 //import org.springframework.boot.devtools.restart.RestartInitializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,11 +34,15 @@ import java.util.List;
  */
 @Service
 public class ImportActivistServiceImpl implements ImportActivistService {
-    private final static String XLS = "xls";
-    public static final String XLSX = "xlsx";
 
-    @Resource
-    ActivistMapper activistMapper;
+    private final ActivistMapper activistMapper;
+    @Autowired
+    public ImportActivistServiceImpl(ActivistMapper activistMapper){
+        this.activistMapper=activistMapper;
+    }
+    private static final String XLS = "xls";
+    private static final String XLSX = "xlsx";
+
 
     @Override
     public ResultVO importExcel(MultipartFile myFile) {

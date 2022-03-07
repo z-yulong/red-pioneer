@@ -10,8 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(value = "Activist对象",description = "用户信息")
 public class Activist {
     /**
@@ -19,7 +17,6 @@ public class Activist {
      */
     @Id
     private Integer id;
-
     /**
      * 账号
      */

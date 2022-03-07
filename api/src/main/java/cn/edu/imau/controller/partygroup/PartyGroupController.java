@@ -77,12 +77,12 @@ public class PartyGroupController {
     @ApiOperation(value = "通过id修改积极分子信息，培养人分配")
     @RequiresRoles("zuzhang")
     @PutMapping("/updateActivist")
-    public ResultVO updateActivist(Activist activist){
+    public ResultVO updateActivist(@RequestBody Activist activist){
         return partyGroupService.updateActivist(activist);
     }
 
     /**
-     * 获取待审批用户（发展信息）
+     * 获取待审批用户
      */
     @ApiOperation(value = "获取待审批用户")
     @RequiresRoles("zuzhang")

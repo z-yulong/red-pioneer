@@ -17,6 +17,4 @@ public class PageHelper{
     //页面大小
     private int limit;
 
-
-
 }

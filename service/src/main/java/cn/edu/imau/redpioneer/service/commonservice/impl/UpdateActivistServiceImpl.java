@@ -28,7 +28,7 @@ import java.io.IOException;
 @Service
 public class UpdateActivistServiceImpl implements UpdateActivistService {
 
-    @Autowired
+    @Resource
     FileUtil fileUtil;
     @Resource
     private ActivistMapper activistMapper;
