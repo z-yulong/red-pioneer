@@ -1,11 +1,10 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
-import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 import cn.edu.imau.redpioneer.dto.PartyBranchDto;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

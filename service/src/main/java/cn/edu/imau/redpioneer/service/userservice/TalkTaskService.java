@@ -1,12 +1,6 @@
 package cn.edu.imau.redpioneer.service.userservice;
 
-import cn.edu.imau.redpioneer.entity.Score;
-import cn.edu.imau.redpioneer.entity.Talk;
-import cn.edu.imau.redpioneer.enums.ResultVO;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletRequest;
-import java.util.Date;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 
 public interface TalkTaskService {
 

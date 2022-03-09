@@ -8,7 +8,7 @@ public enum State {
     /**
      * 禁用
      */
-    PASS(0,"未通过"),
+    FAIL(0,"未通过"),
 
     /**
      * 待审批

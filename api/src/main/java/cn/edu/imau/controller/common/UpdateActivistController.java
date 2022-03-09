@@ -1,7 +1,7 @@
 package cn.edu.imau.controller.common;
 
 import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.UpdateActivistService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

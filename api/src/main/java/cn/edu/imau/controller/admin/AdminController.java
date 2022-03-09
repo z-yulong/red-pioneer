@@ -1,7 +1,7 @@
 package cn.edu.imau.controller.admin;
 
 import cn.edu.imau.redpioneer.entity.PartyBranch;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.service.commonservice.AdminService;
 import io.swagger.annotations.Api;

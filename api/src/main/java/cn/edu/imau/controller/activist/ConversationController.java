@@ -1,7 +1,7 @@
 package cn.edu.imau.controller.activist;
 
 import cn.edu.imau.redpioneer.entity.Conversation;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.ConversationService;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;

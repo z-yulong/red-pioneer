@@ -6,7 +6,7 @@ import cn.edu.imau.redpioneer.dao.DevelopmentInfoMapper;
 import cn.edu.imau.redpioneer.dto.ActivistDevelopmentDto;
 import cn.edu.imau.redpioneer.entity.DevelopmentInfo;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.enums.State;
 import cn.edu.imau.redpioneer.service.userservice.DevelopmentInfoService;
 import cn.edu.imau.redpioneer.utils.FileUtil;

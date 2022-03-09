@@ -3,7 +3,7 @@ package cn.edu.imau.redpioneer.service.userservice.impl;
 import cn.edu.imau.redpioneer.dao.TalkMapper;
 import cn.edu.imau.redpioneer.entity.Talk;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.enums.State;
 import cn.edu.imau.redpioneer.service.userservice.TalkService;
 import cn.edu.imau.redpioneer.utils.FileUtil;

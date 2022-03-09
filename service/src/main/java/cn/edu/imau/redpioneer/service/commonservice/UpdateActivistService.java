@@ -1,7 +1,7 @@
 package cn.edu.imau.redpioneer.service.commonservice;
 
 import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;

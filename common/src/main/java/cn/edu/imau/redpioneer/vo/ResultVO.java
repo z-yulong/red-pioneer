@@ -1,4 +1,4 @@
-package cn.edu.imau.redpioneer.enums;
+package cn.edu.imau.redpioneer.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

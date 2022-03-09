@@ -1,6 +1,6 @@
 package cn.edu.imau.config;
 
-import cn.edu.imau.redpioneer.enums.Result;
+import cn.edu.imau.redpioneer.vo.Result;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;

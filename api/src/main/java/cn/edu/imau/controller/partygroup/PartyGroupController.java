@@ -1,9 +1,8 @@
 package cn.edu.imau.controller.partygroup;
 
 import cn.edu.imau.redpioneer.entity.Activist;
-import cn.edu.imau.redpioneer.entity.PartyGroup;
 import cn.edu.imau.redpioneer.entity.Train;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.PartyGroupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -81,35 +80,8 @@ public class PartyGroupController {
         return partyGroupService.updateActivist(activist);
     }
 
-    /**
-     * 获取待审批用户
-     */
-    @ApiOperation(value = "获取待审批用户")
-    @RequiresRoles("zuzhang")
-    @GetMapping("/getPending")
-    public ResultVO getPending(String type,HttpServletRequest request){
-        return partyGroupService.getPending(type,request);
-    }
 
-    /**
-     * 审批通过（发展信息）
-     */
-    @ApiOperation(value = "审批通过")
-    @RequiresRoles("zuzhang")
-    @PutMapping("/approved/{id}")
-    public ResultVO approved(@PathVariable("id")Integer id,String remark){
-        return partyGroupService.approved(id,remark);
-    }
 
-    /**
-     * 审批未通过（发展信息）
-     */
-    @ApiOperation(value = "审批未通过")
-    @RequiresRoles("zuzhang")
-    @PutMapping("/pass/{id}")
-    public ResultVO pass(@PathVariable("id")Integer id,String remark){
-        return partyGroupService.pass(id,remark);
-    }
 
 
 

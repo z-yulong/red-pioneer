@@ -5,7 +5,7 @@ import cn.edu.imau.redpioneer.dao.PrizeMapper;
 import cn.edu.imau.redpioneer.dao.ScoreMapper;
 import cn.edu.imau.redpioneer.entity.Score;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.ScoreService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;

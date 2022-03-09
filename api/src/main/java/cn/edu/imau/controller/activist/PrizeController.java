@@ -1,6 +1,6 @@
 package cn.edu.imau.controller.activist;
 
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.PrizeService;
 import io.swagger.annotations.Api;
 

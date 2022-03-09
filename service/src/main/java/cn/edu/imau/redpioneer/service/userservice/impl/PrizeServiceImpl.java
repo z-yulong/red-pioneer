@@ -4,7 +4,7 @@ import cn.edu.imau.redpioneer.dao.PrizeMapper;
 import cn.edu.imau.redpioneer.dto.ActivistPrizeDto;
 import cn.edu.imau.redpioneer.entity.Prize;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.enums.State;
 import cn.edu.imau.redpioneer.service.userservice.PrizeService;
 import cn.edu.imau.redpioneer.utils.FileUtil;

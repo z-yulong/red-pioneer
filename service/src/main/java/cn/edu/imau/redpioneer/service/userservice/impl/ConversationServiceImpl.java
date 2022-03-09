@@ -4,7 +4,7 @@ import cn.edu.imau.redpioneer.dao.ConversationMapper;
 import cn.edu.imau.redpioneer.dto.ActivistConversationDto;
 import cn.edu.imau.redpioneer.entity.Conversation;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.ConversationService;
 import cn.edu.imau.redpioneer.utils.FileUtil;
 import cn.edu.imau.redpioneer.utils.JWTUtil;

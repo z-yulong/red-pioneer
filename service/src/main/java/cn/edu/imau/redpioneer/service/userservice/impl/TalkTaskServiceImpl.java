@@ -5,7 +5,7 @@ import cn.edu.imau.redpioneer.dto.ScoreDto;
 import cn.edu.imau.redpioneer.dto.TalkNumDto;
 import cn.edu.imau.redpioneer.dto.TotalDto;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.enums.TalkState;
 import cn.edu.imau.redpioneer.service.userservice.TalkTaskService;
 import cn.edu.imau.redpioneer.utils.MessageUtil;

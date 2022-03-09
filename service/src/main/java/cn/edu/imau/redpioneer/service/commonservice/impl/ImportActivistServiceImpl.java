@@ -3,7 +3,7 @@ package cn.edu.imau.redpioneer.service.commonservice.impl;
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.exception.LianjiaException;
 import cn.edu.imau.redpioneer.service.commonservice.ImportActivistService;
 
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

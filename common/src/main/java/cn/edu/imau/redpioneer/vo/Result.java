@@ -1,4 +1,4 @@
-package cn.edu.imau.redpioneer.enums;
+package cn.edu.imau.redpioneer.vo;
 
 import lombok.Data;
 

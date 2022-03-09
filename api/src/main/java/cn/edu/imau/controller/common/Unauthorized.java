@@ -1,7 +1,7 @@
 package cn.edu.imau.controller.common;
 
 import cn.edu.imau.redpioneer.enums.ResStatus;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 

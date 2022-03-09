@@ -1,7 +1,7 @@
 package cn.edu.imau.controller.activist;
 
 import cn.edu.imau.redpioneer.entity.Score;
-import cn.edu.imau.redpioneer.enums.ResultVO;
+import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.ScoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
