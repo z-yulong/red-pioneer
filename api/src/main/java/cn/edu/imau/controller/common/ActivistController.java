@@ -1,15 +1,16 @@
 package cn.edu.imau.controller.common;
 
 import cn.edu.imau.redpioneer.entity.Activist;
+import cn.edu.imau.redpioneer.service.commonservice.LoginService;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import io.swagger.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 
@@ -23,8 +24,13 @@ import java.io.UnsupportedEncodingException;
 @Api(value = "提供用户登录注册接口",tags = "用户管理")
 public class ActivistController {
 
-    @Resource
-    private ActivistService activistService;
+    ActivistService activistService;
+    LoginService loginService;
+    @Autowired
+    public ActivistController(ActivistService activistService, LoginService loginService) {
+        this.activistService = activistService;
+        this.loginService = loginService;
+    }
 
     /**
      * 用户登录
@@ -38,7 +44,7 @@ public class ActivistController {
     })
     @GetMapping("/login")
     public ResultVO login(@RequestParam("account")String account, @RequestParam(value = "password") String password) throws UnsupportedEncodingException {
-            return activistService.login(account,password);
+            return loginService.login(account,password);
     }
 
     /**
