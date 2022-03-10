@@ -48,7 +48,6 @@ public class AuditServiceImpl implements AuditService {
         this.faliService = faliService;
     }
 
-
     private static final String PRIZE = "prize";
     private static final String DEVELOPMENT = "development";
     private static final String CONVERSATION = "conversation";
@@ -66,11 +65,14 @@ public class AuditServiceImpl implements AuditService {
         String type = request.getHeader(TYPE);
         //从header中获取token
         String token = request.getHeader(TOKEN);
+        if(token==null){
+            return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+        }
         //从token中获取当前用户id
         Integer id = Integer.valueOf(JWTUtil.getIdByToken(token));
 
         switch (type) {
-            case PRIZE: /**获取待审批的奖惩信息*/
+            case PRIZE: //获取待审批的奖惩信息
 
                 List<ActivistPrizeDto> prizes = prizeMapper.selectPrizeByState(State.PENDING.getValue(),id);
                 if (prizes.isEmpty()) {
@@ -79,7 +81,7 @@ public class AuditServiceImpl implements AuditService {
                 }
                 return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), prizes);
 
-            case DEVELOPMENT: /**获取待审批的发展信息*/
+            case DEVELOPMENT: //获取待审批的发展信息
                 List<ActivistDevelopmentDto> developmentInfos = developmentInfoMapper.selectDevelopmentInfoByStateCode(State.PENDING.getValue(),id);
                 if (developmentInfos.isEmpty()) {
                     //没有待审批用户
@@ -87,7 +89,7 @@ public class AuditServiceImpl implements AuditService {
                 }
                 return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), developmentInfos);
 
-            case CONVERSATION: /**获取待审批的志愿信息*/
+            case CONVERSATION: //获取待审批的志愿信息
                 List<ActivistConversationDto> conversations = conversationMapper.selectConversationByState(State.PENDING.getValue(),id);
                 if (conversations.isEmpty()) {
                     //没有待审批用户
@@ -95,21 +97,21 @@ public class AuditServiceImpl implements AuditService {
                 }
                 return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), conversations);
 
-            case TALK: /**获取待审批的谈话*/
+            case TALK: //获取待审批的谈话
                 List<TalkDto> talks = talkMapper.selectTalkByState(State.PENDING.getValue(),id);
                 if (talks.isEmpty()) {
                     //没有待审批用户
                     return new ResultVO(ResStatus.EMPTY.getValue(), ResStatus.EMPTY.getText(), null);
                 }
                 return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), talks);
-            case SCORE: /**获取待审批的成绩*/
+            case SCORE: //获取待审批的成绩
                 List<ScoreDto> scoreDtos = scoreMapper.selectScoreByState(State.PENDING.getValue(),id);
                 if (scoreDtos.isEmpty()) {
                     //没有待审批用户
                     return new ResultVO(ResStatus.EMPTY.getValue(), ResStatus.EMPTY.getText(), null);
                 }
                 return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), scoreDtos);
-            default: /**参数错误*/
+            default: //参数错误
                 return new ResultVO(ResStatus.PARAMETER_ERROR.getValue(), ResStatus.PARAMETER_ERROR.getText(), null);
         }
 

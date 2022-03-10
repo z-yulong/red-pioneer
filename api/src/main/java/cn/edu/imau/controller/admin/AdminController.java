@@ -23,15 +23,18 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value = "提供管理员操作接口",tags = "管理员管理")
 public class AdminController {
 
-    @Autowired
-    AdminService adminService;
 
-    @Autowired
+    AdminService adminService;
     ActivistService activistService;
+    @Autowired
+    public AdminController(AdminService adminService, ActivistService activistService) {
+        this.adminService = adminService;
+        this.activistService = activistService;
+    }
+
+
     /**
      * 新建党支部
-     * @param partyBranch
-     * @return
      */
     @ApiOperation("新建一个党支部")
     @RequiresRoles("admin")
@@ -42,8 +45,6 @@ public class AdminController {
 
     /**
      * 通过id删除支部
-     * @param id
-     * @return
      */
     @ApiOperation("通过id删除支部")
     @RequiresRoles("admin")
@@ -54,9 +55,6 @@ public class AdminController {
 
     /**
      * 通过id更新支部信息
-     * @param partyBranch
-     * @param request
-     * @return
      */
     @ApiOperation(value = "更新支部信息接口")
     @RequiresRoles("admin")
@@ -67,7 +65,6 @@ public class AdminController {
 
     /**
      * 获取所有支部
-     * @return
      */
     @ApiOperation(value = "获取所有支部接口")
     @RequiresRoles("admin")
@@ -78,8 +75,6 @@ public class AdminController {
 
     /**
      * 通过角色查询支部负责人
-     * @param
-     * @return
      */
     @ApiOperation("通过角色查询支部负责人")
     @RequiresRoles("admin")

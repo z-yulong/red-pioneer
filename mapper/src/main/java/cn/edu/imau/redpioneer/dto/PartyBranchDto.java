@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class PartyBranchDto {
 
+    private Integer id;
     /**
      * 支部名称
      */

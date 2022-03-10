@@ -14,11 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JWTUtil {
-    //token有效时长
+    //token有效时长(30分)
     private static final long EXPIRE=30*60*1000L;
     //token的密钥
     private static final String SECRET="jwt+shiro";
-
 
     public static String createToken(Activist activist) throws UnsupportedEncodingException {
         //token过期时间
@@ -51,7 +50,7 @@ public class JWTUtil {
             return false;
         }
     }
-    //无需解密也可以获取token的信息
+    //通过token获取用户账号
     public static String getAccount(String token){
         try {
             DecodedJWT jwt = JWT.decode(token);
@@ -61,6 +60,7 @@ public class JWTUtil {
         }
     }
 
+    //通过token获取用户id
     public static String getIdByToken(String token){
         try {
             DecodedJWT jwt = JWT.decode(token);

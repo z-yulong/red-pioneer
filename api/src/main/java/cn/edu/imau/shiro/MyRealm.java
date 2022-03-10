@@ -26,8 +26,6 @@ public class MyRealm extends AuthorizingRealm {
         this.activistService=activistService;
     }
     //根据token判断此Authenticator是否使用该realm
-    //必须重写不然shiro会报错
-
     //supports：为了让realm支持jwt的凭证校验
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -40,10 +38,6 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //System.out.println("授权~~~~~");
         String token = principals.toString();
-//        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
-//        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-//        //查询数据库来获取用户的角色
-//        info.addRole(activistMapper.selectRoleById(id));
 
         String account = JWTUtil.getAccount(token);
         Example example = new Example(Activist.class);
@@ -62,23 +56,24 @@ public class MyRealm extends AuthorizingRealm {
      * 默认使用此方法进行用户名正确与否验证，错误抛出异常即可，在需要用户认证和鉴权的时候才会调用
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken jwtToken) throws AuthenticationException {
         //System.out.println("认证~~~~~~~");
-        String jwt= (String) token.getCredentials();
-        String username= null;
+        String token= (String) jwtToken.getCredentials();
+        String account;
         try {
-            username= JWTUtil.getAccount(jwt);
+            account= JWTUtil.getAccount(token);//从token获取账号
         }catch (Exception e){
-            throw new AuthenticationException("token非法，不是规范的token，可能被篡改了，或者过期了");
+            throw new AuthenticationException("token非法");
         }
-        if (!JWTUtil.verify(jwt)||username==null){
+
+        if (!JWTUtil.verify(token)||account==null){
             throw new AuthenticationException("token认证失效，token错误或者过期，重新登陆");
         }
-        Activist activist=activistService.getUser(username);
+        Activist activist=activistService.getUser(account);
         if (activist==null){
             throw new AuthenticationException("该用户不存在");
         }
 
-        return new SimpleAuthenticationInfo(jwt,jwt,"MyRealm");
+        return new SimpleAuthenticationInfo(token,token,"MyRealm");
     }
 }
