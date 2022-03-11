@@ -26,12 +26,16 @@
     <result column="state_code" jdbcType="INTEGER" property="stateCode" />
   </resultMap>
 <!-- 查询用户成绩记录条数奇偶 偶数返回1，奇数返回0-->
-  <select id="selectScoreNum" parameterType="string" resultType="integer">
-    SELECT IF(COUNT(*) &amp; 2,1,0) AS num
-    FROM score AS s
-    INNER JOIN activist AS a
-    ON a.id=s.activist_id
-    WHERE a.name = #{name} AND s.state_code=2
+<!--  <select id="selectScoreNum" parameterType="integer" resultType="integer">-->
+<!--    SELECT IF(COUNT(*) &amp; 2,1,0) AS num-->
+<!--    FROM score AS s-->
+<!--    INNER JOIN activist AS a-->
+<!--    ON a.id=s.activist_id-->
+<!--    WHERE a.id = #{id} AND s.state_code=2-->
+<!--  </select>-->
+
+  <select id="selectScoreNum" parameterType="integer" resultType="integer">
+    SELECT COUNT(*) AS num FROM score WHERE activist_id=#{id}
   </select>
 
 <!--通过姓名查询上一学年成绩-->
@@ -40,7 +44,7 @@
     FROM activist AS a
     INNER JOIN score AS s
     ON a.id=s.activist_id
-    WHERE a.name=#{name}
+    WHERE a.id=#{id}
     ORDER BY s.id DESC LIMIT 0,2;
   </select>
 <!--查询待审批的成绩-->

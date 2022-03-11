@@ -8,6 +8,8 @@ import lombok.Data;
  */
 @Data
 public class TalkNumDto {
+
     private String name;
     private Integer num;
+    private Integer id;
 }

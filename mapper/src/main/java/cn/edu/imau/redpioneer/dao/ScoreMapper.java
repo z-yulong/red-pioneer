@@ -8,8 +8,8 @@ import cn.edu.imau.redpioneer.general.GeneralDAO;
 import java.util.List;
 
 public interface ScoreMapper extends GeneralDAO<Score> {
-    Integer selectScoreNum(String name);
-    List<ScoreDto> selectNewScore(String name);
+    Integer selectScoreNum(Integer id);
+    List<ScoreDto> selectNewScore(Integer id);
     List<ScoreDto> selectScoreByState(Integer state,Integer id);
 
 }

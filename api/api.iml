@@ -1418,6 +1418,8 @@
     <orderEntry type="library" name="Maven: tk.mybatis:mapper:3.4.4" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
     <orderEntry type="module" module-name="common" />
+    <orderEntry type="library" name="Maven: com.github.penggle:kaptcha:2.3.2" level="project" />
+    <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235-1" level="project" />
     <orderEntry type="library" name="Maven: com.auth0:java-jwt:3.10.3" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
     <orderEntry type="library" name="Maven: io.jsonwebtoken:jjwt:0.9.1" level="project" />

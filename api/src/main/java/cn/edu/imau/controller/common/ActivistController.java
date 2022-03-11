@@ -25,27 +25,13 @@ import java.io.UnsupportedEncodingException;
 public class ActivistController {
 
     ActivistService activistService;
-    LoginService loginService;
+
     @Autowired
-    public ActivistController(ActivistService activistService, LoginService loginService) {
+    public ActivistController(ActivistService activistService) {
         this.activistService = activistService;
-        this.loginService = loginService;
     }
 
-    /**
-     * 用户登录
-     * @param account
-     * @param password
-     */
-    @ApiOperation(value = "用户登录接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(dataType = "String",name = "account",value = "用户名",required = true),
-            @ApiImplicitParam(dataType = "String",name = "password",value = "密码",required = false,defaultValue = "888888")
-    })
-    @GetMapping("/login")
-    public ResultVO login(@RequestParam("account")String account, @RequestParam(value = "password") String password) throws UnsupportedEncodingException {
-            return loginService.login(account,password);
-    }
+
 
     /**
      * 通过id删除一个用户

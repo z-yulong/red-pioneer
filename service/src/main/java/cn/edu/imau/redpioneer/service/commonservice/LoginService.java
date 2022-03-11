@@ -6,5 +6,5 @@ import java.io.UnsupportedEncodingException;
 
 public interface LoginService {
 
-    ResultVO login(String name, String password) throws UnsupportedEncodingException;
+    ResultVO login(String name, String password,String validateCode) throws UnsupportedEncodingException;
 }

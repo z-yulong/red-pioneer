@@ -24,13 +24,14 @@
 
 
   <resultMap id="TalkNumListMap" type="cn.edu.imau.redpioneer.dto.TalkNumDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
 
 <!--查询所有人支部或小组谈话次数-->
   <select id="selectTalkNum" resultMap="TalkNumListMap">
-    SELECT a.name,COUNT(*) AS num
+    SELECT a.id,a.name,COUNT(*) AS num
     FROM talk AS t
            INNER JOIN activist AS a
            ON a.id=t.activist_id

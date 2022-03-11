@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -23,10 +24,9 @@ import java.util.Date;
  */
 @Service
 public class TalkServiceImpl implements TalkService {
-    @Autowired
+    @Resource
     TalkMapper talkMapper;
-
-    @Autowired
+    @Resource
     FileUtil fileUtil;
     /**
      * 上传谈话记录

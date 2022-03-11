@@ -28,12 +28,13 @@
   </resultMap>
 
   <resultMap id="TotalListMap" type="cn.edu.imau.redpioneer.dto.TotalDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="total" jdbcType="VARCHAR" property="total" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
 <!--查询所有人志愿总时长-->
   <select id="selectTotal" resultMap="TotalListMap">
-    SELECT DISTINCT a.name,c.total
+    SELECT DISTINCT a.id,a.name,c.total
     FROM conversation AS c
            INNER JOIN activist AS a
            ON a.id=c.activist_id

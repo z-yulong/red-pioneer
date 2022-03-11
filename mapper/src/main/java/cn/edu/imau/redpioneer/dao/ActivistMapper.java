@@ -14,8 +14,8 @@ public interface ActivistMapper extends GeneralDAO<Activist> {
     void batchInsert(List<Activist> activists);
 
     //通过姓名更新用户状态
-    void updateStateCode(Integer stateCode,String name);
+    void updateStateCode(Integer stateCode,Integer id);
 
     //通过姓名查询邮箱
-    String selectEmailByName(String name);
+    String selectEmailByName(Integer id);
 }

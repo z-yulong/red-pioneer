@@ -16,6 +16,6 @@ public class ScoreDto {
     private String comprehensiveRanking;
     private String classSize;
     private Integer isFirsthalf;
-    private String stateCode;
+    private Integer stateCode;
 
 }

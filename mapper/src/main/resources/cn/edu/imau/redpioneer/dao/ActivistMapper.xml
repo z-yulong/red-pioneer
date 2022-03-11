@@ -43,12 +43,12 @@
   <update id="updateStateCode">
     update activist as a
     set state_code=#{stateCode}
-    where a.name=#{name}
+    where a.id=#{id}
   </update>
 
 <!--  通过姓名查询邮箱-->
-  <select id="selectEmailByName" parameterType="string" resultType="string">
-    SELECT email FROM activist as a WHERE a.name=#{name}
+  <select id="selectEmailByName" parameterType="integer" resultType="string">
+      SELECT email FROM activist as a WHERE a.id=#{id}
   </select>
 
   <!--更新用户照片-->

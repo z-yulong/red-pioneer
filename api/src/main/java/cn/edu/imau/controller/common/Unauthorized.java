@@ -16,11 +16,11 @@ import java.io.UnsupportedEncodingException;
 
 @CrossOrigin//解决跨域访问
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/error")
 @Api(value = "未经授权",tags = "未经授权")
 public class Unauthorized {
 
-    @GetMapping(path = "/unauthorized/{message}")
+    @GetMapping(path = "/unauthorized")
     public ResultVO unauthorized(@PathVariable String message) throws UnsupportedEncodingException {
         return new ResultVO(ResStatus.USER_UNAUTHORIZED.getValue(), ResStatus.USER_UNAUTHORIZED.getText(), null);
     }

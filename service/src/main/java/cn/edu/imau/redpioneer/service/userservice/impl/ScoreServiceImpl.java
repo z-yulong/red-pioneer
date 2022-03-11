@@ -23,12 +23,17 @@ public class ScoreServiceImpl implements ScoreService {
     private static final  Integer YES = 1;
     private static final  Integer NO = 0;
 
-    @Autowired
     ActivistMapper activistMapper;
-    @Autowired
+    ScoreMapper scoreMapper;
     PrizeMapper prizeMapper;
     @Autowired
-    ScoreMapper scoreMapper;
+    public ScoreServiceImpl(ActivistMapper activistMapper, PrizeMapper prizeMapper, ScoreMapper scoreMapper) {
+        this.activistMapper = activistMapper;
+        this.prizeMapper = prizeMapper;
+        this.scoreMapper = scoreMapper;
+    }
+
+
 
 
     /**
@@ -45,9 +50,7 @@ public class ScoreServiceImpl implements ScoreService {
         String token = req.getHeader("Authorization");
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
-
         score.setActivistId(id);
-
         //获取班级人数
         Integer classSize = Integer.valueOf(score.getClassSize());
         //智育排名
