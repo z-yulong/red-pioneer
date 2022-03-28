@@ -18,4 +18,12 @@ public interface DevelopmentInfoService {
     ) throws IOException;
 
     ResultVO getDevelopmentInfo(String info);
+
+    ResultVO getDevelopmentInfoById(Integer id);
+
+    ResultVO deleteDevelopmentById(Integer id);
+
+    ResultVO uploadDiploma(Date upactivistTime, MultipartFile diploma, ServletRequest request) throws IOException;
+
+    ResultVO uploadApplication(Date applicationTime, MultipartFile applicationForm, ServletRequest request) throws IOException;
 }

@@ -9,4 +9,8 @@ import java.util.List;
 
 public interface PartyBranchMapper extends GeneralDAO<PartyBranch> {
     List<PartyBranchDto> selectAllPartyBranch();
+
+    Integer selectMyBranchId(Integer id);
+
+    List<Integer> selectBranchGroupActivistId(Integer id);
 }

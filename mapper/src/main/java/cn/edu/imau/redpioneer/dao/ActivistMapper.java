@@ -1,5 +1,9 @@
 package cn.edu.imau.redpioneer.dao;
 
+import cn.edu.imau.redpioneer.dto.ActivistInfoDto;
+import cn.edu.imau.redpioneer.dto.GradeNumDto;
+import cn.edu.imau.redpioneer.dto.NationNumDto;
+import cn.edu.imau.redpioneer.dto.SexNumDto;
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.general.GeneralDAO;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +22,20 @@ public interface ActivistMapper extends GeneralDAO<Activist> {
 
     //通过姓名查询邮箱
     String selectEmailByName(Integer id);
+
+    ActivistInfoDto selectActivistInfo(Integer id);
+
+    Activist selectActivistByText(String text);
+
+    List<NationNumDto> selectBranchNationNum(Integer id);
+
+    List<SexNumDto> selectBranchSexNum(Integer id);
+
+    List<GradeNumDto> selectBranchGradeNum(Integer id);
+
+    List<NationNumDto> selectGroupNationNum(Integer id);
+
+    List<SexNumDto> selectGroupSexNum(Integer id);
+
+    List<GradeNumDto> selectGroupGradeNum(Integer id);
 }

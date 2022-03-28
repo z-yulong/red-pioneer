@@ -4,9 +4,8 @@
   <resultMap id="BaseResultMap" type="cn.edu.imau.redpioneer.entity.Score">
 
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="moral" jdbcType="VARCHAR" property="moral" />
+    <result column="up_date" jdbcType="DATE" property="upDate" />
     <result column="moral_ranking" jdbcType="VARCHAR" property="moralRanking" />
-    <result column="comprehensive" jdbcType="VARCHAR" property="comprehensive" />
     <result column="comprehensive_ranking" jdbcType="VARCHAR" property="comprehensiveRanking" />
     <result column="class_size" jdbcType="VARCHAR" property="classSize" />
     <result column="is_firsthalf" jdbcType="INTEGER" property="isFirsthalf" />
@@ -17,9 +16,8 @@
   <resultMap id="ScoreListMap" type="cn.edu.imau.redpioneer.dto.ScoreDto">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="moral" jdbcType="VARCHAR" property="moral" />
+    <result column="up_date" jdbcType="DATE" property="upDate" />
     <result column="moral_ranking" jdbcType="VARCHAR" property="moralRanking" />
-    <result column="comprehensive" jdbcType="VARCHAR" property="comprehensive" />
     <result column="comprehensive_ranking" jdbcType="VARCHAR" property="comprehensiveRanking" />
     <result column="class_size" jdbcType="VARCHAR" property="classSize" />
     <result column="is_firsthalf" jdbcType="INTEGER" property="isFirsthalf" />
@@ -40,7 +38,7 @@
 
 <!--通过姓名查询上一学年成绩-->
   <select id="selectNewScore" resultMap="ScoreListMap">
-    SELECT s.id,a.name,s.moral,s.moral_ranking,s.comprehensive,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
+    SELECT s.id,s.up_date,a.name,s.moral_ranking,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
     FROM activist AS a
     INNER JOIN score AS s
     ON a.id=s.activist_id
@@ -49,7 +47,7 @@
   </select>
 <!--查询待审批的成绩-->
   <select id="selectScoreByState" resultMap="ScoreListMap">
-    SELECT s.id,a.name,s.moral,s.moral,s.moral_ranking,s.comprehensive,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
+    SELECT s.id,s.up_date,a.name,s.moral_ranking,s.comprehensive_ranking,s.class_size,s.is_firsthalf,s.state_code
     FROM activist AS a
     INNER JOIN score AS s
     ON a.id=s.activist_id

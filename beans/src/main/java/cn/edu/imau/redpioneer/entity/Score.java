@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import java.util.Date;
+
 @Data
 public class Score {
     /**
@@ -13,20 +15,16 @@ public class Score {
     private Integer id;
 
     /**
-     * 智育成绩
+     * 上传时间
      */
-    private String moral;
-
+    @Column(name = "up_date")
+    private Date upDate;
     /**
      * 智育排名
      */
     @Column(name = "moral_ranking")
     private String moralRanking;
 
-    /**
-     * 综测成绩
-     */
-    private String comprehensive;
 
     /**
      * 综测排名

@@ -3,6 +3,7 @@ package cn.edu.imau.redpioneer.service.userservice.impl;
 import cn.edu.imau.redpioneer.dao.ConversationMapper;
 import cn.edu.imau.redpioneer.dto.ActivistConversationDto;
 import cn.edu.imau.redpioneer.entity.Conversation;
+import cn.edu.imau.redpioneer.entity.DevelopmentInfo;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.ConversationService;
@@ -11,10 +12,12 @@ import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,21 +26,24 @@ import java.util.List;
  */
 @Service
 public class ConversationServiceImpl implements ConversationService {
+
+    private ConversationMapper conversationMapper;
+    private FileUtil fileUtil;
     @Autowired
-    ConversationMapper conversationMapper;
-    @Autowired
-    FileUtil fileUtil;
+    public ConversationServiceImpl(ConversationMapper conversationMapper, FileUtil fileUtil) {
+        this.conversationMapper = conversationMapper;
+        this.fileUtil = fileUtil;
+    }
 
     /**
      * 添加志愿信息
-     * @param conversation
      * @param prove
      * @param request
      * @return
      * @throws IOException
      */
     @Override
-    public ResultVO addconversation(Conversation conversation, MultipartFile prove, ServletRequest request) throws IOException {
+    public ResultVO addconversation(Date volunteerTime, String volunteerAddress, String volunteerInfo, String volunteerSize, MultipartFile prove, ServletRequest request) throws IOException {
 
         //从header中获取token
         HttpServletRequest req= (HttpServletRequest) request;
@@ -48,12 +54,22 @@ public class ConversationServiceImpl implements ConversationService {
         //从token中获取当前用户id
         Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
 
+        Conversation conversation = new Conversation();
+
         conversation.setActivistId(id);
+        conversation.setVolunteerTime(volunteerTime);
+        conversation.setVolunteerAddress(volunteerAddress);
+        conversation.setVolunteerInfo(volunteerInfo);
+        conversation.setVolunteerSize(volunteerSize);
         conversation.setProve(provePATH);
 
-        conversationMapper.insertSelective(conversation);
+        int i = conversationMapper.insertSelective(conversation);
 
-        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), null);
+        if(i == 1){
+            //成功
+            return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(),null);
     }
 
 
@@ -73,5 +89,34 @@ public class ConversationServiceImpl implements ConversationService {
         }
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), conversations1);
 
+    }
+
+    /**
+     * 通过id查询所有志愿信息
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO getConversationById(Integer id) {
+        Example example=new Example(Conversation.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activistId",id);
+        List<Conversation> conversations = conversationMapper.selectByExample(example);
+        return new ResultVO(ResStatus.OK.getValue(),ResStatus.OK.getText(), conversations);
+    }
+
+    /**
+     * 删除用户志愿信息
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO deleteConversation(Integer id) {
+        int i = conversationMapper.deleteByPrimaryKey(id);
+
+        if (i == 1){
+            return new ResultVO(ResStatus.DELETE_OK.getValue(), ResStatus.DELETE_OK.getText(), null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
     }
 }

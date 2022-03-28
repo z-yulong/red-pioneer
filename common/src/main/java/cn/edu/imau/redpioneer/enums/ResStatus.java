@@ -25,6 +25,8 @@ public enum ResStatus {
      * 登录过期
      */
     LOGIN_EXPIRATION(20005,"登录过期,请重新登录"),
+
+    USER_DISABLED(20006,"用户已禁用，请联系管理员！"),
     /**
      * token不合法
      */

@@ -20,16 +20,23 @@ spring:
     level:
       cn.edu.imau.redpioneer.dao: debug
 ##################################### 文件上传 #####################################
+
   servlet:
-    multipart:
-      # 上传文件的最大值
-      max-request-size: 15MB
-      # 单个文件上传的最大值
-      max-file-size: 10MB
   upload:
     #path: E:/img
     #文件保存路径
     path: /usr/local/tomcat/img
+  mvc:
+    #static-path-pattern: /imgs/**  #访问地址
+    static-path-pattern: /img/**  #访问地址
+  resources:
+    #static-locations: file:E:/img/  #实际地址
+    static-locations: file:/usr/local/tomcat/img/  #实际地址
+  multipart:
+    # 上传文件的最大值
+    max-request-size: 15MB
+    # 单个文件上传的最大值
+    max-file-size: 10MB
 ##################################### 邮件 #####################################
   mail:
   # 字符集编码 默认 UTF-8
@@ -55,3 +62,6 @@ spring:
         smtp:
           ssl:
             enable: true
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8

@@ -26,8 +26,13 @@ import java.util.Date;
 @Api(value = "奖惩信息接口",tags = "奖惩信息")
 public class PrizeController {
 
+    private PrizeService prizeService;
+
     @Autowired
-    PrizeService prizeService;
+    public PrizeController(PrizeService prizeService) {
+        this.prizeService = prizeService;
+    }
+
     /**
      * 上传上传奖惩信息
      * @param prizeImg
@@ -38,7 +43,7 @@ public class PrizeController {
      */
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     @ApiOperation(value = "上传奖惩信息接口")
-    @PutMapping("/addPrize")
+    @PostMapping("/addPrize")
     public ResultVO addPrizeImg(@RequestParam("prizeImg") MultipartFile prizeImg
             , @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date
             , @RequestParam("info")String info, ServletRequest request) throws IOException {
@@ -47,13 +52,25 @@ public class PrizeController {
 
     /**
      * 获取用户惩信息
-     * @param request
+     * @param id
      * @return
      */
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     @ApiOperation(value = "获取用户惩信息接口")
-    @GetMapping("/getPrize")
-    public ResultVO getPrize(ServletRequest request){
-        return prizeService.getPrize(request);
+    @GetMapping("/getPrize/{id}")
+    public ResultVO getPrize(@PathVariable("id") Integer id){
+        return prizeService.getPrizeById(id);
+    }
+
+    /**
+     * 删除用户奖惩信息
+     * @param id
+     * @return
+     */
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "删除用户奖惩信息")
+    @DeleteMapping("/deletePrize/{id}")
+    public ResultVO deletePrize(@PathVariable("id") Integer id){
+        return prizeService.deletePrizeById(id);
     }
 }

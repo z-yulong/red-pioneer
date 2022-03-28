@@ -18,12 +18,12 @@ import tk.mybatis.mapper.entity.Example;
 @Service
 public class ApproveServiceImpl implements ApproveService {
 
-    DevelopmentInfoMapper developmentInfoMapper;
-    ScoreMapper scoreMapper;
-    TalkMapper talkMapper;
-    PrizeMapper prizeMapper;
-    ConversationMapper conversationMapper;
-    ActivistMapper activistMapper;
+    private DevelopmentInfoMapper developmentInfoMapper;
+    private ScoreMapper scoreMapper;
+    private TalkMapper talkMapper;
+    private PrizeMapper prizeMapper;
+    private ConversationMapper conversationMapper;
+    private ActivistMapper activistMapper;
 
     @Autowired
     public ApproveServiceImpl(DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper, ActivistMapper activistMapper) {

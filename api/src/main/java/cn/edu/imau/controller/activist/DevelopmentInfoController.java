@@ -26,13 +26,14 @@ import java.util.Date;
 @Api(value = "提供用户发展信息操作接口",tags = "发展信息")
 public class DevelopmentInfoController {
 
+    private DevelopmentInfoService developmentInfoService;
     @Autowired
-    DevelopmentInfoService developmentInfoService;
+    public DevelopmentInfoController(DevelopmentInfoService developmentInfoService) {
+        this.developmentInfoService = developmentInfoService;
+    }
 
     /**
-     * 上传发展信息
-     * @param applicationTime 入党申请时间
-     * @param applicationForm 入党申请书
+     * 上传积极分子结业信息接口
      * @param upactivistTime 确定为积极分子时间
      * @param diploma 积极分子结业证
      * @param request
@@ -40,12 +41,27 @@ public class DevelopmentInfoController {
      * @throws IOException
      */
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @ApiOperation(value = "上传入党申请信息接口")
-    @PostMapping("/uploadRdsq")
+    @ApiOperation(value = "上传积极分子结业信息接口")
+    @PostMapping("/uploadDiploma")
     public ResultVO uploadRdsq(
-            @RequestParam("applicationTime") @DateTimeFormat(pattern="yyyy-MM-dd") Date applicationTime, MultipartFile applicationForm,
             @RequestParam("upactivistTime") @DateTimeFormat(pattern="yyyy-MM-dd") Date upactivistTime, MultipartFile diploma, ServletRequest request) throws IOException {
-        return developmentInfoService.uploadRdsq(applicationTime,applicationForm,upactivistTime,diploma,request);
+        return developmentInfoService.uploadDiploma(upactivistTime,diploma,request);
+    }
+
+    /**
+     * 上传入党申请书接口
+     * @param applicationTime
+     * @param applicationForm
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "上传入党申请书接口")
+    @PostMapping("/uploadApplication")
+    public ResultVO uploadApplication(
+            @RequestParam("applicationTime") @DateTimeFormat(pattern="yyyy-MM-dd") Date applicationTime, MultipartFile applicationForm,ServletRequest request) throws IOException {
+        return developmentInfoService.uploadApplication (applicationTime,applicationForm,request);
     }
 
     /**
@@ -58,7 +74,28 @@ public class DevelopmentInfoController {
     @GetMapping("/getDevelopmentInfo")
     public ResultVO getDevelopmentInfo(@RequestParam("info")String info){
         return developmentInfoService.getDevelopmentInfo(info);
-
     }
+
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "通过id查看发展信息")
+    @GetMapping("/getDevelopment/{id}")
+    public ResultVO getDevelopmentInfoById(@PathVariable("id")Integer id){
+        return developmentInfoService.getDevelopmentInfoById(id);
+    }
+
+    /**
+     * 删除用户发展信息接口
+     * @param id
+     * @return
+     */
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "删除用户发展信息接口")
+    @DeleteMapping("/deleteDevelopment/{id}")
+    public ResultVO deletePrize(@PathVariable("id") Integer id){
+        return developmentInfoService.deleteDevelopmentById(id);
+    }
+
+
+
 
 }

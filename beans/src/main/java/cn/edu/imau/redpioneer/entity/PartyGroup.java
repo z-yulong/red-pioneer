@@ -31,4 +31,5 @@ public class PartyGroup {
      */
     private Integer branch;
 
+
 }

@@ -10,17 +10,24 @@
 </resultMap>
 
   <resultMap id="myGroupList" type="cn.edu.imau.redpioneer.dto.PartyGroupDto">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="branchName" jdbcType="VARCHAR" property="branch_name" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
   </resultMap>
 
   <select id="selectMyGroups" resultMap="myGroupList">
-    SELECT p.group_name,a.name,b.branch_name
+    SELECT p.id,p.group_name,a.name,b.branch_name,a.tel
     FROM party_group AS p
            INNER JOIN party_branch AS b
            INNER JOIN activist AS a
            ON a.id=p.activist_id AND b.id=p.branch
     WHERE p.branch=#{id}
+  </select>
+
+  <!--通过小组id查询小组负责人-->
+  <select id="selectGroupActivistId" parameterType="int" resultType="int">
+    SELECT activist_id FROM party_group WHERE id=#{id}
   </select>
 </mapper>

@@ -10,4 +10,6 @@ import java.util.List;
 public interface PartyGroupMapper extends GeneralDAO<PartyGroup> {
 
     List<PartyGroupDto> selectMyGroups(Integer id);
+
+    int selectGroupActivistId(Integer id);
 }

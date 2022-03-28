@@ -83,5 +83,69 @@ public class PartyBranchController {
         return partyBranchService.getAllPending(request);
     }
 
+    /**
+         * 审批通过
+     */
+    @ApiOperation(value = "审批通过")
+    @RequiresRoles("shuji")
+    @PutMapping("/approveFocus/{id}")
+    public ResultVO approved(@PathVariable("id")Integer id,String remark,HttpServletRequest request){
+        return partyBranchService.approved(id,remark,request);
+    }
+
+    /**
+     * 审批未通过
+     */
+    @ApiOperation(value = "审批通过")
+    @RequiresRoles("shuji")
+    @PutMapping("/failFocus/{id}")
+    public ResultVO fail(@PathVariable("id")Integer id,String remark,HttpServletRequest request){
+        return partyBranchService.fail(id,remark,request);
+    }
+
+
+    /**
+     * 获取支部人数
+     * @return
+     */
+    @ApiOperation(value = "获取支部人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getBranchNum/{id}")
+    public ResultVO getBranchNum(@PathVariable("id") Integer id){
+        return partyBranchService.getBranchNum(id);
+    }
+
+    /**
+     * 获取支部各名民族人数
+     * @return
+     */
+    @ApiOperation(value = "获取支部各名民族人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getBranchNationNum/{id}")
+    public ResultVO getBranchNationNum(@PathVariable("id") Integer id){
+        return partyBranchService.getBranchNationNum(id);
+    }
+    /**
+     * 获取支部各性别人数
+     * @return
+     */
+    @ApiOperation(value = "获取支部各性别人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getBranchSexNum/{id}")
+    public ResultVO getBranchSexNum(@PathVariable("id") Integer id){
+        return partyBranchService.getBranchSexNum(id);
+    }
+
+    /**
+     * 获取支部各年级人数
+     * @return
+     */
+    @ApiOperation(value = "获取支部各年级人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getBranchGradeNum/{id}")
+    public ResultVO getBranchGradeNum(@PathVariable("id") Integer id){
+        return partyBranchService.getBranchGradeNum(id);
+    }
+
 
 }

@@ -6,6 +6,7 @@ import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.PartyGroupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,6 @@ public class PartyGroupController {
     public ResultVO addTrain(@RequestBody Train train, HttpServletRequest request){
         return partyGroupService.addTrain(train,request);
     }
-
 
     /**
      * 通过id删除培养人
@@ -81,6 +81,72 @@ public class PartyGroupController {
     }
 
 
+    /**
+     * 获取自己小组下所有人
+     * @return
+     */
+    @ApiOperation(value = "获取自己小组下所有培养人")
+    @RequiresRoles("zuzhang")
+    @GetMapping("/getAllActivist")
+    public ResultVO getAllActivist(HttpServletRequest request){
+        return partyGroupService.getAllActivist(request);
+    }
+
+    /**
+     * 通过id获取小组下所有人
+     * @return
+     */
+    @ApiOperation(value = "通过id获取小组下所有人")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
+    @GetMapping("/getAllActivistById/{id}")
+    public ResultVO getAllActivistById(@PathVariable Integer id){
+        return partyGroupService.getAllActivistById(id);
+    }
+
+    /**************************************************************************************************************************/
+
+    /**
+     * 获取党小组人数
+     * @return
+     */
+    @ApiOperation(value = "获取党小组人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getGroupNum/{id}")
+    public ResultVO getGroupNum(@PathVariable("id") Integer id){
+        return partyGroupService.getGroupNum(id);
+    }
+
+    /**
+     * 获取党小组各名民族人数
+     * @return
+     */
+    @ApiOperation(value = "获取党小组各名民族人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getGroupNationNum/{id}")
+    public ResultVO getGroupNationNum(@PathVariable("id") Integer id){
+        return partyGroupService.getGroupNationNum(id);
+    }
+    /**
+     * 获取党小组各性别人数
+     * @return
+     */
+    @ApiOperation(value = "获取党小组各性别人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getGroupSexNum/{id}")
+    public ResultVO getGroupSexNum(@PathVariable("id") Integer id){
+        return partyGroupService.getGroupSexNum(id);
+    }
+
+    /**
+     * 获取党小组各年级人数
+     * @return
+     */
+    @ApiOperation(value = "获取党小组各年级人数")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @GetMapping("/getGroupGradeNum/{id}")
+    public ResultVO getGroupGradeNum(@PathVariable("id") Integer id){
+        return partyGroupService.getGroupGradeNum(id);
+    }
 
 
 

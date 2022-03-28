@@ -1,6 +1,7 @@
 package cn.edu.imau.redpioneer.service.userservice.impl;
 
 import cn.edu.imau.redpioneer.dao.TalkMapper;
+import cn.edu.imau.redpioneer.entity.Prize;
 import cn.edu.imau.redpioneer.entity.Talk;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.vo.ResultVO;
@@ -11,12 +12,14 @@ import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: zyl
@@ -67,4 +70,35 @@ public class TalkServiceImpl implements TalkService {
         }
         return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
     }
+
+    /**
+     * 获取用户谈话息
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO getTalkById(Integer id) {
+        Example example=new Example(Talk.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activistId",id);
+        List<Talk> talks = talkMapper.selectByExample(example);
+        return new ResultVO(ResStatus.OK.getValue(),ResStatus.OK.getText(), talks);
+    }
+
+    /**
+     * 删除谈话息
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO deleteTalkById(Integer id) {
+        int i = talkMapper.deleteByPrimaryKey(id);
+        if(i == 1){
+            //成功
+            return new ResultVO(ResStatus.DELETE_OK.getValue(), ResStatus.DELETE_OK.getText(), null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+    }
+
+
 }

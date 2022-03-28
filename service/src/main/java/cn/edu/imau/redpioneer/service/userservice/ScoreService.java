@@ -8,4 +8,9 @@ import javax.servlet.ServletRequest;
 public interface ScoreService {
 
     ResultVO addScore(Score score, ServletRequest request);
+
+    ResultVO getScoreById(Integer id);
+
+    ResultVO deleteScore(Integer id);
+
 }

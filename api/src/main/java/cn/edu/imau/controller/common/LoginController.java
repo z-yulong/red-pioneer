@@ -43,12 +43,18 @@ public class LoginController {
      * @param account
      * @param password
      */
+//    @ApiOperation(value = "用户登录接口")
+//    @PostMapping("/tologin")
+//    public ResultVO login(@RequestParam("account")String account,
+//                          @RequestParam(value = "password") String password,
+//                          @RequestParam(value = "validateCode") String validateCode ) throws UnsupportedEncodingException {
+//        return loginService.login(account,password,validateCode);
+//    }
     @ApiOperation(value = "用户登录接口")
-    @GetMapping("/tologin")
+    @PostMapping("/tologin")
     public ResultVO login(@RequestParam("account")String account,
-                          @RequestParam(value = "password") String password,
-                          @RequestParam(value = "validateCode") String validateCode ) throws UnsupportedEncodingException {
-        return loginService.login(account,password,validateCode);
+                          @RequestParam(value = "password") String password) throws UnsupportedEncodingException {
+        return loginService.login(account,password);
     }
 
     @GetMapping("/getVerifyCode")

@@ -2,6 +2,8 @@ package cn.edu.imau.redpioneer.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author: zyl
  * @date 2022/2/5 12:38
@@ -16,6 +18,7 @@ public class ScoreDto {
     private String comprehensiveRanking;
     private String classSize;
     private Integer isFirsthalf;
+    private Date upDate;
     private Integer stateCode;
 
 }

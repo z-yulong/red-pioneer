@@ -6,6 +6,7 @@ import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.service.commonservice.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -77,9 +78,27 @@ public class AdminController {
      * 通过角色查询支部负责人
      */
     @ApiOperation("通过角色查询支部负责人")
-    @RequiresRoles("admin")
-    @GetMapping("/getUserByRole")
-    public ResultVO getUserByRole() {
-        return activistService.getUserByRole();
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
+    @GetMapping("/getUserByRole/{roles}")
+    public ResultVO getUserByRole(@PathVariable String roles) {
+        return activistService.getUserByRole(roles);
+    }
+    /**
+     * 禁用用户
+     */
+    @ApiOperation("禁用用户")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji"})
+    @PutMapping("/disabled/{id}")
+    public ResultVO disabled(@PathVariable Integer id) {
+        return activistService.disabled(id);
+    }
+    /**
+     * 启用用户
+     */
+    @ApiOperation("启用用户")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji"})
+    @PutMapping("/enable/{id}")
+    public ResultVO enable(@PathVariable Integer id) {
+        return activistService.enable(id);
     }
 }

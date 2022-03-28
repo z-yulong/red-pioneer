@@ -26,12 +26,12 @@ import java.util.List;
 @Component
 public class TalkTaskServiceImpl implements TalkTaskService {
 
-    MessageUtil messageUtil;
-    ScoreMapper scoreMapper;
-    PrizeMapper prizeMapper;
-    ConversationMapper conversationMapper;
-    TalkMapper talkMapper;
-    ActivistMapper activistMapper;
+    private MessageUtil messageUtil;
+    private ScoreMapper scoreMapper;
+    private PrizeMapper prizeMapper;
+    private ConversationMapper conversationMapper;
+    private TalkMapper talkMapper;
+    private ActivistMapper activistMapper;
     @Autowired
     public TalkTaskServiceImpl(MessageUtil messageUtil, ScoreMapper scoreMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper, TalkMapper talkMapper, ActivistMapper activistMapper) {
         this.messageUtil = messageUtil;

@@ -3,6 +3,7 @@ package cn.edu.imau.redpioneer.service.userservice.impl;
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.PrizeMapper;
 import cn.edu.imau.redpioneer.dao.ScoreMapper;
+import cn.edu.imau.redpioneer.entity.Prize;
 import cn.edu.imau.redpioneer.entity.Score;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.vo.ResultVO;
@@ -10,9 +11,11 @@ import cn.edu.imau.redpioneer.service.userservice.ScoreService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author: zyl
@@ -23,18 +26,15 @@ public class ScoreServiceImpl implements ScoreService {
     private static final  Integer YES = 1;
     private static final  Integer NO = 0;
 
-    ActivistMapper activistMapper;
-    ScoreMapper scoreMapper;
-    PrizeMapper prizeMapper;
+    private ActivistMapper activistMapper;
+    private ScoreMapper scoreMapper;
+    private PrizeMapper prizeMapper;
     @Autowired
     public ScoreServiceImpl(ActivistMapper activistMapper, PrizeMapper prizeMapper, ScoreMapper scoreMapper) {
         this.activistMapper = activistMapper;
         this.prizeMapper = prizeMapper;
         this.scoreMapper = scoreMapper;
     }
-
-
-
 
     /**
      * 上传成绩
@@ -66,6 +66,7 @@ public class ScoreServiceImpl implements ScoreService {
         }else {
             score.setIsFirsthalf(NO);
         }
+        score.setStateCode(1);
 
         int i = scoreMapper.insert(score);
 
@@ -75,5 +76,29 @@ public class ScoreServiceImpl implements ScoreService {
         }
         return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(),null);
 
+    }
+
+    @Override
+    public ResultVO getScoreById(Integer id) {
+        Example example=new Example(Score.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activistId",id);
+        List<Score> scores = scoreMapper.selectByExample(example);
+        return new ResultVO(ResStatus.OK.getValue(),ResStatus.OK.getText(), scores);
+    }
+
+    /**
+     * 删除用户学习成绩信息
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO deleteScore(Integer id) {
+        int i = scoreMapper.deleteByPrimaryKey(id);
+
+        if (i == 1){
+            return new ResultVO(ResStatus.DELETE_OK.getValue(), ResStatus.DELETE_OK.getText(), null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
     }
 }

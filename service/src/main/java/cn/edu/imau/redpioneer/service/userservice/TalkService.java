@@ -9,4 +9,9 @@ import java.util.Date;
 
 public interface TalkService {
     ResultVO uploadTalk(Date talkTime, String talkPeople, Integer talkType, MultipartFile prove, ServletRequest request) throws IOException;
+
+    ResultVO getTalkById(Integer id);
+
+    ResultVO deleteTalkById(Integer id);
+
 }

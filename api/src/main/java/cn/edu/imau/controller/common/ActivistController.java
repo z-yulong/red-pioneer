@@ -2,6 +2,7 @@ package cn.edu.imau.controller.common;
 
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.service.commonservice.LoginService;
+import cn.edu.imau.redpioneer.vo.PagedDataVO;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import io.swagger.annotations.*;
@@ -32,7 +33,6 @@ public class ActivistController {
     }
 
 
-
     /**
      * 通过id删除一个用户
      * @param id
@@ -52,7 +52,7 @@ public class ActivistController {
      */
     @GetMapping("getUser/{id}")
     @ApiOperation("通过id获取一个用户")
-    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     public ResultVO getUserById(@PathVariable("id") Integer id) {
         return activistService.getUserById(id);
     }
@@ -67,6 +67,13 @@ public class ActivistController {
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
     public ResultVO getUserByAccount(@PathVariable("account") String account) {
         return activistService.getUserByAccount(account);
+    }
+
+    @GetMapping("/getUserByText")
+    @ApiOperation("通过账号获取一个用户")
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang"})
+    public ResultVO getUser(String text) {
+        return activistService.getUserByText(text);
     }
 
     /**
@@ -120,7 +127,7 @@ public class ActivistController {
     @PostMapping("/getActivistPage")
     @ApiOperation("分页查询所有人")
     @RequiresRoles("admin")
-    public ResultVO getActivistPage(@RequestBody RowBounds rowBounds, HttpServletRequest request){
+    public PagedDataVO getActivistPage(@RequestBody RowBounds rowBounds, HttpServletRequest request){
         return activistService.selectActivistPage(rowBounds,request);
     }
 }

@@ -23,16 +23,16 @@ import java.util.List;
 @NoArgsConstructor
 public class AuditServiceImpl implements AuditService {
 
-    TrainMapper trainMapper;
-    PartyGroupMapper partyGroupMapper;
-    ActivistMapper activistMapper;
-    DevelopmentInfoMapper developmentInfoMapper;
-    ScoreMapper scoreMapper;
-    TalkMapper talkMapper;
-    PrizeMapper prizeMapper;
-    ConversationMapper conversationMapper;
-    ApproveService approveService;
-    FaliService faliService;
+    private TrainMapper trainMapper;
+    private PartyGroupMapper partyGroupMapper;
+    private ActivistMapper activistMapper;
+    private DevelopmentInfoMapper developmentInfoMapper;
+    private ScoreMapper scoreMapper;
+    private TalkMapper talkMapper;
+    private PrizeMapper prizeMapper;
+    private ConversationMapper conversationMapper;
+    private ApproveService approveService;
+    private FaliService faliService;
 
     @Autowired
     public AuditServiceImpl(TrainMapper trainMapper, PartyGroupMapper partyGroupMapper, ActivistMapper activistMapper, DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper, ApproveService approveService, FaliService faliService) {

@@ -80,7 +80,7 @@ public class FileUtil {
         avatar.transferTo(newFile);
 
         //生成保存路径
-        String savePath = path+randomDir + "/" + uuidFilename;
+        String savePath = randomDir + "/" + uuidFilename;
 
         return savePath;
     }

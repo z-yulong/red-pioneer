@@ -1,8 +1,11 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
+import cn.edu.imau.redpioneer.dto.ActivistInfoDto;
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.enums.ResStatus;
+import cn.edu.imau.redpioneer.enums.State;
+import cn.edu.imau.redpioneer.vo.PagedDataVO;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.ActivistService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
@@ -21,7 +24,7 @@ import java.util.*;
  */
 @Service
 public class ActivistServiceImpl implements ActivistService {
-    private final ActivistMapper activistMapper;
+    private ActivistMapper activistMapper;
     @Autowired
     public ActivistServiceImpl(ActivistMapper activistMapper){
         this.activistMapper=activistMapper;
@@ -57,15 +60,14 @@ public class ActivistServiceImpl implements ActivistService {
      */
     @Override
     public ResultVO getUserById(Integer id) {
-        Activist activist = activistMapper.selectByPrimaryKey(id);
-        if(activist == null){
+        ActivistInfoDto activistInfoDto = activistMapper.selectActivistInfo(id);
+        if(activistInfoDto == null){
             //用户不存在
-            return new ResultVO(ResStatus.USER_DOSE_NOT_EXITS.getValue()
-                    , ResStatus.USER_DOSE_NOT_EXITS.getText(),null);
+            return new ResultVO(ResStatus.USER_DOSE_NOT_EXITS.getValue(), ResStatus.USER_DOSE_NOT_EXITS.getText(),null);
         }
-            return new ResultVO(ResStatus.OK.getValue()
-                    , ResStatus.OK.getText(),activist);
+            return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),activistInfoDto);
     }
+
 
     /**
      * 根据账号获取一个用户
@@ -107,11 +109,11 @@ public class ActivistServiceImpl implements ActivistService {
      * @return activists
      */
     @Override
-    public ResultVO getUserByRole() {
+    public ResultVO getUserByRole(String roles) {
 
         Example example = new Example(Activist.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("roles","shuji");
+        criteria.andEqualTo("roles",roles);
 
         List<Activist> activists = activistMapper.selectByExample(example);
 
@@ -159,10 +161,43 @@ public class ActivistServiceImpl implements ActivistService {
      * @return activists
      */
     @Override
-    public ResultVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request) {
+    public PagedDataVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request) {
         Activist activist = new Activist();
+        int totalItem = activistMapper.selectCount(activist);
         List<Activist> activists = activistMapper.selectByRowBounds(activist, rowBounds);
-        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), activists);
+        int totalPage=(totalItem+rowBounds.getLimit()-1)/rowBounds.getLimit();
+
+        return new PagedDataVO(rowBounds.getOffset(),rowBounds.getLimit(),totalPage,totalItem,activists);
+    }
+
+    @Override
+    public ResultVO getUserByText(String text) {
+
+        Activist activist = activistMapper.selectActivistByText(text);
+
+        if(activist == null){
+            return new ResultVO(ResStatus.USER_DOSE_NOT_EXITS.getValue(), ResStatus.USER_DOSE_NOT_EXITS.getText(),null);
+        }
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),activist);
+    }
+
+    /**
+     * 禁用用户
+     */
+    @Override
+    public ResultVO disabled(Integer id) {
+
+        activistMapper.updateStateCode(0,id);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),null);
+    }
+
+    /**
+     * 启用用户
+     */
+    @Override
+    public ResultVO enable(Integer id) {
+        activistMapper.updateStateCode(1,id);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),null);
     }
 
 
@@ -180,11 +215,9 @@ public class ActivistServiceImpl implements ActivistService {
         Activist activist = activistMapper.selectOneByExample(example);
 
         if(activist == null){
-            return new ResultVO(ResStatus.USER_DOSE_NOT_EXITS.getValue()
-                    , ResStatus.USER_DOSE_NOT_EXITS.getText(),null);
+            return new ResultVO(ResStatus.USER_DOSE_NOT_EXITS.getValue(), ResStatus.USER_DOSE_NOT_EXITS.getText(),null);
         }
-            return new ResultVO(ResStatus.OK.getValue()
-                    , ResStatus.OK.getText(),activist);
+            return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(),activist);
 
     }
 

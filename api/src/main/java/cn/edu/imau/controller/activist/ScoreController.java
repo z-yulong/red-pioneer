@@ -5,10 +5,12 @@ import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.userservice.ScoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 
 
@@ -20,11 +22,11 @@ import javax.servlet.ServletRequest;
 
 @CrossOrigin//解决跨域访问
 @RestController
-@RequestMapping("/source")
+@RequestMapping("/score")
 @Api(value = "成绩信息接口",tags = "成绩信息")
 public class ScoreController {
 
-    @Autowired
+    @Resource
     ScoreService scoreService;
 
     /**
@@ -39,4 +41,23 @@ public class ScoreController {
         return scoreService.addScore(score,request);
     }
 
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "获取成绩接口")
+    @GetMapping("/getScore/{id}")
+    public ResultVO addScore(@PathVariable Integer id){
+        return scoreService.getScoreById(id);
+    }
+
+
+    /**
+     * 删除用户学习成绩信息
+     * @param id
+     * @return
+     */
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "删除用户学习成绩信息")
+    @DeleteMapping("/deleteScore/{id}")
+    public ResultVO deleteScore(@PathVariable("id") Integer id){
+        return scoreService.deleteScore(id);
+    }
 }

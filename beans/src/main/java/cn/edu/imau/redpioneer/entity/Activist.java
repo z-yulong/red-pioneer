@@ -106,5 +106,10 @@ public class Activist {
      */
     @Column(name = "state_code")
     private Integer stateCode;
+    /**
+     * 状态
+     */
+    @Column(name = "branch_id")
+    private Integer branchId;
 
 }

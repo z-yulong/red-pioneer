@@ -9,11 +9,14 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author: zyl
@@ -25,32 +28,58 @@ import java.io.IOException;
 @RequestMapping("/conversation")
 @Api(value = "提供用户志愿服务操作接口",tags = "志愿服务")
 public class ConversationController {
-
+    private ConversationService conversationService;
     @Autowired
-    ConversationService conversationService;
+    public ConversationController(ConversationService conversationService) {
+        this.conversationService = conversationService;
+    }
+
 
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     @ApiOperation(value = "上传志愿服务信息接口")
     @PostMapping("/addConversation")
-    public ResultVO addConversation(@RequestParam("conversationJson") String conversationJson,@RequestParam("prove") MultipartFile prove, ServletRequest request) throws IOException {
+    public ResultVO addConversation(
+            @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam("volunteerTime") Date volunteerTime
+            ,@RequestParam("volunteerAddress")String volunteerAddress
+            ,@RequestParam("volunteerInfo")String volunteerInfo
+            ,@RequestParam("volunteerSize")String volunteerSize
+            , @RequestParam("prove") MultipartFile prove
+            , ServletRequest request) throws IOException {
 
-        //将String转为json并保存到conversation
-        Gson gson=new Gson();
-        Conversation conversation = gson.fromJson(conversationJson,Conversation.class);
 
-        return conversationService.addconversation(conversation,prove,request);
+
+        return conversationService.addconversation(volunteerTime,volunteerAddress,volunteerInfo,volunteerSize,prove,request);
     }
 
     /**
      * 通过姓名或账号查询用户志愿信息
-     * @param info
+     * @param
      * @return
      */
-    //@RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @ApiOperation(value = "通过姓名或账号查询用户发展信息")
-    @GetMapping("/getDevelopmentInfo")
-    public ResultVO getConversation(@RequestParam("info")String info){
-        return conversationService.getConversation(info);
+//    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+//    @ApiOperation(value = "通过姓名或账号查询用户发展信息")
+//    @GetMapping("/getDevelopmentInfo")
+//    public ResultVO getConversation(@RequestParam("info")String info){
+//        return conversationService.getConversation(info);
+//
+//    }
 
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "通过id获取志愿信息")
+    @GetMapping("/getConversation/{id}")
+    public ResultVO getConversation(@PathVariable("id")Integer id){
+        return conversationService.getConversationById(id);
+    }
+
+    /**
+     * 删除用户志愿信息
+     * @param id
+     * @return
+     */
+    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+    @ApiOperation(value = "删除用户志愿信息")
+    @DeleteMapping("/deleteConversation/{id}")
+    public ResultVO deleteConversation(@PathVariable("id") Integer id){
+        return conversationService.deleteConversation(id);
     }
 }

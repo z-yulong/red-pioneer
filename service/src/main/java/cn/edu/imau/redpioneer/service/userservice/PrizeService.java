@@ -10,5 +10,10 @@ import java.util.Date;
 public interface PrizeService {
     ResultVO addprize(MultipartFile prizeImg, Date date, String info, ServletRequest request) throws IOException;
 
-    ResultVO getPrize(ServletRequest request);
+    //ResultVO getPrize(ServletRequest request);
+
+    ResultVO getPrizeById(Integer id);
+
+    ResultVO deletePrizeById(Integer id);
+
 }

@@ -8,6 +8,7 @@ import cn.edu.imau.redpioneer.service.commonservice.UpdateActivistService;
 
 import cn.edu.imau.redpioneer.utils.FileUtil;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
@@ -27,10 +28,13 @@ import java.io.IOException;
 @Service
 public class UpdateActivistServiceImpl implements UpdateActivistService {
 
-    @Resource
-    FileUtil fileUtil;
-    @Resource
+    private FileUtil fileUtil;
     private ActivistMapper activistMapper;
+    @Autowired
+    public UpdateActivistServiceImpl(FileUtil fileUtil, ActivistMapper activistMapper) {
+        this.fileUtil = fileUtil;
+        this.activistMapper = activistMapper;
+    }
 
     /**
      * 修改个人信息

@@ -21,5 +21,17 @@
            INNER JOIN activist AS a
            ON p.activist_id=a.id
   </select>
+  
+  <select id="selectMyBranchId" resultType="integer" parameterType="integer">
+    SELECT p.id FROM party_branch AS p
+    INNER JOIN activist AS a
+    ON a.id=p.activist_id
+    WHERE a.id=#{id}
+  </select>
+
+
+  <select id="selectBranchGroupActivistId" resultType="integer" parameterType="integer">
+    SELECT activist_id FROM party_group WHERE branch=#{id}
+  </select>
 
 </mapper>

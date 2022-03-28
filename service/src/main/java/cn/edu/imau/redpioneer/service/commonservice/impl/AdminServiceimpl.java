@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class AdminServiceimpl implements AdminService {
 
-    private final PartyBranchMapper partyBranchMapper;
+    private PartyBranchMapper partyBranchMapper;
     @Autowired
     public AdminServiceimpl(PartyBranchMapper partyBranchMapper){
         this.partyBranchMapper=partyBranchMapper;

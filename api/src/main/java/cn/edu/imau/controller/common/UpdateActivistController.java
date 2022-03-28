@@ -45,7 +45,7 @@ public class UpdateActivistController {
      */
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     @ApiOperation(value = "修改头像接口")
-    @PutMapping("/avater")
+    @PostMapping("/avater")
     public ResultVO updateAvater(@RequestParam("avater") MultipartFile avater, ServletRequest request) throws IOException {
         return updateActivistService.updateActivistAvatar(avater,request);
     }

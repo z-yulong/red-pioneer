@@ -1,7 +1,11 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
 import cn.edu.imau.redpioneer.dao.ActivistMapper;
+import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
+import cn.edu.imau.redpioneer.dao.PartyGroupMapper;
 import cn.edu.imau.redpioneer.entity.Activist;
+import cn.edu.imau.redpioneer.entity.PartyBranch;
+import cn.edu.imau.redpioneer.entity.PartyGroup;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.exception.LianjiaException;
@@ -15,10 +19,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-//import org.springframework.boot.devtools.restart.RestartInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -34,10 +38,14 @@ import java.util.List;
 @Service
 public class ImportActivistServiceImpl implements ImportActivistService {
 
-    private final ActivistMapper activistMapper;
+    private ActivistMapper activistMapper;
+    private PartyBranchMapper partyBranchMapper;
+    private PartyGroupMapper partyGroupMapper;
     @Autowired
-    public ImportActivistServiceImpl(ActivistMapper activistMapper){
+    public ImportActivistServiceImpl(ActivistMapper activistMapper,PartyBranchMapper partyBranchMapper,PartyGroupMapper partyGroupMapper){
         this.activistMapper=activistMapper;
+        this.partyBranchMapper=partyBranchMapper;
+        this.partyGroupMapper=partyGroupMapper;
     }
     private static final String XLS = "xls";
     private static final String XLSX = "xlsx";
@@ -84,23 +92,46 @@ public class ImportActivistServiceImpl implements ImportActivistService {
             Activist activist = new Activist();
             if(row !=null){
 
-                //  账号
+                //账号
                 String account = getCellValue(row.getCell(0));
                 activist.setAccount(account);
-                //  姓名
+                //姓名
                 String name = getCellValue(row.getCell(1));
-                activist.setName(name);
-//                //  支部
-//                String partyBranch = getCellValue(row.getCell(2));
-//                activist.setName(partyBranch);
 
+                activist.setName(name);
+                //支部
+                String branchName = getCellValue(row.getCell(2));
+                Example example = new Example(PartyBranch.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andEqualTo("branchName",branchName);
+
+                PartyBranch branch = partyBranchMapper.selectOneByExample(example);
+                if(branch==null){
+                    //return new ResultVO(ResStatus.PARAMETER_ERROR.getValue(),"支部"+branchName+"不存在！",null);
+                    continue;
+                }
+                activist.setBranchId(branch.getId());
+                //党小组
+                String groupName = getCellValue(row.getCell(3));
+
+                Example example1 = new Example(PartyGroup.class);
+                Example.Criteria criteria1 = example1.createCriteria();
+                criteria1.andEqualTo("groupName",groupName);
+
+                PartyGroup group = partyGroupMapper.selectOneByExample(example1);
+                if(group==null){
+                    //return new ResultVO(ResStatus.PARAMETER_ERROR.getValue(),"支部"+branchName+"不存在！",null);
+                    continue;
+                }
+                if(group.getBranch().equals(branch.getId())){
+                    activist.setPartyGroup(group.getActivistId());
+                }
                 activists.add(activist);
             }
         }
         activistMapper.batchInsert(activists);  //  批量插入
 
-        return new ResultVO(ResStatus.OK.getValue()
-                ,ResStatus.OK.getText(),null);
+        return new ResultVO(ResStatus.OK.getValue(),ResStatus.OK.getText(),null);
     }
 
     public String getCellValue(Cell cell) {

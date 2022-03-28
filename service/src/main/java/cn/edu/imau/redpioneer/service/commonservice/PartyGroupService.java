@@ -17,6 +17,18 @@ public interface PartyGroupService {
 
     ResultVO updateActivist(Activist activist);
 
+    ResultVO getAllActivist(HttpServletRequest request);
 
-    //ResultVO getRecommend();
+    ResultVO getGroupNum(Integer id);
+
+    ResultVO getGroupNationNum(Integer id);
+
+    ResultVO getGroupSexNum(Integer id);
+
+    ResultVO getGroupGradeNum(Integer id);
+
+    ResultVO getAllActivistById(Integer id);
+
+
+
 }

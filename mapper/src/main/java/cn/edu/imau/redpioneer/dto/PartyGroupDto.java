@@ -8,7 +8,9 @@ import lombok.Data;
  */
 @Data
 public class PartyGroupDto {
+    private Integer id;
     private String groupName;
     private String name;
     private String branchName;
+    private String tel;
 }

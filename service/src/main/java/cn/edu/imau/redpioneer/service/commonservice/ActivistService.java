@@ -1,6 +1,7 @@
 package cn.edu.imau.redpioneer.service.commonservice;
 
 import cn.edu.imau.redpioneer.entity.Activist;
+import cn.edu.imau.redpioneer.vo.PagedDataVO;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import org.apache.ibatis.session.RowBounds;
 
@@ -25,10 +26,15 @@ public interface ActivistService {
 
     Activist getUser(String account);
 
-    ResultVO getUserByRole();
+    ResultVO getUserByRole(String roles);
 
     ResultVO register(String account,String name,String roles);
 
-    ResultVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request);
+    PagedDataVO selectActivistPage(RowBounds rowBounds, HttpServletRequest request);
 
+    ResultVO getUserByText(String text);
+
+    ResultVO disabled(Integer id);
+
+    ResultVO enable(Integer id);
 }

@@ -1,6 +1,9 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
 import cn.edu.imau.redpioneer.dao.*;
+import cn.edu.imau.redpioneer.dto.GradeNumDto;
+import cn.edu.imau.redpioneer.dto.NationNumDto;
+import cn.edu.imau.redpioneer.dto.SexNumDto;
 import cn.edu.imau.redpioneer.entity.*;
 import cn.edu.imau.redpioneer.enums.ResStatus;
 import cn.edu.imau.redpioneer.vo.ResultVO;
@@ -19,14 +22,14 @@ import java.util.List;
  */
 @Service
 public class PartyGroupServiceImpl implements PartyGroupService {
-    TrainMapper trainMapper;
-    PartyGroupMapper partyGroupMapper;
-    ActivistMapper activistMapper;
-    DevelopmentInfoMapper developmentInfoMapper;
-    ScoreMapper scoreMapper;
-    TalkMapper talkMapper;
-    PrizeMapper prizeMapper;
-    ConversationMapper conversationMapper;
+    private TrainMapper trainMapper;
+    private PartyGroupMapper partyGroupMapper;
+    private ActivistMapper activistMapper;
+    private DevelopmentInfoMapper developmentInfoMapper;
+    private ScoreMapper scoreMapper;
+    private TalkMapper talkMapper;
+    private PrizeMapper prizeMapper;
+    private ConversationMapper conversationMapper;
     //构造器
     @Autowired
     public PartyGroupServiceImpl(TrainMapper trainMapper, PartyGroupMapper partyGroupMapper, ActivistMapper activistMapper, DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper) {
@@ -103,6 +106,22 @@ public class PartyGroupServiceImpl implements PartyGroupService {
         return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
     }
 
+
+    /**
+     * 通过id修改积极分子信息，培养人分配
+     * @return null
+     */
+    @Override
+    public ResultVO updateActivist(Activist activist) {
+
+        int i = activistMapper.updateByPrimaryKeySelective(activist);
+
+        if(i == 1){
+            //更新成功
+            return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+    }
     /**
      * 获取自己小组下所有培养人
      * @return trains
@@ -123,22 +142,82 @@ public class PartyGroupServiceImpl implements PartyGroupService {
     }
 
     /**
-     * 通过id修改积极分子信息，培养人分配
-     * @return null
+     * 获取自己小组下所有人
+     * @return
      */
     @Override
-    public ResultVO updateActivist(Activist activist) {
+    public ResultVO getAllActivist(HttpServletRequest request) {
+        //从header中获取token
+        String token = request.getHeader("Authorization");
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
 
-        int i = activistMapper.updateByPrimaryKeySelective(activist);
+        //查询自己党小组下所有人
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("partyGroup",id);
+        List<Activist> activists = activistMapper.selectByExample(example);
 
-        if(i == 1){
-            //更新成功
-            return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);
-        }
-        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), activists);
     }
 
+    @Override
+    public ResultVO getAllActivistById(Integer id) {
+        int activistId = partyGroupMapper.selectGroupActivistId(id);
 
+        //查询自己党小组下所有人
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("partyGroup",activistId);
+        List<Activist> activists = activistMapper.selectByExample(example);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), activists);
+    }
+    /**
+     * 获取党小组人数
+     * @return
+     */
+    @Override
+    public ResultVO getGroupNum(Integer id) {
+        int activistId = partyGroupMapper.selectGroupActivistId(id);
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("partyGroup",activistId);
+        int num = activistMapper.selectCountByExample(example);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), num);
+    }
+
+    /**
+     * 获取党小组各名民族人数
+     * @return
+     */
+    @Override
+    public ResultVO getGroupNationNum(Integer id) {
+        int activistId = partyGroupMapper.selectGroupActivistId(id);
+        List<NationNumDto> nationNumDtos = activistMapper.selectGroupNationNum(activistId);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), nationNumDtos);
+    }
+
+    /**
+     * 获取党小组各性别人数
+     * @return
+     */
+    @Override
+    public ResultVO getGroupSexNum(Integer id) {
+        int activistId = partyGroupMapper.selectGroupActivistId(id);
+        List<SexNumDto> sexNumDtos = activistMapper.selectGroupSexNum(activistId);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), sexNumDtos);
+    }
+
+    /**
+     * 获取党小组各年级人数
+     * @return
+     */
+    @Override
+    public ResultVO getGroupGradeNum(Integer id) {
+        int activistId = partyGroupMapper.selectGroupActivistId(id);
+        List<GradeNumDto> gradeNumDtos = activistMapper.selectGroupGradeNum(activistId);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), gradeNumDtos);
+    }
 
 
 

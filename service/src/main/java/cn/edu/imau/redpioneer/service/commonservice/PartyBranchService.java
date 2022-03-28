@@ -21,4 +21,16 @@ public interface PartyBranchService {
     ResultVO getAllPartyGroup(HttpServletRequest request);
 
     ResultVO getAllPending(HttpServletRequest request);
+
+    ResultVO getBranchNum(Integer id);
+
+    ResultVO getBranchNationNum(Integer id);
+
+    ResultVO getBranchSexNum(Integer id);
+
+    ResultVO getBranchGradeNum(Integer id);
+
+    ResultVO approved(Integer id, String remark, HttpServletRequest request);
+
+    ResultVO fail(Integer id, String remark, HttpServletRequest request);
 }

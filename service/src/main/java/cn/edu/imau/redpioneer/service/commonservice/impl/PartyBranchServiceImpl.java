@@ -1,11 +1,17 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
+import cn.edu.imau.redpioneer.dao.ActivistMapper;
 import cn.edu.imau.redpioneer.dao.PartyBranchMapper;
 import cn.edu.imau.redpioneer.dao.PartyGroupMapper;
+import cn.edu.imau.redpioneer.dto.GradeNumDto;
+import cn.edu.imau.redpioneer.dto.NationNumDto;
 import cn.edu.imau.redpioneer.dto.PartyGroupDto;
+import cn.edu.imau.redpioneer.dto.SexNumDto;
+import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 import cn.edu.imau.redpioneer.entity.PartyGroup;
 import cn.edu.imau.redpioneer.enums.ResStatus;
+import cn.edu.imau.redpioneer.utils.MessageUtil;
 import cn.edu.imau.redpioneer.vo.ResultVO;
 import cn.edu.imau.redpioneer.service.commonservice.PartyBranchService;
 import cn.edu.imau.redpioneer.utils.JWTUtil;
@@ -14,6 +20,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,12 +30,16 @@ import java.util.List;
 @Service
 public class PartyBranchServiceImpl implements PartyBranchService {
 
+    private MessageUtil messageUtil;
     private PartyGroupMapper partyGroupMapper;
     private PartyBranchMapper partyBranchMapper;
+    private ActivistMapper activistMapper;
     @Autowired
-    public PartyBranchServiceImpl(PartyGroupMapper partyGroupMapper,PartyBranchMapper partyBranchMapper){
+    public PartyBranchServiceImpl(PartyGroupMapper partyGroupMapper,PartyBranchMapper partyBranchMapper,ActivistMapper activistMapper,MessageUtil messageUtil){
         this.partyGroupMapper=partyGroupMapper;
         this.partyBranchMapper=partyBranchMapper;
+        this.activistMapper=activistMapper;
+        this.messageUtil=messageUtil;
     }
 
     private final String AUTHORIZATION ="Authorization";
@@ -113,16 +124,9 @@ public class PartyBranchServiceImpl implements PartyBranchService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("activistId",id);
         PartyBranch partyBranch = partyBranchMapper.selectOneByExample(example);
-/**
-        //查询自己支部下的党小组
-        Example example1 = new Example(PartyGroup.class);
-        Example.Criteria criteria1 = example1.createCriteria();
-        criteria1.andEqualTo("branch",partyBranch.getId());
-        List<PartyGroup> partyGroups = partyGroupMapper.selectByExample(example1);
-*/
+
         List<PartyGroupDto> partyGroupDtos = partyGroupMapper.selectMyGroups(partyBranch.getId());
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), partyGroupDtos);
-
 
     }
 
@@ -132,8 +136,129 @@ public class PartyBranchServiceImpl implements PartyBranchService {
      */
     @Override
     public ResultVO getAllPending(HttpServletRequest request) {
+        //从header中获取token
+        String token = request.getHeader("Authorization");
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+        List<Activist> ok=new ArrayList<>();
 
+        //当前用户管理的支部的id
+        Integer myBranchId = partyBranchMapper.selectMyBranchId(id);
+        //当前用户支部下的党小组的负责人id
+        List<Integer> myBranchGroupActivistId = partyBranchMapper.selectBranchGroupActivistId(myBranchId);
 
-        return null;
+        //查询待审批的用户
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("stateCode",3);
+        List<Activist> activists = activistMapper.selectByExample(example);
+
+        for (Activist activist : activists) {
+            for (Integer integer : myBranchGroupActivistId) {
+                if (integer.equals(activist.getPartyGroup())){
+                    ok.add(activist);
+
+                }
+            }
+        }
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), ok);
     }
+    /**
+     * 通过
+     * @param id
+     * @param remark
+     * @param request
+     * @return
+     */
+    @Override
+    public ResultVO approved(Integer id, String remark, HttpServletRequest request) {
+        Activist activist = new Activist();
+        activist.setId(id);
+        activist.setStateCode(0);
+        int i = activistMapper.updateByPrimaryKeySelective(activist);
+        if(i == 1){
+            //通过id查询email
+            String email = activistMapper.selectEmailByName(id);
+            //发送邮件
+            messageUtil.sendMessage(email,"内蒙古农业大学"
+                    ,"恭喜您已通过重点培养对象审核！");
+            //更新成功
+            return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+    }
+
+    /**
+     * 未通过
+     * @param id
+     * @param remark
+     * @param request
+     * @return
+     */
+    @Override
+    public ResultVO fail(Integer id, String remark, HttpServletRequest request) {
+        Activist activist = new Activist();
+        activist.setId(id);
+        activist.setStateCode(1);
+        int i = activistMapper.updateByPrimaryKeySelective(activist);
+        if(i == 1){
+            //通过id查询email
+            String email = activistMapper.selectEmailByName(id);
+            //发送邮件
+            messageUtil.sendMessage(email,"内蒙古农业大学"
+                    ,"您的重点培养对象审核未通过！"+"\n"+"原因："+remark);
+            //更新成功
+            return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);
+        }
+        return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+    }
+
+    /**
+     * 获取支部人数
+     * @return
+     */
+    @Override
+    public ResultVO getBranchNum(Integer id) {
+        Example example = new Example(Activist.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("branchId",id);
+        int num = activistMapper.selectCountByExample(example);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), num);
+    }
+
+    /**
+     * 获取支部各名民族人数
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO getBranchNationNum(Integer id) {
+        List<NationNumDto> nationNumDtos = activistMapper.selectBranchNationNum(id);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), nationNumDtos);
+    }
+
+    /**
+     * 获取支部各性别人数
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO getBranchSexNum(Integer id) {
+        List<SexNumDto> sexNumDtos = activistMapper.selectBranchSexNum(id);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), sexNumDtos);
+    }
+
+    /**
+     * 获取支部各年级人数
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO getBranchGradeNum(Integer id) {
+        List<GradeNumDto> gradeNumDtos = activistMapper.selectBranchGradeNum(id);
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), gradeNumDtos);
+    }
+
+
+
 }

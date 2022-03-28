@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FaliServiceImpl  implements FaliService{
-    DevelopmentInfoMapper developmentInfoMapper;
-    ScoreMapper scoreMapper;
-    TalkMapper talkMapper;
-    PrizeMapper prizeMapper;
-    ConversationMapper conversationMapper;
-    ActivistMapper activistMapper;
+    private DevelopmentInfoMapper developmentInfoMapper;
+    private ScoreMapper scoreMapper;
+    private TalkMapper talkMapper;
+    private PrizeMapper prizeMapper;
+    private ConversationMapper conversationMapper;
+    private ActivistMapper activistMapper;
 
     @Autowired
     public FaliServiceImpl(DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper, ActivistMapper activistMapper) {
