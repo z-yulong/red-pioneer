@@ -47,19 +47,51 @@
   </resultMap>
 
   <resultMap id="ActivistNationNumMap" type="cn.edu.imau.redpioneer.dto.NationNumDto">
+    <result column="branch_name" jdbcType="VARCHAR" property="name" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
 
   <resultMap id="ActivistSexNumMap" type="cn.edu.imau.redpioneer.dto.SexNumDto">
+    <result column="branch_name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+
+  <resultMap id="ActivistGroupSexNumMap" type="cn.edu.imau.redpioneer.dto.SexNumDto">
+    <result column="group_name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
 
   <resultMap id="ActivistGradeNumMap" type="cn.edu.imau.redpioneer.dto.GradeNumDto">
+    <result column="branch_name" jdbcType="VARCHAR" property="name" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
+
+  <resultMap id="ActivistNumMap" type="cn.edu.imau.redpioneer.dto.ActivistNumDto">
+    <result column="branch_name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+
+  <resultMap id="ActivistGroupNumMap" type="cn.edu.imau.redpioneer.dto.ActivistNumDto">
+    <result column="group_name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+
+  <resultMap id="ActivistGroupNationNumMap" type="cn.edu.imau.redpioneer.dto.NationNumDto">
+    <result column="group_name" jdbcType="VARCHAR" property="name" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+
+  <resultMap id="ActivistGroupGradeNumMap" type="cn.edu.imau.redpioneer.dto.GradeNumDto">
+    <result column="group_name" jdbcType="VARCHAR" property="name" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+
 
 
   <!--批量插入用户-->
@@ -99,37 +131,84 @@
   <select id="selectActivistByText" parameterType="string" resultMap="BaseResultMap">
     SELECT * FROM activist WHERE account=#{text} OR `name` = #{text} OR id_card=#{text}
   </select>
-<!--  获取支部各名民族人数-->
+  <!--=============================================================================================================-->
+
+  <!--  获取支部各名民族人数-->
   <select id="selectBranchNationNum" resultMap="ActivistNationNumMap">
-     SELECT a.nation,COUNT(1) AS num FROM activist AS a WHERE branch_id=#{id} GROUP BY a.nation;
+    SELECT b.branch_name,a.nation,COUNT(1) AS num
+    FROM activist AS a
+        INNER JOIN party_branch AS b
+        ON a.branch_id=b.id
+    GROUP BY b.branch_name,a.nation
   </select>
 
   <!--  获取支部各性别人数-->
   <select id="selectBranchSexNum" resultMap="ActivistSexNumMap">
-     SELECT a.sex,COUNT(1) AS num FROM activist AS a WHERE branch_id=#{id} GROUP BY a.sex;
+    SELECT b.branch_name,a.sex,COUNT(1) AS num
+    FROM activist AS a
+        INNER JOIN party_branch AS b
+        ON a.branch_id=b.id
+    GROUP BY b.branch_name,a.sex
   </select>
 
   <!--  获取支部各年级人数-->
   <select id="selectBranchGradeNum" resultMap="ActivistGradeNumMap">
-    SELECT LEFT(a.classes,2) AS grade,COUNT(1) AS num FROM activist AS a WHERE branch_id=#{id} GROUP BY LEFT(a.classes,2)
+    SELECT b.branch_name,LEFT(a.classes,2) AS grade,COUNT(1) AS num
+    FROM activist AS a
+      INNER JOIN party_branch AS b
+    ON a.branch_id=b.id
+    GROUP BY b.branch_name,LEFT(a.classes,2)
   </select>
 
 <!--=============================================================================================================-->
 
-  <!--  获取党小组各名民族人数-->
-  <select id="selectGroupNationNum" resultMap="ActivistNationNumMap">
-    SELECT a.nation,COUNT(1) AS num FROM activist AS a WHERE party_group=#{id} GROUP BY a.nation;
+  <!--获取各党小组人数-->
+  <select id="selectGroupActivistNum" resultMap="ActivistGroupNumMap">
+    SELECT g.group_name,COUNT(*) AS num
+    FROM activist AS a
+        INNER JOIN party_group AS g
+        ON a.party_group=g.activist_id
+    WHERE g.branch=#{id}
+    GROUP BY g.group_name
+  </select>
+
+  <select id="selectBranchActivistNum" resultMap="ActivistNumMap">
+    SELECT b.branch_name,COUNT(1) AS num FROM activist AS a
+       INNER JOIN party_branch AS b
+       ON a.branch_id=b.id
+    GROUP BY b.branch_name
   </select>
 
   <!--  获取党小组各性别人数-->
-  <select id="selectGroupSexNum" resultMap="ActivistSexNumMap">
-    SELECT a.sex,COUNT(1) AS num FROM activist AS a WHERE party_group=#{id} GROUP BY a.sex;
+  <select id="selectGroupSexNum" resultMap="ActivistGroupSexNumMap">
+    SELECT g.group_name,a.sex,COUNT(*) AS num
+    FROM activist AS a
+        INNER JOIN party_group AS g
+        ON a.party_group=g.activist_id
+    WHERE g.branch=#{id}
+    GROUP BY g.group_name,a.sex
+  </select>
+
+  <!--  获取党小组各民族人数-->
+  <select id="selectGroupNationNum" resultMap="ActivistGroupNationNumMap">
+    SELECT g.group_name,a.nation,COUNT(*) AS num
+    FROM activist AS a
+        INNER JOIN party_group AS g
+        ON a.party_group=g.activist_id
+    WHERE g.branch=#{id}
+    GROUP BY g.group_name,a.nation
   </select>
 
   <!--  获取党小组各年级人数-->
-  <select id="selectGroupGradeNum" resultMap="ActivistGradeNumMap">
-    SELECT LEFT(a.classes,2) AS grade,COUNT(1) AS num FROM activist AS a WHERE party_group=#{id} GROUP BY LEFT(a.classes,2)
-  </select>
+  <select id="selectGroupGradeNum" resultMap="ActivistGroupGradeNumMap">
+    SELECT g.group_name,LEFT(a.classes,2) AS grade,COUNT(1) AS num
+    FROM activist AS a
+      INNER JOIN party_group AS g
+    ON a.party_group=g.activist_id
+    WHERE g.branch=#{id}
+    GROUP BY g.group_name,LEFT(a.classes,2)  </select>
+  <!--=============================================================================================================-->
+
 
 </mapper>
 

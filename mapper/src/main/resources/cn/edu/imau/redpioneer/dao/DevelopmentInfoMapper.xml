@@ -16,7 +16,7 @@
   <resultMap id="DevelopmentMap" type="cn.edu.imau.redpioneer.dto.ActivistDevelopmentDto">
       <result column="id" jdbcType="INTEGER" property="id" />
       <result column="name" jdbcType="VARCHAR" property="name" />
-      <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />
+      <result column="application_time" jdbcType="DATE" property="applicationTime" />
       <result column="application_form" jdbcType="VARCHAR" property="applicationForm" />
       <result column="diploma" jdbcType="VARCHAR" property="diploma" />
       <result column="upactivist_time" jdbcType="DATE" property="upactivistTime" />

@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class GradeNumDto {
+    private String name;
     private String grade;
     private Integer num;
 

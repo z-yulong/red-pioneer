@@ -111,9 +111,9 @@ public class PartyGroupController {
      */
     @ApiOperation(value = "获取党小组人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getGroupNum/{id}")
-    public ResultVO getGroupNum(@PathVariable("id") Integer id){
-        return partyGroupService.getGroupNum(id);
+    @GetMapping("/getGroupNum")
+    public ResultVO getGroupNum(HttpServletRequest request){
+        return partyGroupService.getGroupNum(request);
     }
 
     /**
@@ -122,9 +122,9 @@ public class PartyGroupController {
      */
     @ApiOperation(value = "获取党小组各名民族人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getGroupNationNum/{id}")
-    public ResultVO getGroupNationNum(@PathVariable("id") Integer id){
-        return partyGroupService.getGroupNationNum(id);
+    @GetMapping("/getGroupNationNum")
+    public ResultVO getGroupNationNum(HttpServletRequest request){
+        return partyGroupService.getGroupNationNum(request);
     }
     /**
      * 获取党小组各性别人数
@@ -132,9 +132,9 @@ public class PartyGroupController {
      */
     @ApiOperation(value = "获取党小组各性别人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getGroupSexNum/{id}")
-    public ResultVO getGroupSexNum(@PathVariable("id") Integer id){
-        return partyGroupService.getGroupSexNum(id);
+    @GetMapping("/getGroupSexNum")
+    public ResultVO getGroupSexNum(HttpServletRequest request){
+        return partyGroupService.getGroupSexNum(request);
     }
 
     /**
@@ -143,9 +143,9 @@ public class PartyGroupController {
      */
     @ApiOperation(value = "获取党小组各年级人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getGroupGradeNum/{id}")
-    public ResultVO getGroupGradeNum(@PathVariable("id") Integer id){
-        return partyGroupService.getGroupGradeNum(id);
+    @GetMapping("/getGroupGradeNum")
+    public ResultVO getGroupGradeNum(HttpServletRequest request){
+        return partyGroupService.getGroupGradeNum(request);
     }
 
 

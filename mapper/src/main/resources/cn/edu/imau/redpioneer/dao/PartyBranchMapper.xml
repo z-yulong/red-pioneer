@@ -29,7 +29,6 @@
     WHERE a.id=#{id}
   </select>
 
-
   <select id="selectBranchGroupActivistId" resultType="integer" parameterType="integer">
     SELECT activist_id FROM party_group WHERE branch=#{id}
   </select>

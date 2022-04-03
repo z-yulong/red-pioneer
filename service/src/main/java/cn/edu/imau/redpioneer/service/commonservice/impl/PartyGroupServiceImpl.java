@@ -1,6 +1,7 @@
 package cn.edu.imau.redpioneer.service.commonservice.impl;
 
 import cn.edu.imau.redpioneer.dao.*;
+import cn.edu.imau.redpioneer.dto.ActivistNumDto;
 import cn.edu.imau.redpioneer.dto.GradeNumDto;
 import cn.edu.imau.redpioneer.dto.NationNumDto;
 import cn.edu.imau.redpioneer.dto.SexNumDto;
@@ -30,9 +31,10 @@ public class PartyGroupServiceImpl implements PartyGroupService {
     private TalkMapper talkMapper;
     private PrizeMapper prizeMapper;
     private ConversationMapper conversationMapper;
+    private PartyBranchMapper partyBranchMapper;
     //构造器
     @Autowired
-    public PartyGroupServiceImpl(TrainMapper trainMapper, PartyGroupMapper partyGroupMapper, ActivistMapper activistMapper, DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper) {
+    public PartyGroupServiceImpl( PartyBranchMapper partyBranchMapper,TrainMapper trainMapper, PartyGroupMapper partyGroupMapper, ActivistMapper activistMapper, DevelopmentInfoMapper developmentInfoMapper, ScoreMapper scoreMapper, TalkMapper talkMapper, PrizeMapper prizeMapper, ConversationMapper conversationMapper) {
         this.trainMapper = trainMapper;
         this.partyGroupMapper = partyGroupMapper;
         this.activistMapper = activistMapper;
@@ -41,6 +43,7 @@ public class PartyGroupServiceImpl implements PartyGroupService {
         this.talkMapper = talkMapper;
         this.prizeMapper = prizeMapper;
         this.conversationMapper = conversationMapper;
+        this.partyBranchMapper = partyBranchMapper;
     }
 
 
@@ -172,18 +175,28 @@ public class PartyGroupServiceImpl implements PartyGroupService {
         List<Activist> activists = activistMapper.selectByExample(example);
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), activists);
     }
-    /**
+/****************************************************************************************************************/
+
+/**
      * 获取党小组人数
      * @return
      */
     @Override
-    public ResultVO getGroupNum(Integer id) {
-        int activistId = partyGroupMapper.selectGroupActivistId(id);
-        Example example = new Example(Activist.class);
+    public ResultVO getGroupNum(HttpServletRequest request) {
+        //从header中获取token
+        String token = request.getHeader("Authorization");
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+
+        Example example = new Example(PartyBranch.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("partyGroup",activistId);
-        int num = activistMapper.selectCountByExample(example);
-        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), num);
+        criteria.andEqualTo("activistId",id);
+
+        PartyBranch partyBranch = partyBranchMapper.selectOneByExample(example);
+
+
+        List<ActivistNumDto> gradeNumDtos = activistMapper.selectGroupActivistNum(partyBranch.getId());
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), gradeNumDtos);
     }
 
     /**
@@ -191,9 +204,17 @@ public class PartyGroupServiceImpl implements PartyGroupService {
      * @return
      */
     @Override
-    public ResultVO getGroupNationNum(Integer id) {
-        int activistId = partyGroupMapper.selectGroupActivistId(id);
-        List<NationNumDto> nationNumDtos = activistMapper.selectGroupNationNum(activistId);
+    public ResultVO getGroupNationNum(HttpServletRequest request) {
+        //从header中获取token
+        String token = request.getHeader("Authorization");
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+        Example example = new Example(PartyBranch.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activistId",id);
+        PartyBranch partyBranch = partyBranchMapper.selectOneByExample(example);
+
+        List<NationNumDto> nationNumDtos = activistMapper.selectGroupNationNum(partyBranch.getId());
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), nationNumDtos);
     }
 
@@ -202,9 +223,18 @@ public class PartyGroupServiceImpl implements PartyGroupService {
      * @return
      */
     @Override
-    public ResultVO getGroupSexNum(Integer id) {
-        int activistId = partyGroupMapper.selectGroupActivistId(id);
-        List<SexNumDto> sexNumDtos = activistMapper.selectGroupSexNum(activistId);
+    public ResultVO getGroupSexNum(HttpServletRequest request) {
+        //从header中获取token
+        String token = request.getHeader("Authorization");
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+        Example example = new Example(PartyBranch.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activistId",id);
+        PartyBranch partyBranch = partyBranchMapper.selectOneByExample(example);
+
+
+        List<SexNumDto> sexNumDtos = activistMapper.selectGroupSexNum(partyBranch.getId());
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), sexNumDtos);
     }
 
@@ -213,9 +243,18 @@ public class PartyGroupServiceImpl implements PartyGroupService {
      * @return
      */
     @Override
-    public ResultVO getGroupGradeNum(Integer id) {
-        int activistId = partyGroupMapper.selectGroupActivistId(id);
-        List<GradeNumDto> gradeNumDtos = activistMapper.selectGroupGradeNum(activistId);
+    public ResultVO getGroupGradeNum(HttpServletRequest request) {
+        //从header中获取token
+        String token = request.getHeader("Authorization");
+        //从token中获取当前用户id
+        Integer id= Integer.valueOf(JWTUtil.getIdByToken(token));
+        Example example = new Example(PartyBranch.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activistId",id);
+        PartyBranch partyBranch = partyBranchMapper.selectOneByExample(example);
+
+
+        List<GradeNumDto> gradeNumDtos = activistMapper.selectGroupGradeNum(partyBranch.getId());
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), gradeNumDtos);
     }
 

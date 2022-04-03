@@ -19,13 +19,13 @@ public interface PartyGroupService {
 
     ResultVO getAllActivist(HttpServletRequest request);
 
-    ResultVO getGroupNum(Integer id);
+    ResultVO getGroupNum(HttpServletRequest request);
 
-    ResultVO getGroupNationNum(Integer id);
+    ResultVO getGroupNationNum(HttpServletRequest request);
 
-    ResultVO getGroupSexNum(Integer id);
+    ResultVO getGroupSexNum(HttpServletRequest request);
 
-    ResultVO getGroupGradeNum(Integer id);
+    ResultVO getGroupGradeNum(HttpServletRequest request);
 
     ResultVO getAllActivistById(Integer id);
 

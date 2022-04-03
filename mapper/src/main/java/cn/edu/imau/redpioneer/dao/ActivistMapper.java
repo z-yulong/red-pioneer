@@ -1,9 +1,6 @@
 package cn.edu.imau.redpioneer.dao;
 
-import cn.edu.imau.redpioneer.dto.ActivistInfoDto;
-import cn.edu.imau.redpioneer.dto.GradeNumDto;
-import cn.edu.imau.redpioneer.dto.NationNumDto;
-import cn.edu.imau.redpioneer.dto.SexNumDto;
+import cn.edu.imau.redpioneer.dto.*;
 import cn.edu.imau.redpioneer.entity.Activist;
 import cn.edu.imau.redpioneer.general.GeneralDAO;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,15 +24,19 @@ public interface ActivistMapper extends GeneralDAO<Activist> {
 
     Activist selectActivistByText(String text);
 
-    List<NationNumDto> selectBranchNationNum(Integer id);
+    List<NationNumDto> selectBranchNationNum();
 
-    List<SexNumDto> selectBranchSexNum(Integer id);
+    List<SexNumDto> selectBranchSexNum();
 
-    List<GradeNumDto> selectBranchGradeNum(Integer id);
+    List<GradeNumDto> selectBranchGradeNum();
 
     List<NationNumDto> selectGroupNationNum(Integer id);
 
     List<SexNumDto> selectGroupSexNum(Integer id);
 
     List<GradeNumDto> selectGroupGradeNum(Integer id);
+
+    List<GradeNumDto> selectBranchActivistNum();
+
+    List<ActivistNumDto> selectGroupActivistNum(Integer id);
 }

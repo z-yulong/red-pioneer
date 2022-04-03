@@ -22,13 +22,13 @@ public interface PartyBranchService {
 
     ResultVO getAllPending(HttpServletRequest request);
 
-    ResultVO getBranchNum(Integer id);
+    ResultVO getBranchNum();
 
-    ResultVO getBranchNationNum(Integer id);
+    ResultVO getBranchNationNum();
 
-    ResultVO getBranchSexNum(Integer id);
+    ResultVO getBranchSexNum();
 
-    ResultVO getBranchGradeNum(Integer id);
+    ResultVO getBranchGradeNum();
 
     ResultVO approved(Integer id, String remark, HttpServletRequest request);
 

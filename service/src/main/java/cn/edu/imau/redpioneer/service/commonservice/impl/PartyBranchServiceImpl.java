@@ -212,50 +212,46 @@ public class PartyBranchServiceImpl implements PartyBranchService {
         }
         return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
     }
-
+/*******************************************************************************************************************/
     /**
      * 获取支部人数
      * @return
      */
     @Override
-    public ResultVO getBranchNum(Integer id) {
-        Example example = new Example(Activist.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("branchId",id);
-        int num = activistMapper.selectCountByExample(example);
-        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), num);
+    public ResultVO getBranchNum() {
+
+        List<GradeNumDto> gradeNumDtos = activistMapper.selectBranchActivistNum();
+        return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), gradeNumDtos);
     }
 
     /**
      * 获取支部各名民族人数
-     * @param id
+     * @param
      * @return
      */
     @Override
-    public ResultVO getBranchNationNum(Integer id) {
-        List<NationNumDto> nationNumDtos = activistMapper.selectBranchNationNum(id);
+    public ResultVO getBranchNationNum() {
+        List<NationNumDto> nationNumDtos = activistMapper.selectBranchNationNum();
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), nationNumDtos);
     }
 
     /**
      * 获取支部各性别人数
-     * @param id
      * @return
      */
     @Override
-    public ResultVO getBranchSexNum(Integer id) {
-        List<SexNumDto> sexNumDtos = activistMapper.selectBranchSexNum(id);
+    public ResultVO getBranchSexNum() {
+        List<SexNumDto> sexNumDtos = activistMapper.selectBranchSexNum();
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), sexNumDtos);
     }
 
     /**
      * 获取支部各年级人数
-     * @param id
      * @return
      */
     @Override
-    public ResultVO getBranchGradeNum(Integer id) {
-        List<GradeNumDto> gradeNumDtos = activistMapper.selectBranchGradeNum(id);
+    public ResultVO getBranchGradeNum() {
+        List<GradeNumDto> gradeNumDtos = activistMapper.selectBranchGradeNum();
         return new ResultVO(ResStatus.OK.getValue(), ResStatus.OK.getText(), gradeNumDtos);
     }
 

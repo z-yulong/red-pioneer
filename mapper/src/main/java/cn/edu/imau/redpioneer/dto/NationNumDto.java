@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class NationNumDto {
+    private String name;
     private String nation;
     private Integer num;
 }

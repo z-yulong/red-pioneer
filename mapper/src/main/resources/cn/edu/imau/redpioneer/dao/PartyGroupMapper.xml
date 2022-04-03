@@ -30,4 +30,7 @@
   <select id="selectGroupActivistId" parameterType="int" resultType="int">
     SELECT activist_id FROM party_group WHERE id=#{id}
   </select>
+
+
+
 </mapper>

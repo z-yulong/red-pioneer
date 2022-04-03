@@ -1,5 +1,6 @@
 package cn.edu.imau.redpioneer.dao;
 
+import cn.edu.imau.redpioneer.dto.GradeNumDto;
 import cn.edu.imau.redpioneer.dto.PartyBranchDto;
 import cn.edu.imau.redpioneer.entity.PartyBranch;
 
@@ -13,4 +14,6 @@ public interface PartyBranchMapper extends GeneralDAO<PartyBranch> {
     Integer selectMyBranchId(Integer id);
 
     List<Integer> selectBranchGroupActivistId(Integer id);
+
+
 }

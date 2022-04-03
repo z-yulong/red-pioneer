@@ -84,7 +84,7 @@ public class PartyBranchController {
     }
 
     /**
-         * 审批通过
+     * 审批通过
      */
     @ApiOperation(value = "审批通过")
     @RequiresRoles("shuji")
@@ -108,11 +108,17 @@ public class PartyBranchController {
      * 获取支部人数
      * @return
      */
+//    @ApiOperation(value = "获取支部人数")
+//    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
+//    @GetMapping("/getBranchNum/{id}")
+//    public ResultVO getBranchNum(@PathVariable("id") Integer id){
+//        return partyBranchService.getBranchNum(id);
+//    }
     @ApiOperation(value = "获取支部人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getBranchNum/{id}")
-    public ResultVO getBranchNum(@PathVariable("id") Integer id){
-        return partyBranchService.getBranchNum(id);
+    @GetMapping("/getBranchNum")
+    public ResultVO getBranchNum(){
+        return partyBranchService.getBranchNum();
     }
 
     /**
@@ -121,9 +127,9 @@ public class PartyBranchController {
      */
     @ApiOperation(value = "获取支部各名民族人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getBranchNationNum/{id}")
-    public ResultVO getBranchNationNum(@PathVariable("id") Integer id){
-        return partyBranchService.getBranchNationNum(id);
+    @GetMapping("/getBranchNationNum")
+    public ResultVO getBranchNationNum(){
+        return partyBranchService.getBranchNationNum();
     }
     /**
      * 获取支部各性别人数
@@ -131,9 +137,9 @@ public class PartyBranchController {
      */
     @ApiOperation(value = "获取支部各性别人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getBranchSexNum/{id}")
-    public ResultVO getBranchSexNum(@PathVariable("id") Integer id){
-        return partyBranchService.getBranchSexNum(id);
+    @GetMapping("/getBranchSexNum")
+    public ResultVO getBranchSexNum(){
+        return partyBranchService.getBranchSexNum();
     }
 
     /**
@@ -142,9 +148,9 @@ public class PartyBranchController {
      */
     @ApiOperation(value = "获取支部各年级人数")
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-    @GetMapping("/getBranchGradeNum/{id}")
-    public ResultVO getBranchGradeNum(@PathVariable("id") Integer id){
-        return partyBranchService.getBranchGradeNum(id);
+    @GetMapping("/getBranchGradeNum")
+    public ResultVO getBranchGradeNum(){
+        return partyBranchService.getBranchGradeNum();
     }
 
 

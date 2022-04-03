@@ -40,7 +40,7 @@ public class ApproveController {
     /**
      * 审批未通过
      */
-    @ApiOperation(value = "审批通过")
+    @ApiOperation(value = "审批未通过")
     @RequiresRoles("zuzhang")
     @PutMapping("/fail/{id}")
     public ResultVO fail(@PathVariable("id")Integer id,String remark,HttpServletRequest request){
