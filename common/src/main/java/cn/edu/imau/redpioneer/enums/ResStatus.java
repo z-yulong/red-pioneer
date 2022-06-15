@@ -28,7 +28,7 @@ public enum ResStatus {
 
     USER_DISABLED(20006,"用户已禁用，请联系管理员！"),
     /**
-     * token不合法
+     * 参数错误
      */
     PARAMETER_ERROR(10010,"参数错误"),
 

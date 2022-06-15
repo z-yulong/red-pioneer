@@ -129,8 +129,12 @@ public class AuditServiceImpl implements AuditService {
                 return approveService.prizeApproved(id) == 1 ? new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null):
                         new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
             case DEVELOPMENT:
-                return approveService.developmentApproved(id, remark) == 1 ? new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null):
-                        new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+                if(approveService.developmentApproved(id, remark) == 1){
+                    return new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null);
+                }
+                return new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
+//                return approveService.developmentApproved(id, remark) == 1 ? new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null):
+//                        new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);
             case CONVERSATION:
                 return approveService.conversationApproved(id) == 1 ? new ResultVO(ResStatus.UPDATE_OK.getValue(), ResStatus.UPDATE_OK.getText(), null):
                         new ResultVO(ResStatus.NO.getValue(), ResStatus.NO.getText(), null);

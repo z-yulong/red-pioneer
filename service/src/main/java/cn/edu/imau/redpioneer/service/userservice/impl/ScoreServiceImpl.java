@@ -44,7 +44,6 @@ public class ScoreServiceImpl implements ScoreService {
      */
     @Override
     public ResultVO addScore(Score score, ServletRequest request) {
-
         //从header中获取token
         HttpServletRequest req= (HttpServletRequest) request;
         String token = req.getHeader("Authorization");
@@ -57,7 +56,6 @@ public class ScoreServiceImpl implements ScoreService {
         Integer moralRanking= Integer.valueOf(score.getMoralRanking());
         //综测排名
         Integer comprehensiveRanking= Integer.valueOf(score.getComprehensiveRanking());
-
         //班级人数的一半
         int classHalf = classSize / 2;
         //判断智育排名和综测排名是否为班级前二分之一

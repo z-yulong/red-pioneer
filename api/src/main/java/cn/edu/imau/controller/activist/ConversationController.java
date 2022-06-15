@@ -46,23 +46,9 @@ public class ConversationController {
             , @RequestParam("prove") MultipartFile prove
             , ServletRequest request) throws IOException {
 
-
-
         return conversationService.addconversation(volunteerTime,volunteerAddress,volunteerInfo,volunteerSize,prove,request);
     }
 
-    /**
-     * 通过姓名或账号查询用户志愿信息
-     * @param
-     * @return
-     */
-//    @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
-//    @ApiOperation(value = "通过姓名或账号查询用户发展信息")
-//    @GetMapping("/getDevelopmentInfo")
-//    public ResultVO getConversation(@RequestParam("info")String info){
-//        return conversationService.getConversation(info);
-//
-//    }
 
     @RequiresRoles(logical = Logical.OR, value = {"admin","shuji","zuzhang","user"})
     @ApiOperation(value = "通过id获取志愿信息")

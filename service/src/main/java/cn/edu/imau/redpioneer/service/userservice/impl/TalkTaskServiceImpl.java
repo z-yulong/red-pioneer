@@ -48,10 +48,7 @@ public class TalkTaskServiceImpl implements TalkTaskService {
     private static final Integer GROUP_TALK_NUM =4;
     private static final Integer PARTY_TALK_NUM =2;
 
-    @Override
-    public ResultVO partyGroupTalk() {
-        return null;
-    }
+
 
     @Scheduled(cron = EXECUTION_TIME)
     @Override
